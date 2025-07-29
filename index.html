@@ -1,86 +1,243 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-   <meta charset="UTF-8" />
-   <title>Arne Hansen - PhD Student in Cognitive Neuroscience</title>
-   <!-- Example Google Font -->
-   <link
-     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"
-     rel="stylesheet"
-   />
-   <style>
-     body {
-       margin: 0;
-       padding: 0;
-       font-family: 'Montserrat', sans-serif;
-       background-color: #ffffff;
-       color: #000000;
-     }
- 
-     .container {
-       max-width: 800px;
-       margin: 0 auto;
-       padding: 60px 20px;
-       text-align: center;
-     }
- 
-     h1 {
-       font-size: 3rem;
-       font-weight: 700;
-       margin: 0 0 10px 0;
-     }
- 
-     h2 {
-       font-size: 1.5rem;
-       font-weight: 300;
-       margin: 0 0 30px 0;
-       line-height: 1.4;
-     }
- 
-     a {
-       color: #000000;
-       text-decoration: none;
-       font-weight: 400;
-     }
- 
-     a:hover {
-       text-decoration: underline;
-     }
- 
-     .info p {
-       margin: 10px 0;
-     }
- 
-     .footer {
-       margin-top: 40px;
-       font-size: 0.9rem;
-       color: #555555;
-     }
-   </style>
- </head>
- <body>
-   <div class="container">
-     <h1>Arne Hansen</h1>
-     <h2>
-       PhD Student in Cognitive Neuroscience<br />
-       University of Zurich &amp; Center for Neuroscience Zurich
-     </h2>
- 
-     <div class="info">
-       <!-- Email -->
-       <p>
-         <a href="mailto:arne.hansen@psychologie.uzh.ch">arne.hansen@psychologie.uzh.ch</a>
-       </p>
-       <!-- Official University Page -->
-       <p>
-         <a href="https://www.psychology.uzh.ch/en/areas/nec/plafor/team/Doctoral-students/hansen.html" target="_blank">
-          University of Zurich Website
-         </a>
-       </p>
-       <!-- Social or Professional Links (adjust as desired) -->
-       <p>
-         <a href="https://github.com/arnedhansen" target="_blank">GitHub</a> |       
-         <a href="https://linkedin.com/in/arne-hansen1" target="_blank">LinkedIn</a></p>
-     </div>
- 
-     <div class=" 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arne Hansen – Curriculum Vitae</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #333; }
+    a { text-decoration: none; color: inherit; }
+    img { display: inline-block; vertical-align: middle; }
+    header { padding: 2rem; text-align: centre; }
+    .container { display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; max-width: 1200px; margin: auto; padding: 2rem; }
+    aside { position: sticky; top: 2rem; border-right: 1px solid #e0e0e0; padding-right: 1.5rem; }
+    aside nav ul { list-style: none; }
+    aside nav li { margin-bottom: 1rem; }
+    aside nav a { font-weight: 600; }
+    main { }
+    section { margin-bottom: 3rem; }
+    section h2 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    section hr { border: none; height: 1px; background: #e0e0e0; margin-bottom: 1rem; }
+    ul.timeline, ul.simple { list-style: none; }
+    ul.timeline li, ul.simple li { margin-bottom: 1rem; }
+    ul.timeline time { font-weight: 600; margin-right: 0.5rem; color: #777; }
+    .entry { display: flex; align-items: centre; }
+    .entry img.logo-img { width: 24px; height: auto; margin-right: 0.75rem; }
+    footer { text-align: centre; font-size: 0.85rem; color: #777; border-top: 1px solid #e0e0e0; padding: 1.5rem; }
+    @media(max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      aside { border-right: none; border-bottom: 1px solid #e0e0e0; padding-bottom: 1rem; margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Arne Hansen</h1>
+    <p>PhD Student in Cognitive Neuroscience | University of Zurich & Center for Neuroscience Zürich</p>
+  </header>
+
+  <div class="container">
+    <aside>
+      <nav>
+        <ul>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#experience">Professional Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching Experience</a></li>
+          <li><a href="#grants">Grants & Awards</a></li>
+          <li><a href="#supervision">Supervision</a></li>
+          <li><a href="#memberships">Memberships</a></li>
+          <li><a href="#activities">Institutional Activities</a></li>
+          <li><a href="#development">Peer Mentoring</a></li>
+          <li><a href="#outreach">Outreach</a></li>
+          <li><a href="#presentations">Presentations</a></li>
+          <li><a href="#workshops">Workshops & Qualifications</a></li>
+          <li><a href="#extracurricular">Extracurricular</a></li>
+          <li><a href="#languages">Languages</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#references">References</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="contact">
+        <h2>Contact</h2>
+        <hr>
+        <p>📞 +41 79 831 25 86<br>✉️ <a href="mailto:arne.hansen@psychologie.uzh.ch">arne.hansen@psychologie.uzh.ch</a><br>GitHub: <a href="https://github.com/arnedhansen">arnedhansen</a><br>LinkedIn: <a href="https://www.linkedin.com/in/arne-hansen1">arne-hansen1</a></p>
+      </section>
+
+      <section id="experience">
+        <h2>Professional Experience</h2>
+        <hr>
+        <ul class="timeline">
+          <li class="entry"><time>04/2024–Present</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Website Administrator</strong>, Dep. of Comparative Language Sciences, UZH. Website content management in CMS Magnolia (Anke Benker) fileciteturn1file0</li>
+          <li class="entry"><time>09/2023–Present</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Managing Director</strong>, Competence Center for Language & Medicine, UZH. Financial oversight in SAP; event organization; website management in CMS Magnolia (Prof. Giroud & Prof. Kabatek) fileciteturn1file0</li>
+          <li class="entry"><time>09/2023–02/2024</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Administrative Assistant</strong>, Dean’s Office, Faculty of Arts & Humanities, UZH. MS Teams automation (Dr. Safi & A. Benker) fileciteturn1file0</li>
+          <li class="entry"><time>03/2023–01/2024</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Research Assistant</strong>, Methods of Plasticity Research, Dep. of Psychology, UZH. EEG & ET data acquisition & analysis (Dr. Popov & Prof. Langer) fileciteturn1file0</li>
+          <li class="entry"><time>03/2023–03/2024</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Teaching Assistant</strong>, Neuropsychology, Dep. of Psychology, UZH. Lecture slide preparation; OLAT course management (Prof. Sauseng et al.) fileciteturn1file0</li>
+          <li class="entry"><time>09/2022–09/2023</time><img src="images/isle-logo.png" alt="ISLE logo" class="logo-img"><strong>Administrative Assistant</strong>, ISLE, UZH. CMS Magnolia website management (Prof. Stoll & Prof. van Schaik) fileciteturn1file0</li>
+          <li class="entry"><time>08/2022–12/2023</time><img src="images/eth-logo.png" alt="ETH logo" class="logo-img"><strong>Research Assistant</strong>, Decision Science Lab, ETH Zurich. Survey creation; R analysis (Dr. Berkowitz) fileciteturn1file0</li>
+          <li class="entry"><time>07/2022–03/2024</time><img src="images/uzh-logo.png" alt="UZH logo" class="logo-img"><strong>Webmaster</strong>, Methods of Plasticity Research, UZH. CMS Magnolia management (Prof. Langer) fileciteturn1file0</li>
+          <li class="entry"><time>06/2022–09/2022</time><img src="images/sgp-logo.png" alt="SGP logo" class="logo-img"><strong>Student Assistant</strong>, 17th Swiss Psychological Society Conference. Conference organisation (Dr. Hagmayer & Prof. Ulrich) fileciteturn1file0</li>
+        </ul>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <hr>
+        <ul class="timeline">
+          <li><time>04/2024–Present</time><strong>PhD in Cognitive Neuroscience</strong>, Dep. of Psychology, UZH & Center for Neuroscience Zurich. Thesis: "EEG Signatures of Oculomotor Control" (Supervisor: Dr. Popov; Co-supervisors: Profs. Langer, Sauseng, Hervais-Adelman) fileciteturn1file2</li>
+          <li><time>02/2021–12/2023</time><strong>MSc in Psychology</strong>, UZH [5.6 summa cum laude]. Thesis: "Eye Movements & Alpha Power during Working Memory" (Prof. Langer; Dr. Popov) fileciteturn1file2</li>
+          <li><time>09/2017–12/2020</time><strong>BSc in Psychology</strong>, UZH [4.8]. Thesis: "Beyond Broca & Wernicke – Language in the Brain" (Prof. Meyer) fileciteturn1file2</li>
+        </ul>
+      </section>
+
+      <section id="publications">
+        <h2>Publications</h2>
+        <hr>
+        <h3>Published</h3>
+        <ul class="simple">
+          <li>Hansen, A.D., Strzelczyk, D., Troendle, M., Langer, N. & Popov, T. (2024). Modulations of posterior alpha power during working memory co-vary with eye movements. Psychophysiology. November 23, 2024. fileciteturn1file1</li>
+        </ul>
+        <h3>In Prep</h3>
+        <ul class="simple">
+          <li>Hansen, A.D., Baer, L.Z.M., Troendle, M., Strzelczyk, D., Langer, N. & Popov, T. Contrast-Induced Variability in Gamma Oscillations and Eye Movements. [Registered Report] fileciteturn1file1</li>
+          <li>Hansen, A.D., Appenzeller, N., Goetz, M., Popov, T., Strzelczyk, D. & Langer, N. A Multiverse Analysis of Frontal Alpha Asymmetry as a Biomarker. fileciteturn1file1</li>
+        </ul>
+      </section>
+
+      <section id="teaching">
+        <h2>Teaching Experience</h2>
+        <hr>
+        <ul class="simple">
+          <li>Spring 2025 & Spring 2024: Teaching Assistant, Implementation & Evaluation of Neurophysiological Experiments fileciteturn1file1</li>
+          <li>Fall 2023: Student TA, Adaptive Mind – Plastic Brain fileciteturn1file1</li>
+          <li>Spring 2023: Student TA, Cognitive Neuroscience fileciteturn1file1</li>
+          <li>Fall 2022: Student TA, Biological Psychology fileciteturn1file1</li>
+          <li>Spring 2021 & Spring 2020: Student TA, Seminar in Experimental Psychology fileciteturn1file1</li>
+        </ul>
+      </section>
+
+      <section id="grants">
+        <h2>Grants & Awards</h2>
+        <hr>
+        <ul class="simple">
+          <li>04/2025: SNSF Mobility Grant, CHF 11’700 fileciteturn1file3</li>
+          <li>03/2025: Writing Retreat Grant, UZH Graduate School, CHF 4’000 fileciteturn1file3</li>
+          <li>12/2024: GRC Travel Grant, UZH Graduate Campus, CHF 1’150 fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="supervision">
+        <h2>Supervision</h2>
+        <hr>
+        <ul class="simple">
+          <li>Spring 2024: Anna Lena Dossenbach, BA thesis on Alpha Oscillations & Oculomotor Control. fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="memberships">
+        <h2>Memberships</h2>
+        <hr>
+        <ul class="simple">
+          <li>2024–Present: Society for Psychophysiology</li>
+          <li>2023–Present: Junior Scientific Staff, UZH</li>
+          <li>2023–Present: CuttingGardens M/EEG</li>
+          <li>2021–2023: Swiss Society for Neuroscience</li>
+          <li>2017–Present: Fachverein Psychologie, UZH fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="activities">
+        <h2>Institutional Activities</h2>
+        <hr>
+        <ul class="simple">
+          <li>2024–Present: Elected Student Rep, IT & Data Management Commission, Dep. of Psychology, UZH</li>
+          <li>2024–Present: Elected Student Rep, Institute’s Assembly, Dep. of Psychology, UZH fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="development">
+        <h2>Academic Development & Peer Mentoring</h2>
+        <hr>
+        <ul class="simple">
+          <li>2025–Present: Founder & Member, EEG Peer Mentoring Group</li>
+          <li>2023–Present: Member, brainfood peer mentoring</li>
+          <li>2023–Present: Founder & Member, EEG Journal Club fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="outreach">
+        <h2>Outreach</h2>
+        <hr>
+        <ul class="simple">
+          <li>03/2025: "Understanding Vision – How our brain masters eye–perception interplay", aware magazine. fileciteturn1file3</li>
+        </ul>
+      </section>
+
+      <section id="presentations">
+        <h2>Presentations</h2>
+        <hr>
+        <ul class="simple">
+          <li>09/2025: Co‑Varying Eye Movements & Alpha Power, ICON Porto</li>
+          <li>05/2025: Preliminary Results, MaDoKo, UZH</li>
+          <li>01/2025: Gamma & Eye Movements, ABIM Champéry</li>
+          <li>10/2024: Pilot Study, SPR Prague</li>
+          <li>05/2024: Pilot Study, MaDoKo UZH</li>
+          <li>01/2024: Pilot Study, ABIM Champéry</li>
+          <li>10/2023: CuttingGardens MEG‑UKI Dublin & Frankfurt</li>
+          <li>07/2023: SAMBA Salzburg fileciteturn1file6</li>
+        </ul>
+      </section>
+
+      <section id="workshops">
+        <h2>Workshops & Qualifications</h2>
+        <hr>
+        <ul class="simple">
+          <li>08/2025: Analyzing Neural Time Series Summer School (Dr. M.X. Cohen)</li>
+          <li>11/2024: GitLab Workshop (Prof. R. Frey)</li>
+          <li>10/2024: Digital Signal Processing Workshop (Prof. G.A. Miller)</li>
+          <li>07/2023: Advanced EEG Analysis in MATLAB (Prof. A. Keil) fileciteturn1file6</li>
+        </ul>
+      </section>
+
+      <section id="extracurricular">
+        <h2>Extracurricular Activities</h2>
+        <hr>
+        <ul class="simple">
+          <li>09/2024–Present: Author, Student Newspaper aware</li>
+          <li>07/2022–Present: Lector, Student Newspaper aware</li>
+          <li>05/2021–07/2023: UZHGYM Buddy Program</li>
+          <li>09/2018–06/2019: Mentor, First Year Mentoring, FAPS UZH fileciteturn1file6</li>
+        </ul>
+      </section>
+
+      <section id="languages">
+        <h2>Languages</h2>
+        <hr>
+        <ul class="simple">
+          <li>German Native</li>
+          <li>Dutch Native</li>
+          <li>English Fluent</li>
+          <li>French Basic fileciteturn1file4</li>
+        </ul>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <hr>
+        <h3>Research & Experiments</h3>
+        <ul class="simple">
+          <li>EEG (ANT128, Geodesics), ECG, EOG, EMG, SCR, Respiration</li>
+          <li>EyeTracking (Eyelink, TobiiPro), tRNS fileciteturn1file4</li>
+        </ul>
+        <h3>Programming & Software</h3>
+        <ul class="simple">
+          <li>MATLAB, EEGLab, FieldTrip (Advanced)</li>
+          <li>R (Intermediate), Python (Basic)</li>
+          <li>MS Office, OLAT, Qualtrics, CMS Magnolia fileciteturn1file5
