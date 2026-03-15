@@ -220,13 +220,13 @@
       <div class="gh-calendar-wrap">
         <div class="gh-dow-labels">
           <span></span>
-          <span>Sun</span>
           <span>Mon</span>
           <span>Tue</span>
           <span>Wed</span>
           <span>Thu</span>
           <span>Fri</span>
           <span>Sat</span>
+          <span>Sun</span>
         </div>
         <div class="gh-calendar-outer">
           <div id="gh-calendar" class="gh-calendar"></div>
@@ -378,14 +378,15 @@
         return data;
       }
 
-      /* ── Build week grid ── */
+      /* ── Build week grid (Monday-first) ── */
       function toWeeks(days) {
         const weeks = [];
         let week = [];
-        const firstDow = new Date(days[0].date + 'T00:00:00').getDay();
-        for (let i = 0; i < firstDow; i++) week.push(null);
+        // Remap: Mon=0, Tue=1, …, Sat=5, Sun=6
+        const dow0 = (new Date(days[0].date + 'T00:00:00').getDay() + 6) % 7;
+        for (let i = 0; i < dow0; i++) week.push(null);
         for (const d of days) {
-          const dow = new Date(d.date + 'T00:00:00').getDay();
+          const dow = (new Date(d.date + 'T00:00:00').getDay() + 6) % 7;
           if (dow === 0 && week.length > 0) {
             while (week.length < 7) week.push(null);
             weeks.push(week); week = [];
