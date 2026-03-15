@@ -3,17 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Coding projects by Arne Hansen: EEG signal processing pipelines, MATLAB toolboxes, and open-science tools for cognitive neuroscience." />
+  <meta name="description" content="Coding projects and open-source repositories by Arne Hansen, including EEG analysis pipelines and neuroscience toolboxes." />
   <meta name="author" content="Arne Hansen" />
-  <meta name="keywords" content="Arne Hansen, cognitive neuroscience, EEG, MATLAB, Python, open science, GitHub, signal processing" />
-  <meta property="og:title" content="Projects – Arne Hansen" />
-  <meta property="og:description" content="Coding projects by Arne Hansen: EEG signal processing pipelines, MATLAB toolboxes, and open-science tools for cognitive neuroscience." />
+  <meta name="keywords" content="Arne Hansen, cognitive neuroscience, EEG, UZH, University of Zurich, oculomotor, alpha oscillations, working memory, PhD" />
+  <meta property="og:title" content="Coding Projects – Arne Hansen" />
+  <meta property="og:description" content="Coding projects and open-source repositories by Arne Hansen, including EEG analysis pipelines and neuroscience toolboxes." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://arnedhansen.github.io/projects.html" />
-  <link rel="canonical" href="https://arnedhansen.github.io/projects.html" />
-  <title>Projects – Arne Hansen</title>
+  <meta property="og:url" content="https://arnedhansen.github.io/coding_projects.html" />
+  <link rel="canonical" href="https://arnedhansen.github.io/coding_projects.html" />
+  <title>Coding Projects – Arne Hansen</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-group {
+      margin-top: 32px;
+      margin-bottom: 4px;
+    }
+    .project-group-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 0;
+    }
+    .project-entry {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-entry:last-child { border-bottom: none; }
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+    .project-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .project-title a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .project-title a:hover { color: var(--accent); text-decoration: none; }
+    .project-lang {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      background: var(--border);
+      padding: 2px 7px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .project-desc {
+      font-size: 0.80rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+  </style>
 </head>
 <body>
   <nav class="nav">
@@ -24,6 +79,7 @@
       <li><a href="experience.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1a3 3 0 0 0-6 0c0 .12.11.56.18 1H10c0-.12-.08-.56-.18-1A3 3 0 0 0 4 5c0 .12.11.56.18 1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zM9 5a1 1 0 0 1 2 0c0 .12-.08.56-.08.56S10.12 6 10 6H9.08S9 5.12 9 5zm6 0a1 1 0 0 1 2 0c0 .12-.08.56-.08.56S16.12 6 16 6h-.92S15 5.12 15 5zM20 19H2V8h18v11z"/></svg></span><span>Experience</span></a></li>
       <li><a href="skills.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></span><span>Skills</span></a></li>
       <li><a href="publications.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span><span>Publications</span></a></li>
+      <li><a href="coding_projects.html" class="active"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span><span>Projects</span></a></li>
       <li><a href="teaching.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M8 2h13a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H8V2z"/><circle cx="4.5" cy="4" r="1.8"/><path d="M4.5 6C3 6 2 7 2 8.5V13h1.5v-3.8L4 9v5h1v-5l.5.2V13H7V8.5C7 7 6 6 4.5 6zm.5 2.5 2-1 .6 1-2 1-.6-1z"/><circle cx="6" cy="17" r="1.3"/><circle cx="12" cy="17" r="1.3"/><circle cx="18" cy="17" r="1.3"/><path d="M4 23v-2.2C4 19.8 4.9 19 6 19s2 .8 2 1.8V23H4zm10 0v-2.2c0-1-.9-1.8-2-1.8s-2 .8-2 1.8V23h4zm6 0v-2.2c0-1-.9-1.8-2-1.8s-2 .8-2 1.8V23h4z"/></svg></span><span>Teaching</span></a></li>
       <li><a href="awards.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1a5.002 5.002 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg></span><span>Awards</span></a></li>
       <li><a href="engagement.html"><span class="nav-icon-svg" style="width:12px;height:12px;display:inline-flex;align-items:center;flex-shrink:0;"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span><span>Engagement</span></a></li>
@@ -44,92 +100,207 @@
     </div>
   </nav>
   <div class="container">
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span>Coding Projects</div>
+    <div class="section-heading">
+      <span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span>
+      Coding Projects
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:28px;">Open-source repositories on <a href="https://github.com/arnedhansen" target="_blank">GitHub</a>.</p>
+
+    <!-- Research -->
+    <div class="project-group">
+      <div class="project-group-title">Research</div>
+    </div>
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title">GBTdecode – Gamma-Band EEG Decoding Toolbox</div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/AOC" target="_blank">AOC</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">Python</span>
+        <span class="project-lang">R</span>
+      </div>
+      <div class="project-desc">Full analysis pipeline for the Alpha Oculomotor Control study. Sternberg and N-back working memory tasks with simultaneous EEG and eye-tracking to characterize alpha-band neural signatures of oculomotor control. Published as a Registered Report in <em>Psychophysiology</em>.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/AOC_OSF" target="_blank">AOC_OSF</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">Python</span>
+        <span class="project-lang">R</span>
+      </div>
+      <div class="project-desc">Open-access data and analysis scripts accompanying the AOC Registered Report, deposited on the Open Science Framework for full reproducibility.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/AOI" target="_blank">AOI</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">Python</span>
+        <span class="project-lang">R</span>
+      </div>
+      <div class="project-desc">Extension of the AOC pipeline with a restructured hybrid MATLAB/Python/R architecture, source-level statistics, and multiverse analysis.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/GCP" target="_blank">GCP</a></div>
         <span class="project-lang">MATLAB</span>
       </div>
-      <div class="project-desc">
-        Analysis pipeline for decoding gamma-band oscillatory activity from high-density EEG data,
-        used in the OculoCortical Coherence research programme. Implements automated artefact rejection,
-        time-frequency decomposition via FieldTrip, and permutation-based statistical testing.
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/arnedhansen" target="_blank">→ GitHub</a>
-      </div>
+      <div class="project-desc">Analysis pipeline for the Gamma Concentric Protocol. Dynamic concentric grating fixation task with simultaneous EEG and eye-tracking to investigate gamma-band neural signatures of oculomotor control.</div>
     </div>
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title">AlphaEye – Alpha–Oculomotor Co-variation Pipeline</div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/ARNEMA" target="_blank">ARNEMA</a></div>
         <span class="project-lang">MATLAB</span>
       </div>
-      <div class="project-desc">
-        Reproducible signal processing pipeline for jointly analysing posterior alpha power and
-        task-contingent eye movement patterns during working memory maintenance. Accompanies the
-        registered report published in <em>Psychophysiology</em> (2024).
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/arnedhansen" target="_blank">→ GitHub</a>
-        <a href="https://www.authorea.com/users/819882/articles/1218693-modulations-of-posterior-alpha-power-during-working-memory-co-vary-with-task-dependent-eye-movement-patterns" target="_blank">→ Paper</a>
-      </div>
+      <div class="project-desc">EEG preprocessing and analysis pipeline for OCC Sternberg and N-back paradigms. Includes ICA artifact rejection, bandpass filtering, FieldTrip-based time-frequency decomposition, and frequency analysis.</div>
     </div>
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title">FAA-Multiverse – Frontal Alpha Asymmetry Multiverse Analysis</div>
-        <span class="project-lang">MATLAB · Python</span>
+        <div class="project-title"><a href="https://github.com/arnedhansen/CVA" target="_blank">CVA</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">R</span>
       </div>
-      <div class="project-desc">
-        Multiverse analysis framework evaluating the robustness of frontal alpha asymmetry (FAA)
-        as a biomarker for depressive disorder in children and adolescents across a large space of
-        reasonable preprocessing and analysis choices.
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/arnedhansen" target="_blank">→ GitHub</a>
-      </div>
+      <div class="project-desc">EEG preprocessing and analysis pipeline for a CSF Volume Attenuation study, including event logging and source-level statistics.</div>
     </div>
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title">Personal Academic Website</div>
-        <span class="project-lang">HTML · CSS · JavaScript</span>
+        <div class="project-title"><a href="https://github.com/arnedhansen/CDA" target="_blank">CDA</a></div>
+        <span class="project-lang">MATLAB</span>
       </div>
-      <div class="project-desc">
-        This website — a clean, minimal multi-page academic portfolio built without frameworks.
-        Features a responsive hamburger navigation, CSS custom properties for theming, and an
-        accessible timeline layout.
+      <div class="project-desc">Combined EEG and eye-tracking analysis covering frequency-domain decomposition, gaze heat maps, gaze variability, and trial-level preprocessing.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/FCD" target="_blank">FCD</a></div>
+        <span class="project-lang">MATLAB</span>
       </div>
-      <div class="project-links">
-        <a href="https://github.com/arnedhansen/arnedhansen.github.io" target="_blank">→ GitHub</a>
+      <div class="project-desc">EEG and eye-tracking recording and analysis pipeline, including preprocessing, feature extraction, and behavioral data integration.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/FAR" target="_blank">FAR</a></div>
+        <span class="project-lang">MATLAB</span>
       </div>
+      <div class="project-desc">Experimental paradigm for the FaceMorph/FAR EEG and eye-tracking study, implemented in MATLAB/PsychToolbox with Eyelink and BrainProducts integration.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/IAPS" target="_blank">IAPS</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">EEG experimental paradigm using International Affective Picture System (IAPS) stimuli with simultaneous eye-tracking.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/IAB" target="_blank">IAB</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">Inattentional blindness paradigm with EEG preprocessing and analysis, developed for a Matura (Swiss high school) outreach project.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/DALAS" target="_blank">DALAS</a></div>
+        <span class="project-lang">R</span>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">Specification curve analysis pipeline for EEG channel-level and LCMV source-level (DLPFC, frontal) models comparing healthy and diagnosed participant groups across auditory/visual conditions.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/PSF" target="_blank">PSF</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">Pupil size feature extraction and gaze variability analysis scripts for Sternberg and N-back tasks, developed alongside the AOC study.</div>
+    </div>
+
+    <!-- Data Analysis -->
+    <div class="project-group">
+      <div class="project-group-title">Data Analysis</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/ADA" target="_blank">ADA</a></div>
+        <span class="project-lang">Python</span>
+      </div>
+      <div class="project-desc">Desktop application for exploratory data analysis and statistical testing. Supports CSV/Excel import, outlier detection (IQR, Z-score, MAD), t-tests, ANOVAs, repeated-measures ANOVA with assumption checks, and publication-quality raincloud plots — all via an interactive GUI. Work in progress.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/Superlets" target="_blank">Superlets</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">Python</span>
+      </div>
+      <div class="project-desc">MATLAB and Python implementations of the Superlet Transform (SLT) for high-resolution time-frequency decomposition of neural signals, including pure-MATLAB, MEX/C++, and standalone Python versions.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/ANTS" target="_blank">ANTS</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">MATLAB files and exercises from the Analyzing Neural Time Series (ANTS) curriculum, covering spectral analysis, Laplacian referencing, and topographic mapping of EEG data.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/functions" target="_blank">functions</a></div>
+        <span class="project-lang">MATLAB</span>
+        <span class="project-lang">Python</span>
+        <span class="project-lang">R</span>
+      </div>
+      <div class="project-desc">Shared utility library for EEG and eye-tracking pipelines. Includes functions for epoch exclusion, microsaccade detection, gaze heat map computation, bandpower estimation, and FOOOF spectral parameterization integration.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/NeurophysiologyBlockCourse" target="_blank">NeurophysiologyBlockCourse</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">MATLAB and EEGLAB tutorials for a neurophysiology EEG block course at UZH. Covers MATLAB programming, digital signal processing, data structures, time-frequency analysis, ICA, and data export. Includes German and English versions.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/trackerStats" target="_blank">trackerStats</a></div>
+        <span class="project-lang">MATLAB</span>
+      </div>
+      <div class="project-desc">Descriptive and correlational statistics on longitudinal personal wellbeing tracker data, covering mood, energy, stress, sleep, productivity, and related variables.</div>
+    </div>
+
+    <!-- Website -->
+    <div class="project-group">
+      <div class="project-group-title">Website</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/arnedhansen.github.io" target="_blank">arnedhansen.github.io</a></div>
+        <span class="project-lang">HTML</span>
+        <span class="project-lang">CSS</span>
+      </div>
+      <div class="project-desc">Source code for this academic personal website, built with plain HTML, CSS, and JavaScript — no frameworks.</div>
+    </div>
+
+    <div class="project-entry">
+      <div class="project-header">
+        <div class="project-title"><a href="https://github.com/arnedhansen/maptoposter" target="_blank">maptoposter</a></div>
+        <span class="project-lang">Python</span>
+      </div>
+      <div class="project-desc">Python CLI tool to generate minimalist map posters for any city using OpenStreetMap data. Supports multiple visual themes (e.g. blueprint, neon, terracotta) and exports print-ready poster images.</div>
     </div>
 
   </div>
-  <script>
-  (function(){
-    var btn = document.querySelector('.nav-hamburger');
-    var menu = document.querySelector('.nav-links');
-    if (!btn || !menu) return;
-    var iconMenu = btn.querySelector('.icon-menu');
-    var iconClose = btn.querySelector('.icon-close');
-    btn.addEventListener('click', function(){
-      var isOpen = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(isOpen));
-      iconMenu.style.display = isOpen ? 'none' : 'block';
-      iconClose.style.display = isOpen ? 'block' : 'none';
-    });
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        iconMenu.style.display = 'block';
-        iconClose.style.display = 'none';
-      });
-    });
-  })();
-  </script>
 </body>
 </html>
