@@ -269,6 +269,16 @@ a:hover { text-decoration: underline; }
 .skill-name  { font-weight: 500; }
 .skill-level { color: var(--muted); font-size: 0.78rem; }
 
+/* ══ MEMBERSHIP ENTRIES ══════════════════════ */
+.member-entry {
+  display: grid; grid-template-columns: 94px 1fr; gap: 0 18px;
+  padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start;
+}
+.member-date { font-size: 0.72rem; color: var(--muted); padding-top: 2px; line-height: 1.5; }
+.member-org  { font-size: 0.85rem; font-weight: 500; line-height: 1.45; margin-bottom: 3px; }
+.member-role { font-size: 0.75rem; color: var(--muted); margin-bottom: 2px; }
+.member-inst { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+
 /* ══ LIST ROWS ═══════════════════════════════ */
 .list-row {
   display: flex; justify-content: space-between; align-items: flex-start;
