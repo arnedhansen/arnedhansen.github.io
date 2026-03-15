@@ -17,7 +17,6 @@
   };
 
   var NAV = [
-    ['about.html',           'About',         'about'],
     ['education.html',       'Education',     'edu'],
     ['experience.html',      'Experience',    'exp'],
     ['skills.html',          'Skills',        'skills'],
