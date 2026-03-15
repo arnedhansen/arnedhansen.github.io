@@ -63,10 +63,116 @@
       border-radius: 3px;
       white-space: nowrap;
     }
+    .lang-matlab  { background: #e16737; color: #fff; }
+    .lang-python  { background: #3572A5; color: #fff; }
+    .lang-r       { background: #198CE7; color: #fff; }
+    .lang-html    { background: #e34c26; color: #fff; }
+    .lang-css     { background: #563d7c; color: #fff; }
     .project-desc {
       font-size: 0.80rem;
       color: var(--muted);
       line-height: 1.65;
+    }
+    /* ── GitHub contribution heatmap ── */
+    .gh-calendar-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .gh-dow-labels {
+      display: grid;
+      grid-template-rows: 16px repeat(7, 10px);
+      gap: 2px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+    .gh-dow-labels span {
+      font-size: 0.58rem;
+      color: var(--muted);
+      line-height: 10px;
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .gh-calendar-outer {
+      overflow-x: auto;
+      padding-bottom: 2px;
+      min-width: 0;
+    }
+    .gh-calendar {
+      display: inline-grid;
+      grid-template-rows: 16px repeat(7, 10px);
+      grid-auto-flow: column;
+      grid-auto-columns: 10px;
+      gap: 2px;
+      cursor: default;
+    }
+    .gh-month-label {
+      font-size: 0.58rem;
+      color: var(--muted);
+      white-space: nowrap;
+      line-height: 16px;
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 400;
+    }
+    .gh-day {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+    .gh-day[data-level="1"] { background: #c6e48b; }
+    .gh-day[data-level="2"] { background: #7bc96f; }
+    .gh-day[data-level="3"] { background: #239a3b; }
+    .gh-day[data-level="4"] { background: #196127; }
+    .gh-day-empty { visibility: hidden; }
+    .gh-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .gh-total {
+      font-size: 0.70rem;
+      color: var(--muted);
+    }
+    .gh-legend {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .gh-legend-label {
+      font-size: 0.58rem;
+      color: var(--muted);
+      margin-right: 2px;
+    }
+    .gh-legend-cell {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+    .gh-legend-cell[data-level="1"] { background: #c6e48b; }
+    .gh-legend-cell[data-level="2"] { background: #7bc96f; }
+    .gh-legend-cell[data-level="3"] { background: #239a3b; }
+    .gh-legend-cell[data-level="4"] { background: #196127; }
+    #gh-tooltip {
+      position: fixed;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 0.65rem;
+      font-family: inherit;
+      padding: 4px 9px;
+      border-radius: 3px;
+      pointer-events: none;
+      display: none;
+      z-index: 1000;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -106,6 +212,41 @@
     </div>
     <p style="font-size:0.8rem;color:var(--muted);margin-bottom:28px;">Open-source repositories on <a href="https://github.com/arnedhansen" target="_blank">GitHub</a>.</p>
 
+    <!-- GitHub Activity -->
+    <div class="project-group" style="margin-top:0">
+      <div class="project-group-title">GitHub Activity</div>
+    </div>
+    <div style="padding: 14px 0 0 0;">
+      <div class="gh-calendar-wrap">
+        <div class="gh-dow-labels">
+          <span></span>
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+        <div class="gh-calendar-outer">
+          <div id="gh-calendar" class="gh-calendar"></div>
+        </div>
+      </div>
+      <div class="gh-meta">
+        <span id="gh-total" class="gh-total"></span>
+        <div class="gh-legend">
+          <span class="gh-legend-label">Less</span>
+          <div class="gh-legend-cell"></div>
+          <div class="gh-legend-cell" data-level="1"></div>
+          <div class="gh-legend-cell" data-level="2"></div>
+          <div class="gh-legend-cell" data-level="3"></div>
+          <div class="gh-legend-cell" data-level="4"></div>
+          <span class="gh-legend-label" style="margin-left:2px">More</span>
+        </div>
+      </div>
+    </div>
+    <div id="gh-tooltip"></div>
+
     <!-- Research -->
     <div class="project-group">
       <div class="project-group-title">Research</div>
@@ -114,9 +255,9 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/AOC" target="_blank">AOC</a></div>
-        <span class="project-lang">MATLAB</span>
-        <span class="project-lang">Python</span>
-        <span class="project-lang">R</span>
+        <span class="project-lang lang-matlab">MATLAB 88%</span>
+        <span class="project-lang lang-r">R 6%</span>
+        <span class="project-lang lang-python">Python 5%</span>
       </div>
       <div class="project-desc">Full analysis pipeline for the Alpha Oculomotor Control study. Sternberg and N-back working memory tasks with simultaneous EEG and eye-tracking to characterize alpha-band neural signatures of oculomotor control. Published as a <a href="https://www.authorea.com/users/819882/articles/1218693-modulations-of-posterior-alpha-power-during-working-memory-co-vary-with-task-dependent-eye-movement-patterns" target="_blank">Registered Report</a> in <em>Psychophysiology</em>.</div>
     </div>
@@ -124,9 +265,9 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/AOI" target="_blank">AOI</a></div>
-        <span class="project-lang">MATLAB</span>
-        <span class="project-lang">Python</span>
-        <span class="project-lang">R</span>
+        <span class="project-lang lang-matlab">MATLAB</span>
+        <span class="project-lang lang-python">Python</span>
+        <span class="project-lang lang-r">R</span>
       </div>
       <div class="project-desc">Extension of the AOC pipeline with a restructured hybrid MATLAB/Python/R architecture, source-level statistics, and multiverse analysis.</div>
     </div>
@@ -134,7 +275,8 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/GCP" target="_blank">GCP</a></div>
-        <span class="project-lang">MATLAB</span>
+        <span class="project-lang lang-matlab">MATLAB 97%</span>
+        <span class="project-lang lang-r">R 3%</span>
       </div>
       <div class="project-desc">Analysis pipeline for the Gamma Concentric Protocol. Dynamic concentric grating fixation task with simultaneous EEG and eye-tracking to investigate gamma-band neural signatures of oculomotor control.</div>
     </div>
@@ -142,8 +284,7 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/CVA" target="_blank">CVA</a></div>
-        <span class="project-lang">MATLAB</span>
-        <span class="project-lang">R</span>
+        <span class="project-lang lang-matlab">MATLAB 100%</span>
       </div>
       <div class="project-desc">EEG preprocessing and analysis pipeline for a CSF Volume Attenuation study, including event logging and source-level statistics.</div>
     </div>
@@ -151,7 +292,7 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/IAB" target="_blank">IAB</a></div>
-        <span class="project-lang">MATLAB</span>
+        <span class="project-lang lang-matlab">MATLAB 100%</span>
       </div>
       <div class="project-desc">Inattentional blindness paradigm with EEG preprocessing and analysis, developed for a Matura (Swiss high school) outreach project.</div>
     </div>
@@ -159,8 +300,8 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/DALAS" target="_blank">DALAS</a></div>
-        <span class="project-lang">R</span>
-        <span class="project-lang">MATLAB</span>
+        <span class="project-lang lang-r">R</span>
+        <span class="project-lang lang-matlab">MATLAB</span>
       </div>
       <div class="project-desc">Specification curve analysis pipeline for EEG channel-level and LCMV source-level (DLPFC, frontal) models comparing healthy and diagnosed participant groups across auditory/visual conditions.</div>
     </div>
@@ -173,7 +314,7 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/ADA" target="_blank">ADA</a></div>
-        <span class="project-lang">Python</span>
+        <span class="project-lang lang-python">Python</span>
       </div>
       <div class="project-desc">Desktop application for exploratory data analysis and statistical testing. Supports CSV/Excel import, outlier detection (IQR, Z-score, MAD), t-tests, ANOVAs, repeated-measures ANOVA with assumption checks, and publication-quality raincloud plots — all via an interactive GUI. Work in progress.</div>
     </div>
@@ -181,7 +322,7 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/NeurophysiologyBlockCourse" target="_blank">NeurophysiologyBlockCourse</a></div>
-        <span class="project-lang">MATLAB</span>
+        <span class="project-lang lang-matlab">MATLAB 89%</span>
       </div>
       <div class="project-desc">MATLAB and EEGLAB tutorials for a neurophysiology EEG block course at UZH. Covers MATLAB programming, digital signal processing, data structures, time-frequency analysis, ICA, and data export. Includes German and English versions.</div>
     </div>
@@ -194,12 +335,137 @@
     <div class="project-entry">
       <div class="project-header">
         <div class="project-title"><a href="https://github.com/arnedhansen/arnedhansen.github.io" target="_blank">arnedhansen.github.io</a></div>
-        <span class="project-lang">HTML</span>
-        <span class="project-lang">CSS</span>
+        <span class="project-lang lang-html">HTML 92%</span>
+        <span class="project-lang lang-css">CSS 8%</span>
       </div>
       <div class="project-desc">Source code for this academic personal website, built with plain HTML, CSS, and JavaScript — no frameworks.</div>
     </div>
 
   </div>
+
+  <script>
+    (function () {
+      const MONTHS    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const CACHE_KEY = 'gh_contrib_v1';
+      const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+      /* ── Cache helpers ── */
+      function readCache() {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          if (!raw) return null;
+          const c = JSON.parse(raw);
+          return (Date.now() - c.ts < CACHE_TTL) ? c.data : null;
+        } catch (_) { return null; }
+      }
+      function readStaleCache() {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          return raw ? JSON.parse(raw).data : null;
+        } catch (_) { return null; }
+      }
+      function writeCache(data) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data })); } catch (_) {}
+      }
+
+      /* ── Fetch (fresh or cached) ── */
+      async function getData() {
+        const fresh = readCache();
+        if (fresh) return fresh;
+        const res  = await fetch('https://github-contributions-api.jogruber.de/v4/arnedhansen?y=last');
+        const data = await res.json();
+        writeCache(data);
+        return data;
+      }
+
+      /* ── Build week grid ── */
+      function toWeeks(days) {
+        const weeks = [];
+        let week = [];
+        const firstDow = new Date(days[0].date + 'T00:00:00').getDay();
+        for (let i = 0; i < firstDow; i++) week.push(null);
+        for (const d of days) {
+          const dow = new Date(d.date + 'T00:00:00').getDay();
+          if (dow === 0 && week.length > 0) {
+            while (week.length < 7) week.push(null);
+            weeks.push(week); week = [];
+          }
+          week.push(d);
+        }
+        while (week.length < 7) week.push(null);
+        weeks.push(week);
+        return weeks;
+      }
+
+      /* ── Render grid ── */
+      function render(data) {
+        const container = document.getElementById('gh-calendar');
+        const totalEl   = document.getElementById('gh-total');
+        const weeks     = toWeeks(data.contributions);
+        let html = '', lastMonth = -1;
+        for (const wk of weeks) {
+          const first = wk.find(d => d !== null);
+          let label = '';
+          if (first) {
+            const m = new Date(first.date + 'T00:00:00').getMonth();
+            if (m !== lastMonth) { label = MONTHS[m]; lastMonth = m; }
+          }
+          html += `<div class="gh-month-label">${label}</div>`;
+          for (const d of wk) {
+            if (!d) {
+              html += `<div class="gh-day gh-day-empty"></div>`;
+            } else {
+              html += `<div class="gh-day" data-level="${d.level}" data-date="${d.date}" data-count="${d.count}"></div>`;
+            }
+          }
+        }
+        container.innerHTML = html;
+        totalEl.textContent = `${data.total.lastYear.toLocaleString()} contributions in the last year`;
+      }
+
+      /* ── Tooltip ── */
+      function attachTooltip() {
+        const container = document.getElementById('gh-calendar');
+        const tip       = document.getElementById('gh-tooltip');
+        container.addEventListener('mouseover', e => {
+          const cell = e.target.closest('.gh-day[data-date]');
+          if (!cell) { tip.style.display = 'none'; return; }
+          const n       = parseInt(cell.dataset.count, 10);
+          const dateStr = new Date(cell.dataset.date + 'T00:00:00')
+            .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          tip.textContent = n === 0
+            ? `No contributions on ${dateStr}`
+            : `${n} contribution${n !== 1 ? 's' : ''} on ${dateStr}`;
+          tip.style.display = 'block';
+        });
+        container.addEventListener('mousemove', e => {
+          tip.style.left = (e.clientX + 12) + 'px';
+          tip.style.top  = (e.clientY - 36) + 'px';
+        });
+        container.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+      }
+
+      /* ── Skeleton while loading ── */
+      (function skeleton() {
+        const container = document.getElementById('gh-calendar');
+        let html = '';
+        for (let w = 0; w < 53; w++) {
+          html += '<div class="gh-month-label"></div>';
+          for (let d = 0; d < 7; d++) html += '<div class="gh-day"></div>';
+        }
+        container.innerHTML = html;
+      })();
+
+      /* ── Boot ── */
+      getData()
+        .then(data => { render(data); attachTooltip(); })
+        .catch(() => {
+          const stale = readStaleCache();
+          if (stale) { render(stale); attachTooltip(); return; }
+          document.getElementById('gh-calendar').innerHTML =
+            '<span style="font-size:0.72rem;color:var(--muted);padding:6px 0;display:block">Activity unavailable</span>';
+        });
+    })();
+  </script>
 </body>
 </html>
