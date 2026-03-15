@@ -34,7 +34,7 @@
   }
 
   var html = '<nav class="nav">'
-    + '<a href="index.html" class="nav-brand">Arne Hansen</a>'
+    + '<a href="index.html" class="nav-brand">Arne D. Hansen</a>'
     + '<button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">'
     +   '<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>'
     + '</button>'
