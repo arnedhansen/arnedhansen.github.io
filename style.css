@@ -49,13 +49,19 @@ a:hover { text-decoration: underline; }
 
 .nav-links { list-style: none; display: flex; gap: 1px; align-items: center; justify-self: center; }
 .nav-links a {
-  display: block; font-size: 0.71rem; font-weight: 400;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.71rem; font-weight: 400;
   color: var(--text); text-decoration: none;
   padding: 5px 8px; border-radius: 6px; white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 .nav-links a:hover  { background: rgba(0,0,0,0.06); text-decoration: none; }
 .nav-links a.active { font-weight: 600; color: var(--accent); }
+
+.nav-icon-svg { display: inline-flex; align-items: center; flex-shrink: 0; opacity: 0.38; transition: opacity 0.15s; }
+.nav-icon-svg svg { display: block; fill: currentColor; width: 12px; height: 12px; }
+.nav-links a:hover .nav-icon-svg { opacity: 0.75; }
+.nav-links a.active .nav-icon-svg { opacity: 1; }
 
 .nav-icons {
   display: flex; align-items: center; gap: 9px;
@@ -78,11 +84,15 @@ a:hover { text-decoration: underline; }
 
 /* ── Section heading ── */
 .section-heading {
+  display: flex; align-items: center; gap: 10px;
   font-size: 1.05rem; font-weight: 700; letter-spacing: 0.01em;
   padding-bottom: 12px; border-bottom: 1px solid var(--border);
   margin-bottom: 36px; margin-top: 52px;
 }
 .section-heading:first-child { margin-top: 0; }
+
+.sh-icon { display: flex; align-items: center; flex-shrink: 0; opacity: 0.45; }
+.sh-icon svg { display: block; fill: currentColor; width: 17px; height: 17px; }
 
 /* ── Profile block ── */
 .profile-block {
