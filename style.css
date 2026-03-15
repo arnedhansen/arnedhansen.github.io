@@ -270,143 +270,21 @@ a:hover { text-decoration: underline; }
 }
 .list-row-year { color: var(--muted); font-size: 0.75rem; white-space: nowrap; flex-shrink: 0; padding-top: 2px; }
 
-/* ══ MOBILE-ONLY UTILITIES (hidden on desktop, no effect above 780px) ══ */
-
-/* Hamburger button — invisible on desktop */
-.nav-hamburger {
-  display: none;
-  background: none; border: none; cursor: pointer;
-  padding: 7px; color: var(--text); border-radius: 6px;
-  align-items: center; justify-content: center;
-  transition: background 0.15s; flex-shrink: 0;
-}
-.nav-hamburger svg { display: block; fill: currentColor; width: 22px; height: 22px; }
-
-/* Mobile social row inside dropdown — invisible on desktop */
-li.nav-mobile-social { display: none; }
-
-/* Scrollable table wrapper — overflow:auto is invisible when content fits */
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
 /* ══ RESPONSIVE ══════════════════════════════ */
 @media (max-width: 780px) {
-
-  /* ── Nav: swap link list for hamburger ── */
-  .nav {
-    grid-template-columns: 1fr auto;
-    padding: 0 16px;
-  }
-  /* Hide the link list and social icons; show hamburger instead */
-  .nav-links {
-    display: none;
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(240,239,235,0.98);
-    backdrop-filter: saturate(180%) blur(16px);
-    -webkit-backdrop-filter: saturate(180%) blur(16px);
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    padding: 6px 0 12px;
-    z-index: 300;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
-  }
-  .nav-links.open { display: flex; }
-  .nav-links li { width: 100%; }
-  .nav-links a {
-    font-size: 0.84rem; font-weight: 400;
-    padding: 12px 22px; border-radius: 0; gap: 14px;
-    width: 100%; white-space: normal;
-  }
-  .nav-icon-svg svg { width: 15px !important; height: 15px !important; }
-  .nav-icons { display: none; }
-  .nav-hamburger { display: flex; }
-
-  /* Mobile social links row at bottom of dropdown */
-  li.nav-mobile-social {
-    display: flex;
-    gap: 20px;
-    padding: 12px 22px 4px;
-    margin-top: 4px;
-    border-top: 1px solid var(--border);
-  }
-  li.nav-mobile-social .icon-link { opacity: 0.6; }
-  li.nav-mobile-social .icon-link:hover { opacity: 1; }
-  li.nav-mobile-social .icon-link svg { width: 18px; height: 18px; }
-
-  /* ── Layout ── */
+  .nav { padding: 0 14px; gap: 8px; }
+  .nav-links a { font-size: 0.65rem; padding: 4px 5px; }
   .container { padding: 36px 20px; }
   .profile-block { flex-direction: column; align-items: flex-start; gap: 20px; }
   .profile-info h1 { font-size: 1.6rem; }
-
-  /* ── Timeline ── */
   .timeline { --date-w: 66px; }
   .tl-date { font-size: 0.58rem; }
-
-  /* ── Skills ── */
   .skills-grid { grid-template-columns: 1fr; }
-
-  /* ── Awards: show amount on its own line instead of hiding it ── */
-  .award-entry {
-    grid-template-columns: 62px 1fr;
-    grid-template-rows: auto auto;
-    gap: 0 14px;
-    align-items: start;
-  }
-  .award-date  { grid-row: 1; }
-  .award-title { grid-row: 1; }
-  .award-amt   { grid-column: 2; grid-row: 2; display: block; padding-top: 2px; }
-
-  /* ── Misc ── */
+  .award-entry { grid-template-columns: 56px 1fr; }
+  .award-amt { display: none; }
   .section-nav { grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width: 520px) {
-  .container { padding: 28px 16px; }
-  .profile-info h1 { font-size: 1.45rem; }
-
-  /* Stack the date above the timeline content on very small screens */
-  .timeline { --date-w: 0px; --line-w: 22px; }
-  .tl-row {
-    grid-template-columns: var(--line-w) 1fr;
-    position: relative;
-  }
-  .tl-date {
-    position: absolute; top: 0;
-    left: calc(var(--line-w) + 14px);
-    text-align: left; padding: 0;
-    font-size: 0.62rem; white-space: nowrap;
-  }
-  .tl-line-col { grid-column: 1; }
-  .tl-content  { grid-column: 2; padding-top: 20px; padding-left: 14px; }
-
-  /* List rows: wrap year below text */
-  .list-row { flex-wrap: wrap; gap: 4px; }
-  .list-row-year { flex-basis: 100%; padding-top: 0; }
-
-  /* Misc */
+  .nav-links li:nth-child(n+7) { display: none; }
   .section-nav { grid-template-columns: 1fr; }
 }
-
-/* ══ CODING PROJECTS ═════════════════════════ */
-.project-entry {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border);
-}
-.project-entry:last-child { border-bottom: none; }
-
-.project-header {
-  display: flex; align-items: baseline; gap: 14px;
-  margin-bottom: 5px; flex-wrap: wrap;
-}
-.project-title {
-  font-size: 0.88rem; font-weight: 700; color: var(--text); line-height: 1.3;
-}
-.project-lang {
-  font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.09em; padding: 2px 7px; border-radius: 3px;
-  background: #ececec; color: var(--muted); white-space: nowrap;
-}
-.project-desc {
-  font-size: 0.82rem; color: var(--muted); line-height: 1.75; margin-bottom: 8px;
-}
-.project-links { display: flex; gap: 16px; flex-wrap: wrap; }
-.project-links a { font-size: 0.75rem; }
