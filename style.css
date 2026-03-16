@@ -209,24 +209,24 @@ a:hover { text-decoration: underline; }
   font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
   color: var(--muted); margin-bottom: 16px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
 }
-.pub-entry { padding: 0 0 22px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.pub-entry { position: relative; padding: 0 90px 22px 0; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
 .pub-entry:last-child { border-bottom: none; margin-bottom: 0; }
 .pub-title   { font-size: 0.875rem; font-weight: 600; line-height: 1.45; margin-bottom: 5px; }
 .pub-authors { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 3px; }
 .pub-journal { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
-.pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+.pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; margin-right: -90px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
 .pub-link    { font-size: 0.75rem; }
 .pub-badge {
   display: inline-block; font-size: 0.58rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 3px;
-  vertical-align: middle; margin-left: 5px;
+  vertical-align: middle; margin-left: 0;
 }
 .pub-badge.published { background: #f0e4e4; color: var(--accent); }
 .pub-badge.in-prep   { background: #ececec; color: var(--muted); }
 .pub-badge.talk      { background: #e4eaf0; color: #2d5f8a; }
 .pub-badge.poster    { background: #ececec; color: var(--muted); }
 .pub-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.os-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.os-badges { position: absolute; top: 0; right: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
 .os-badge {
   display: inline-block; font-size: 0.52rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 6px; border-radius: 3px;
@@ -471,8 +471,10 @@ a:hover { text-decoration: underline; }
   .profile-icon-links { flex-wrap: wrap; row-gap: 10px; }
   /* teaching table: enable horizontal scroll */
   .teaching-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  /* publication entry header: allow badges to wrap below title */
-  .pub-entry-header { flex-wrap: wrap; }
+  /* publication badges: stack below content on narrow screens */
+  .pub-entry { padding-right: 0; }
+  .pub-summary { margin-right: 0; }
+  .os-badges { position: static; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: 6px; }
   /* body text: left-align avoids ugly word-spacing on narrow screens */
   .body-text, .pub-summary, .project-desc { text-align: left; }
 }
