@@ -360,12 +360,12 @@ a:hover { text-decoration: underline; }
   font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--muted); background: var(--border); padding: 2px 7px; border-radius: 3px; white-space: nowrap;
 }
-.lang-matlab { background: #e16737; color: #fff; }
-.lang-python  { background: #3572A5; color: #fff; }
-.lang-r       { background: #198CE7; color: #fff; }
-.lang-html    { background: #e34c26; color: #fff; }
-.lang-css     { background: #563d7c; color: #fff; }
-.lang-js      { background: #f1e05a; color: #333; }
+.lang-matlab { background: #f5c4a8; color: #7a3010; }
+.lang-python  { background: #d4c4f0; color: #3d2080; }
+.lang-r       { background: #b8d9f8; color: #0a4d8c; }
+.lang-html    { background: #f5bfb0; color: #7a2010; }
+.lang-css     { background: #a8e0d8; color: #0a4840; }
+.lang-js      { background: #fdf0a0; color: #5a4800; }
 .project-desc { font-size: 0.80rem; color: var(--muted); line-height: 1.65; }
 
 /* ── GitHub contribution heatmap ── */
