@@ -214,7 +214,7 @@ a:hover { text-decoration: underline; }
 .pub-title   { font-size: 0.875rem; font-weight: 600; line-height: 1.45; margin-bottom: 5px; }
 .pub-authors { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 3px; }
 .pub-journal { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
-.pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; }
+.pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
 .pub-link    { font-size: 0.75rem; }
 .pub-badge {
   display: inline-block; font-size: 0.58rem; font-weight: 700;
@@ -273,6 +273,7 @@ a:hover { text-decoration: underline; }
 .outreach-entry { padding: 14px 0; border-bottom: 1px solid var(--border); }
 .outreach-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 3px; }
 .outreach-meta  { font-size: 0.75rem; color: var(--muted); }
+.outreach-entry .pub-summary { border-left: none; padding-left: 0; }
 
 /* ══ SKILLS GRID ═════════════════════════════ */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 52px; font-size: 0.845rem; margin-bottom: 16px; }
@@ -366,7 +367,7 @@ a:hover { text-decoration: underline; }
 .lang-html    { background: #f5bfb0; color: #7a2010; }
 .lang-css     { background: #a8e0d8; color: #0a4840; }
 .lang-js      { background: #fdf0a0; color: #5a4800; }
-.project-desc { font-size: 0.80rem; color: var(--muted); line-height: 1.65; }
+.project-desc { font-size: 0.80rem; color: var(--muted); line-height: 1.65; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
 
 /* ── GitHub contribution heatmap ── */
 .gh-calendar-wrap { display: flex; align-items: flex-start; gap: 5px; }
@@ -472,7 +473,7 @@ a:hover { text-decoration: underline; }
   /* publication entry header: allow badges to wrap below title */
   .pub-entry-header { flex-wrap: wrap; }
   /* body text: left-align avoids ugly word-spacing on narrow screens */
-  .body-text { text-align: left; }
+  .body-text, .pub-summary, .project-desc { text-align: left; }
 }
 @media (max-width: 520px) {
   .section-nav { grid-template-columns: 1fr; }
