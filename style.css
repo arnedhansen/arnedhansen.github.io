@@ -225,6 +225,17 @@ a:hover { text-decoration: underline; }
 .pub-badge.in-prep   { background: #ececec; color: var(--muted); }
 .pub-badge.talk      { background: #e4eaf0; color: #2d5f8a; }
 .pub-badge.poster    { background: #ececec; color: var(--muted); }
+.pub-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.os-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.os-badge {
+  display: inline-block; font-size: 0.52rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 6px; border-radius: 3px;
+}
+.os-badge.prereg      { background: #f5e0e0; color: #8b1a1a; }
+.os-badge.prereg-plus { background: #f5e0e0; color: #8b1a1a; }
+.os-badge.open-data   { background: #dde8f5; color: #1a5296; }
+.os-badge.open-mat    { background: #fdf0dd; color: #8a5a00; }
+.os-badge.open-code   { background: #dff0df; color: #1f6b1f; }
 
 /* ══ PRESENTATIONS ═══════════════════════════ */
 .pres-entry {
