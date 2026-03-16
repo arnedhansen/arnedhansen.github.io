@@ -113,7 +113,7 @@ a:hover { text-decoration: underline; }
 .page-menu {
   margin-top: 40px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   justify-content: center;
   width: 80%;
@@ -132,13 +132,14 @@ a:hover { text-decoration: underline; }
   background: rgba(0,0,0,0.05);
   overflow: hidden;
   white-space: nowrap;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: background 1s ease, color 0.5s ease;
 }
 
 .page-menu-item:hover {
   text-decoration: none;
   background: rgba(139,32,32,0.09);
   color: var(--accent);
+  transition: background 1s ease, color 0.5s ease;
 }
 
 .pmi-icon {
@@ -174,15 +175,19 @@ a:hover { text-decoration: underline; }
   opacity: 0;
   margin-left: 0;
   transition:
-    max-width 0.75s cubic-bezier(0.25, 0, 0.1, 1),
-    opacity 0.5s ease,
-    margin-left 0.75s cubic-bezier(0.25, 0, 0.1, 1);
+    max-width 1s cubic-bezier(0.25, 0, 0.1, 1),
+    opacity 0.7s ease,
+    margin-left 1s cubic-bezier(0.25, 0, 0.1, 1);
 }
 
 .page-menu-item:hover .pmi-label {
   max-width: 200px;
   opacity: 1;
   margin-left: 8px;
+  transition:
+    max-width 1s cubic-bezier(0.25, 0, 0.1, 1),
+    opacity 0.7s ease,
+    margin-left 1s cubic-bezier(0.25, 0, 0.1, 1);
 }
 
 .pmi-arrow { display: none; }
