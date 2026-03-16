@@ -459,8 +459,26 @@ a:hover { text-decoration: underline; }
   .award-entry { grid-template-columns: 56px 1fr; }
   .award-amt { display: none; }
   .section-nav { grid-template-columns: 1fr 1fr; }
+  /* page-menu: collapse to 2 columns */
+  .page-menu { grid-template-columns: 1fr 1fr; }
+  .page-menu-item:nth-child(3n) { border-right: 1px solid var(--border); }
+  .page-menu-item:nth-child(2n) { border-right: none; }
+  /* member-entry: stack vertically */
+  .member-entry { display: flex; flex-direction: column; gap: 1px; }
+  /* profile icon links: allow wrapping */
+  .profile-icon-links { flex-wrap: wrap; row-gap: 10px; }
+  /* teaching table: enable horizontal scroll */
+  .teaching-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* publication entry header: allow badges to wrap below title */
+  .pub-entry-header { flex-wrap: wrap; }
+  /* body text: left-align avoids ugly word-spacing on narrow screens */
+  .body-text { text-align: left; }
 }
 @media (max-width: 520px) {
   .section-nav { grid-template-columns: 1fr; }
+  /* page-menu: collapse to 1 column */
+  .page-menu { grid-template-columns: 1fr; }
+  .page-menu-item { border-right: none; }
+  .page-menu-item:nth-child(3n) { border-right: none; }
 }
 
