@@ -112,30 +112,34 @@ a:hover { text-decoration: underline; }
 /* ══ PAGE MENU (landing) ══════════════════════════ */
 .page-menu {
   margin-top: 40px;
-  border-top: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .page-menu-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 17px 10px;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
+  height: 40px;
+  padding: 0 13px;
+  border-radius: 20px;
   text-decoration: none;
   color: var(--text);
-  transition: color 0.15s ease;
-  position: relative;
+  background: rgba(0,0,0,0.05);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.page-menu-item:nth-child(3n) {
-  border-right: none;
+.page-menu-item:hover {
+  text-decoration: none;
+  background: rgba(139,32,32,0.09);
+  color: var(--accent);
 }
-.page-menu-item:hover { text-decoration: none; color: var(--accent); }
-.page-menu-item:hover .pmi-icon { opacity: 1; color: var(--accent); }
-.page-menu-item:hover .pmi-arrow { opacity: 1; transform: translateX(4px); }
 
 .pmi-icon {
   flex-shrink: 0;
@@ -144,9 +148,9 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.45;
+  opacity: 0.55;
   color: var(--text);
-  transition: opacity 0.15s, color 0.15s;
+  transition: opacity 0.25s ease, color 0.25s ease;
 }
 .pmi-icon svg {
   width: 18px;
@@ -155,31 +159,42 @@ a:hover { text-decoration: underline; }
   fill: currentColor;
 }
 
+.page-menu-item:hover .pmi-icon {
+  opacity: 1;
+  color: var(--accent);
+}
+
 .pmi-label {
-  flex: 1;
-  font-size: 0.845rem;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.01em;
+  opacity: 0;
+  margin-left: 0;
+  transition:
+    max-width 0.75s cubic-bezier(0.25, 0, 0.1, 1),
+    opacity 0.5s ease,
+    margin-left 0.75s cubic-bezier(0.25, 0, 0.1, 1);
 }
 
-.pmi-arrow {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  opacity: 0.28;
-  transition: opacity 0.15s, transform 0.2s ease;
-}
-.pmi-arrow svg {
-  width: 16px;
-  height: 16px;
-  display: block;
-  fill: currentColor;
+.page-menu-item:hover .pmi-label {
+  max-width: 200px;
+  opacity: 1;
+  margin-left: 8px;
 }
 
-.page-menu-item.pmi-cv .pmi-label { color: var(--accent); }
-.page-menu-item.pmi-cv .pmi-icon  { color: var(--accent); }
+.pmi-arrow { display: none; }
+
+/* CV download items: label always visible */
+.page-menu-item.pmi-cv .pmi-label {
+  max-width: 200px;
+  opacity: 1;
+  margin-left: 8px;
+  color: var(--accent);
+}
+.page-menu-item.pmi-cv .pmi-icon { opacity: 0.75; color: var(--accent); }
 
 /* ── Body text ── */
 .body-text { font-size: 0.875rem; line-height: 1.9; margin-bottom: 18px; color: var(--text); }
@@ -461,10 +476,7 @@ a:hover { text-decoration: underline; }
   .award-entry { grid-template-columns: 56px 1fr; }
   .award-amt { display: none; }
   .section-nav { grid-template-columns: 1fr 1fr; }
-  /* page-menu: collapse to 2 columns */
-  .page-menu { grid-template-columns: 1fr 1fr; }
-  .page-menu-item:nth-child(3n) { border-right: 1px solid var(--border); }
-  .page-menu-item:nth-child(2n) { border-right: none; }
+  /* page-menu pills: flex-wrap handles layout naturally */
   /* member-entry: stack vertically */
   .member-entry { display: flex; flex-direction: column; gap: 1px; }
   /* profile icon links: allow wrapping */
@@ -480,9 +492,8 @@ a:hover { text-decoration: underline; }
 }
 @media (max-width: 520px) {
   .section-nav { grid-template-columns: 1fr; }
-  /* page-menu: collapse to 1 column */
-  .page-menu { grid-template-columns: 1fr; }
-  .page-menu-item { border-right: none; }
-  .page-menu-item:nth-child(3n) { border-right: none; }
+  /* hide timeline dots and vertical lines on mobile */
+  .tl-line-col { display: none; }
+  .tl-row { grid-template-columns: var(--date-w) 1fr; }
 }
 
