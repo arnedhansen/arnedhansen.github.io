@@ -214,6 +214,7 @@ a:hover { text-decoration: underline; }
 .pub-title   { font-size: 0.875rem; font-weight: 600; line-height: 1.45; margin-bottom: 5px; }
 .pub-authors { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 3px; }
 .pub-journal { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+.pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; }
 .pub-link    { font-size: 0.75rem; }
 .pub-badge {
   display: inline-block; font-size: 0.58rem; font-weight: 700;
