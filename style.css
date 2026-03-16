@@ -217,10 +217,13 @@ a:hover { text-decoration: underline; }
 .pub-link    { font-size: 0.75rem; }
 .pub-badge {
   display: inline-block; font-size: 0.58rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 3px; margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 3px;
+  vertical-align: middle; margin-left: 5px;
 }
 .pub-badge.published { background: #f0e4e4; color: var(--accent); }
 .pub-badge.in-prep   { background: #ececec; color: var(--muted); }
+.pub-badge.talk      { background: #e4eaf0; color: #2d5f8a; }
+.pub-badge.poster    { background: #ececec; color: var(--muted); }
 
 /* ══ PRESENTATIONS ═══════════════════════════ */
 .pres-entry {
@@ -350,6 +353,7 @@ a:hover { text-decoration: underline; }
 .lang-r       { background: #198CE7; color: #fff; }
 .lang-html    { background: #e34c26; color: #fff; }
 .lang-css     { background: #563d7c; color: #fff; }
+.lang-js      { background: #f1e05a; color: #333; }
 .project-desc { font-size: 0.80rem; color: var(--muted); line-height: 1.65; }
 
 /* ── GitHub contribution heatmap ── */
