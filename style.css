@@ -355,23 +355,23 @@ a:hover { text-decoration: underline; }
 /* ── GitHub contribution heatmap ── */
 .gh-calendar-wrap { display: flex; align-items: flex-start; gap: 5px; }
 .gh-dow-labels {
-  display: grid; grid-template-rows: 16px repeat(7, 10px);
+  display: grid; grid-template-rows: 16px repeat(7, var(--gh-cell, 10px));
   gap: 2px; flex-shrink: 0; padding-top: 1px;
 }
 .gh-dow-labels span {
-  font-size: 0.58rem; color: var(--muted); line-height: 10px;
+  font-size: 0.58rem; color: var(--muted); line-height: var(--gh-cell, 10px);
   text-align: right; white-space: nowrap; font-weight: 400;
 }
-.gh-calendar-outer { overflow-x: auto; padding-bottom: 2px; min-width: 0; }
+.gh-calendar-outer { flex: 1; min-width: 0; padding-bottom: 2px; }
 .gh-calendar {
-  display: inline-grid; grid-template-rows: 16px repeat(7, 10px);
-  grid-auto-flow: column; grid-auto-columns: 10px; gap: 2px; cursor: default;
+  display: grid; width: 100%; grid-template-rows: 16px repeat(7, var(--gh-cell, 10px));
+  grid-auto-flow: column; grid-auto-columns: var(--gh-cell, 10px); gap: 2px; cursor: default;
 }
 .gh-month-label {
   font-size: 0.58rem; color: var(--muted); white-space: nowrap;
   line-height: 16px; font-weight: 400;
 }
-.gh-day { width: 10px; height: 10px; border-radius: 2px; background: var(--border); }
+.gh-day { width: var(--gh-cell, 10px); height: var(--gh-cell, 10px); border-radius: 2px; background: var(--border); }
 .gh-day[data-level="1"] { background: #c6e48b; }
 .gh-day[data-level="2"] { background: #7bc96f; }
 .gh-day[data-level="3"] { background: #239a3b; }

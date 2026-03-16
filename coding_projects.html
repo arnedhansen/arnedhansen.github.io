@@ -68,7 +68,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/AOC" target="_blank" rel="noopener noreferrer">AOC</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/AOC" target="_blank" rel="noopener noreferrer">AOC: Alpha Oculomotor Control</a></div>
         <span class="project-lang lang-matlab">MATLAB 88%</span>
         <span class="project-lang lang-r">R 6%</span>
         <span class="project-lang lang-python">Python 5%</span>
@@ -78,7 +78,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/AOI" target="_blank" rel="noopener noreferrer">AOI</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/AOI" target="_blank" rel="noopener noreferrer">AOI: Alpha Oculomotor Inflation</a></div>
         <span class="project-lang lang-matlab">MATLAB</span>
         <span class="project-lang lang-python">Python</span>
         <span class="project-lang lang-r">R</span>
@@ -88,7 +88,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/GCP" target="_blank" rel="noopener noreferrer">GCP</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/GCP" target="_blank" rel="noopener noreferrer">GCP: Gamma Contrast Perception</a></div>
         <span class="project-lang lang-matlab">MATLAB 97%</span>
         <span class="project-lang lang-r">R 3%</span>
       </div>
@@ -97,7 +97,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/CVA" target="_blank" rel="noopener noreferrer">CVA</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/CVA" target="_blank" rel="noopener noreferrer">CVA: CSF Volume Attenuation</a></div>
         <span class="project-lang lang-matlab">MATLAB 100%</span>
       </div>
       <div class="project-desc">EEG preprocessing and analysis pipeline for a CSF Volume Attenuation study, including event logging and source-level statistics.</div>
@@ -105,7 +105,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/IAB" target="_blank" rel="noopener noreferrer">IAB</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/IAB" target="_blank" rel="noopener noreferrer">IAB: Inattentional Blindness</a></div>
         <span class="project-lang lang-matlab">MATLAB 100%</span>
       </div>
       <div class="project-desc">Inattentional blindness paradigm with EEG preprocessing and analysis, developed for a Matura (Swiss high school) outreach project.</div>
@@ -113,7 +113,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/DALAS" target="_blank" rel="noopener noreferrer">DALAS</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/DALAS" target="_blank" rel="noopener noreferrer">DALAS: Depression Alpha Asymmetry</a></div>
         <span class="project-lang lang-r">R</span>
         <span class="project-lang lang-matlab">MATLAB</span>
       </div>
@@ -127,7 +127,7 @@
 
     <div class="project-entry">
       <div class="project-header">
-        <div class="project-title"><a href="https://github.com/arnedhansen/ADA" target="_blank" rel="noopener noreferrer">ADA</a></div>
+        <div class="project-title"><a href="https://github.com/arnedhansen/ADA" target="_blank" rel="noopener noreferrer">ADA: Automated Data Analysis</a></div>
         <span class="project-lang lang-python">Python</span>
       </div>
       <div class="project-desc">Desktop application for exploratory data analysis and statistical testing. Supports CSV/Excel import, outlier detection (IQR, Z-score, MAD), t-tests, ANOVAs, repeated-measures ANOVA with assumption checks, and publication-quality raincloud plots — all via an interactive GUI. Work in progress.</div>
@@ -138,7 +138,7 @@
         <div class="project-title"><a href="https://github.com/arnedhansen/NeurophysiologyBlockCourse" target="_blank" rel="noopener noreferrer">NeurophysiologyBlockCourse</a></div>
         <span class="project-lang lang-matlab">MATLAB 89%</span>
       </div>
-      <div class="project-desc">MATLAB and EEGLAB tutorials for a neurophysiology EEG block course at UZH. Covers MATLAB programming, digital signal processing, data structures, time-frequency analysis, ICA, and data export. Includes German and English versions.</div>
+      <div class="project-desc">MATLAB and EEGLAB tutorials for a neurophysiology EEG block course. Covers MATLAB programming, digital signal processing, data structures, time-frequency analysis, ICA, and data export. Includes German and English versions.</div>
     </div>
 
     <!-- Website -->
@@ -157,6 +157,19 @@
 
   </div>
 
+  <script>
+    (function () {
+      const WEEKS = 53, GAP = 2;
+      function updateCellSize() {
+        const outer = document.querySelector('.gh-calendar-outer');
+        if (!outer) return;
+        const cellSize = Math.floor((outer.clientWidth - (WEEKS - 1) * GAP) / WEEKS);
+        document.documentElement.style.setProperty('--gh-cell', Math.max(cellSize, 6) + 'px');
+      }
+      updateCellSize();
+      window.addEventListener('resize', updateCellSize);
+    })();
+  </script>
   <script>
     (function () {
       const MONTHS    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
