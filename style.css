@@ -233,7 +233,7 @@ a:hover { text-decoration: underline; }
 .pub-entry:last-child { border-bottom: none; margin-bottom: 0; }
 .pub-title   { font-size: 0.875rem; font-weight: 600; line-height: 1.45; margin-bottom: 5px; }
 .pub-authors { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 3px; }
-.pub-journal { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+.pub-journal { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
 .pub-summary { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-top: 8px; margin-right: -90px; font-style: italic; border-left: 2px solid var(--border); padding-left: 10px; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
 .pub-link    { font-size: 0.75rem; }
 .pub-badge {
