@@ -259,9 +259,11 @@ a:hover { text-decoration: underline; }
 
 /* ══ PRESENTATIONS ═══════════════════════════ */
 .pres-entry {
+  position: relative;
   display: grid; grid-template-columns: 68px 1fr; gap: 0 18px;
-  padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start;
+  padding: 14px 70px 14px 0; border-bottom: 1px solid var(--border); align-items: start;
 }
+.pres-entry .os-badges { top: 14px; }
 .pres-date     { font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
 .pres-title    { font-size: 0.85rem; font-weight: 500; line-height: 1.45; margin-bottom: 3px; }
 .pres-venue    { font-size: 0.75rem; color: var(--muted); }
@@ -488,8 +490,8 @@ a:hover { text-decoration: underline; }
   .profile-icon-links { flex-wrap: wrap; row-gap: 10px; }
   /* teaching table: enable horizontal scroll */
   .teaching-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  /* publication badges: stack below content on narrow screens */
-  .pub-entry { padding-right: 0; }
+  /* publication/presentation badges: stack below content on narrow screens */
+  .pub-entry, .pres-entry { padding-right: 0; }
   .pub-summary { margin-right: 0; }
   .os-badges { position: static; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: 6px; }
   /* body text: left-align avoids ugly word-spacing on narrow screens */
