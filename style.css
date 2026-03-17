@@ -261,10 +261,14 @@ a:hover { text-decoration: underline; }
 /* ══ PRESENTATIONS ═══════════════════════════ */
 .pres-entry {
   position: relative;
-  display: grid; grid-template-columns: 68px 1fr; gap: 0 18px;
-  padding: 14px 70px 14px 0; border-bottom: 1px solid var(--border); align-items: start;
+  display: grid; grid-template-columns: 68px 1fr auto; gap: 0 18px;
+  padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start;
 }
-.pres-entry .os-badges { top: 14px; }
+.pres-entry .os-badges {
+  position: static;
+  align-items: flex-end;
+  justify-self: end;
+}
 .pres-date     { font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
 .pres-title    { font-size: 0.85rem; font-weight: 500; line-height: 1.45; margin-bottom: 3px; }
 .pres-venue    { font-size: 0.75rem; color: var(--muted); }
