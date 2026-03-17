@@ -244,7 +244,8 @@ a:hover { text-decoration: underline; }
 .pub-badge.published { background: #f0e4e4; color: var(--accent); }
 .pub-badge.in-prep   { background: #ececec; color: var(--muted); }
 .pub-badge.talk      { background: #e4eaf0; color: #2d5f8a; }
-.pub-badge.poster    { background: #ececec; color: var(--muted); }
+.pub-badge.poster    { background: #daeed8; color: #63c978; }
+.pub-badge.journal-club    { background: #f7e7dd; color: #f9a560; }
 .pub-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .os-badges { position: absolute; top: 0; right: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
 .os-badge {
