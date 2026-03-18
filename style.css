@@ -8,7 +8,7 @@
   --accent:  #8b2020;
   --border:  #ebe9e3;
   --line:    #d2d2d2;
-  --dot:     #1a1a1a;
+  --dot:     #818080;
   --nav-h:   58px;
 }
 
@@ -396,6 +396,22 @@ a:hover { text-decoration: underline; }
 .lang-css     { background: #a8e0d8; color: #0a4840; }
 .lang-js      { background: #fdf0a0; color: #5a4800; }
 .project-desc { font-size: 0.80rem; color: var(--muted); line-height: 1.65; text-align: justify; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+
+/* ══ RESOURCES PAGE ══════════════════════════ */
+.resource-entry { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.resource-title { font-size: 0.86rem; font-weight: 600; line-height: 1.45; margin-bottom: 2px; }
+.resource-title a { color: var(--text); text-decoration: none; }
+.resource-title a:hover { color: var(--accent); text-decoration: none; }
+.resource-meta {
+  font-size: 0.66rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px;
+}
+.resource-desc { font-size: 0.79rem; color: var(--muted); line-height: 1.65; }
+.resource-subheading {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--muted);
+  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin: 16px 0 0;
+}
 
 /* ── GitHub contribution heatmap ── */
 .gh-calendar-wrap { display: flex; align-items: flex-start; gap: 5px; }
