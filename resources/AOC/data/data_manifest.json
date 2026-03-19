@@ -1,0 +1,24 @@
+{
+"files": [
+"nback_bcea_baselined.json",
+"nback_bcea_raw.json",
+"nback_behavior_raw.json",
+"nback_gaze_deviation_baselined.json",
+"nback_gaze_deviation_raw.json",
+"nback_spectrum_baselined.json",
+"nback_spectrum_parameterized.json",
+"nback_spectrum_raw.json",
+"nback_spl_baselined.json",
+"nback_spl_raw.json",
+"sternberg_bcea_baselined.json",
+"sternberg_bcea_raw.json",
+"sternberg_behavior_raw.json",
+"sternberg_gaze_deviation_baselined.json",
+"sternberg_gaze_deviation_raw.json",
+"sternberg_spectrum_baselined.json",
+"sternberg_spectrum_parameterized.json",
+"sternberg_spectrum_raw.json",
+"sternberg_spl_baselined.json",
+"sternberg_spl_raw.json"
+]
+}

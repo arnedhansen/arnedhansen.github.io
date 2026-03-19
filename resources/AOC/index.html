@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3B521BXP1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X3B521BXP1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alpha Oculomotor Control (AOC) — Interactive EEG and eye-tracking data visualization. N = 104." />
+  <meta name="author" content="Arne D. Hansen" />
+  <meta property="og:title" content="AOC Interactive Data Viz | Arne D. Hansen – Cognitive Neuroscience" />
+  <meta property="og:url" content="https://arnedhansen.github.io/resources/AOC/" />
+  <meta property="og:image" content="https://arnedhansen.github.io/assets/arne.jpeg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://arnedhansen.github.io/resources/AOC/" />
+  <title>AOC Interactive Data Viz | Arne D. Hansen – Cognitive Neuroscience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .aoc-page { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); }
+    .aoc-page .container { max-width: 860px; }
+    .aoc-header { margin-bottom: 32px; }
+    .aoc-title { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; margin-bottom: 6px; }
+    .aoc-subtitle { font-size: clamp(0.8rem, 2vw, 0.9rem); color: var(--muted); margin-bottom: 16px; }
+    .aoc-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .aoc-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; opacity: 0.9; }
+    .aoc-links a:hover { opacity: 1; text-decoration: underline; }
+    .aoc-row { margin-bottom: 20px; }
+    .aoc-row-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
+    .aoc-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .aoc-pill { flex-shrink: 0; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.05); color: var(--text); font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease; }
+    .aoc-pill:hover { background: rgba(139,32,32,0.09); color: var(--accent); }
+    .aoc-pill.active { background: var(--surface); color: var(--accent); border-color: var(--accent); }
+    .aoc-pill:disabled, .aoc-pill.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; color: var(--muted); }
+    .aoc-pill.eeg-accent { border-left: 2px solid #6b7280; }
+    .aoc-pill.gaze-accent { border-left: 2px solid #b45309; }
+    .aoc-pill.behavior-accent { border-left: 2px solid #1d4ed8; }
+    .aoc-pill.active.eeg-accent, .aoc-pill.active.gaze-accent, .aoc-pill.active.behavior-accent { border-left-color: transparent; }
+    .aoc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-top: 24px; box-shadow: none; }
+    .aoc-card.eeg-viz { border-top: 2px solid #6b7280; }
+    .aoc-card.gaze-viz { border-top: 2px solid #b45309; }
+    .aoc-viz-block { margin-bottom: 32px; }
+    .aoc-viz-block:last-child { margin-bottom: 0; }
+    .aoc-viz-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 16px; }
+    .aoc-panels { display: grid; gap: 20px; }
+    .aoc-panels.two-cols { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 600px) { .aoc-panels.two-cols { grid-template-columns: 1fr; } }
+    .aoc-panel { position: relative; min-height: 300px; }
+    .aoc-panel-title { font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+    .aoc-canvas-wrap { position: relative; width: 100%; height: 300px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); }
+    @media (min-width: 601px) { .aoc-canvas-wrap { height: 340px; } }
+    .aoc-canvas-wrap.tall { height: 400px; }
+    @media (min-width: 601px) { .aoc-canvas-wrap.tall { height: 520px; } }
+    .aoc-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+    .aoc-spinner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); }
+    .aoc-spinner::after { content: ""; width: 28px; height: 28px; border: 2px solid rgba(0,0,0,0.08); border-top-color: #1d1d1f; border-radius: 50%; animation: aoc-spin 0.8s linear infinite; }
+    @keyframes aoc-spin { to { transform: rotate(360deg); } }
+    .aoc-msg { padding: 12px 14px; text-align: center; color: var(--muted); font-size: 0.8rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); margin-bottom: 16px; }
+    .aoc-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 0.75rem; }
+    .aoc-legend span { display: flex; align-items: center; gap: 6px; }
+    .aoc-legend dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .aoc-multiverse { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .aoc-multiverse-title { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 20px; }
+    .aoc-fig-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 600px) { .aoc-fig-grid { grid-template-columns: 1fr; } }
+    .aoc-fig-item { cursor: pointer; }
+    .aoc-fig-item img { width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); }
+    .aoc-fig-pdf { width: 100%; height: 420px; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; background: #fff; }
+    @media (max-width: 600px) { .aoc-fig-pdf { height: 320px; } }
+    .aoc-proc-label { font-size: 0.65rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 8px 0 6px; }
+    .aoc-fig-caption { font-size: 0.78rem; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+    .aoc-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .aoc-lightbox.open { display: flex; }
+    .aoc-lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; }
+    .aoc-lightbox iframe { border-radius: 4px; }
+    .aoc-lightbox-close { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 2rem; cursor: pointer; }
+  </style>
+</head>
+<body class="aoc-page">
+  <script src="nav.js"></script>
+  <div class="container">
+    <div class="aoc-header">
+      <a href="/resources.html" style="font-size:0.78rem;color:#6e6e73;margin-bottom:12px;display:inline-block;">← Resources</a>
+      <h1 class="aoc-title">Alpha Oculomotor Control</h1>
+      <p class="aoc-subtitle">N = 104 · EEG + Eye Tracking · UZH 2024–2025</p>
+      <div class="aoc-links">
+        <a href="#" target="_blank" rel="noopener">Paper ↗</a>
+        <a href="#" target="_blank" rel="noopener">OSF ↗</a>
+        <a href="#" target="_blank" rel="noopener">OpenNeuro ↗</a>
+      </div>
+    </div>
+    <div id="aoc-runtime-note" class="aoc-msg" style="display:none;"></div>
+
+    <div class="aoc-row">
+      <div class="aoc-row-label">Visualization</div>
+      <div class="aoc-pills" id="viz-pills">
+        <button class="aoc-pill eeg-accent" data-viz="erp">ERP</button>
+        <button class="aoc-pill eeg-accent" data-viz="spectrum">Power Spectrum</button>
+        <button class="aoc-pill eeg-accent" data-viz="tfr">TFR</button>
+        <button class="aoc-pill eeg-accent" data-viz="topo">Topography</button>
+        <button class="aoc-pill gaze-accent" data-viz="gaze_deviation">Gaze Deviation</button>
+        <button class="aoc-pill gaze-accent" data-viz="spl">SPL</button>
+        <button class="aoc-pill gaze-accent" data-viz="gaze_velocity">Gaze Velocity</button>
+        <button class="aoc-pill gaze-accent" data-viz="bcea">BCEA</button>
+        <button class="aoc-pill behavior-accent" data-viz="behavior">Behavioral</button>
+      </div>
+    </div>
+
+    <div class="aoc-row">
+      <div class="aoc-row-label">Processing</div>
+      <div class="aoc-pills" id="proc-pills">
+        <button class="aoc-pill active" data-proc="raw">Raw</button>
+        <button class="aoc-pill" data-proc="baselined">Baselined</button>
+        <button class="aoc-pill" data-proc="parameterized" id="proc-param">Baselined + SpecParam</button>
+      </div>
+    </div>
+
+    <div class="aoc-row">
+      <div class="aoc-row-label">Task</div>
+      <div class="aoc-pills" id="task-pills">
+        <button class="aoc-pill active" data-task="nback">N-back</button>
+        <button class="aoc-pill active" data-task="sternberg">Sternberg</button>
+      </div>
+    </div>
+
+    <div class="aoc-card" id="viz-card">
+      <div id="viz-content"></div>
+    </div>
+
+    <div class="aoc-multiverse" id="multiverse-section">
+      <div class="aoc-multiverse-title">Multiverse analyses</div>
+      <div class="aoc-fig-grid" id="multiverse-grid"></div>
+    </div>
+  </div>
+
+  <div class="aoc-lightbox" id="lightbox">
+    <span class="aoc-lightbox-close" id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="" style="display:none;max-width:95%;max-height:95%;object-fit:contain;">
+    <iframe id="lightbox-pdf" title="Figure" style="display:none;width:90%;height:90%;border:none;background:#fff;"></iframe>
+  </div>
+
+  <footer class="site-footer">Last updated March 2026</footer>
+
+  <script>
+(function () {
+  "use strict";
+
+  const DATA_BASE = "resources/AOC/data/";
+  const VIZ_ORDER = ["erp", "spectrum", "tfr", "topo", "gaze_deviation", "spl", "gaze_velocity", "bcea", "behavior"];
+  const VIZ_WITH_PARAM = ["spectrum", "tfr", "topo"];
+  const EEG_VIZ = ["erp", "spectrum", "tfr", "topo"];
+  const PROC_ORDER = ["raw", "baselined", "parameterized"];
+  const PROC_LABELS = { raw: "Raw", baselined: "Baselined", parameterized: "Baselined + SpecParam" };
+  const TASK_LABELS = { nback: "N-back", sternberg: "Sternberg" };
+  const COND_COLORS = { "1back": "#2d7d46", "2back": "#3d9960", "3back": "#4db37a", "2items": "#b45309", "4items": "#c96a15", "6items": "#de8220" };
+
+  let state = { viz: new Set(["spectrum"]), proc: new Set(["raw"]), task: new Set(["nback", "sternberg"]) };
+  let dataCache = new Map();
+  let renderAbortController = null;
+  let availableFiles = null;
+
+  function filename(viz, proc, task) {
+    if (viz === "behavior") return task + "_behavior_raw.json";
+    if (viz === "erp") return task + "_erp_" + proc + ".json";
+    if (["gaze_deviation", "spl", "gaze_velocity", "bcea"].includes(viz)) return task + "_" + viz + "_" + proc + ".json";
+    return task + "_" + viz + "_" + proc + ".json";
+  }
+
+  function comboHasFile(viz, proc, task) {
+    if (!availableFiles) return true;
+    const fn = filename(viz, proc, task);
+    return availableFiles.has(fn);
+  }
+
+  function vizHasAnyData(viz) {
+    const tasks = [...state.task];
+    const procs = viz === "behavior" ? ["raw"] : PROC_ORDER.filter(p => state.proc.has(p));
+    for (const t of tasks) {
+      for (const p of procs) {
+        if (comboHasFile(viz, p, t)) return true;
+      }
+    }
+    return false;
+  }
+
+  function updateVizAvailability() {
+    document.querySelectorAll("#viz-pills .aoc-pill").forEach(p => {
+      const has = vizHasAnyData(p.dataset.viz);
+      p.disabled = !has;
+      p.classList.toggle("disabled", !has);
+      if (!has && state.viz.has(p.dataset.viz)) state.viz.delete(p.dataset.viz);
+    });
+    if (state.viz.size === 0) {
+      for (const v of VIZ_ORDER) {
+        if (vizHasAnyData(v)) {
+          state.viz.add(v);
+          break;
+        }
+      }
+    }
+  }
+
+  async function loadData(viz, proc, task, signal) {
+    const f = filename(viz, proc, task);
+    if (dataCache.has(f)) return dataCache.get(f);
+    try {
+      const r = await fetch(DATA_BASE + f, { signal: signal });
+      if (!r.ok) throw new Error("Not found");
+      const data = await r.json();
+      dataCache.set(f, data);
+      return data;
+    } catch (e) {
+      if (e && e.name === "AbortError") throw e;
+      return null;
+    }
+  }
+
+  function syncPillClasses() {
+    document.querySelectorAll("#viz-pills .aoc-pill").forEach(x => x.classList.toggle("active", state.viz.has(x.dataset.viz)));
+    document.querySelectorAll("#proc-pills .aoc-pill").forEach(x => x.classList.toggle("active", state.proc.has(x.dataset.proc)));
+    document.querySelectorAll("#task-pills .aoc-pill").forEach(x => x.classList.toggle("active", state.task.has(x.dataset.task)));
+  }
+
+  function updateProcVisibility() {
+    const hasParam = [...state.viz].some(v => VIZ_WITH_PARAM.includes(v));
+    document.getElementById("proc-param").style.display = hasParam ? "" : "none";
+    if (!hasParam) state.proc.delete("parameterized");
+    if (state.proc.size === 0) state.proc.add("raw");
+    syncPillClasses();
+  }
+
+  function getCondNames(task) {
+    return task === "nback" ? ["1back", "2back", "3back"] : ["2items", "4items", "6items"];
+  }
+
+  function drawSpectrum(ctx, width, height, data, task) {
+    if (!data || !data.freqs || !data.conditions) return;
+    const conds = getCondNames(task).filter(c => data.conditions[c]);
+    if (conds.length === 0) return;
+    const freqs = data.freqs;
+    const pad = { t: 30, r: 40, b: 35, l: 45 };
+    const plotW = width - pad.l - pad.r;
+    const plotH = height - pad.t - pad.b;
+    const fmin = 4, fmax = 20;
+    let vMin = Infinity, vMax = -Infinity;
+    conds.forEach(c => {
+      const v = data.conditions[c];
+      v.forEach(x => { vMin = Math.min(vMin, x); vMax = Math.max(vMax, x); });
+      if (data.sem && data.sem[c]) data.sem[c].forEach((s, i) => { vMin = Math.min(vMin, v[i] - s); vMax = Math.max(vMax, v[i] + s); });
+    });
+    if (vMax <= vMin) vMax = vMin + 1;
+    vMin -= (vMax - vMin) * 0.05;
+    vMax += (vMax - vMin) * 0.05;
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = "#e5e5e5";
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.t + (plotH * i) / 4;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, y);
+      ctx.lineTo(width - pad.r, y);
+      ctx.stroke();
+    }
+    for (let i = 0; i <= 8; i++) {
+      const x = pad.l + (plotW * i) / 8;
+      ctx.beginPath();
+      ctx.moveTo(x, pad.t);
+      ctx.lineTo(x, height - pad.b);
+      ctx.stroke();
+    }
+
+    if (data.iaf) {
+      const iafx = pad.l + ((data.iaf - fmin) / (fmax - fmin)) * plotW;
+      if (iafx >= pad.l && iafx <= width - pad.r) {
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(0,0,0,0.3)";
+        ctx.beginPath();
+        ctx.moveTo(iafx, pad.t);
+        ctx.lineTo(iafx, height - pad.b);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    const colors = ["#2d7d46", "#3d9960", "#4db37a"];
+    if (task === "sternberg") Object.assign(colors, ["#b45309", "#c96a15", "#de8220"]);
+    conds.forEach((c, i) => {
+      const vals = data.conditions[c];
+      const sems = data.sem && data.sem[c] ? data.sem[c] : null;
+      const pts = freqs.map((f, j) => ({
+        x: pad.l + ((f - fmin) / (fmax - fmin)) * plotW,
+        y: pad.t + plotH - ((vals[j] - vMin) / (vMax - vMin)) * plotH
+      }));
+      if (sems) {
+        ctx.fillStyle = (COND_COLORS[c] || colors[i] || "#333") + "26";
+        ctx.beginPath();
+        for (let j = 0; j < pts.length; j++) {
+          const yy = pad.t + plotH - ((vals[j] + sems[j] - vMin) / (vMax - vMin)) * plotH;
+          if (j === 0) ctx.moveTo(pts[j].x, yy);
+          else ctx.lineTo(pts[j].x, yy);
+        }
+        for (let j = pts.length - 1; j >= 0; j--) {
+          const yy = pad.t + plotH - ((vals[j] - sems[j] - vMin) / (vMax - vMin)) * plotH;
+          ctx.lineTo(pts[j].x, yy);
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.strokeStyle = COND_COLORS[c] || colors[i] || "#333";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      for (let j = 1; j < pts.length; j++) ctx.lineTo(pts[j].x, pts[j].y);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "11px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    for (let f = 4; f <= 20; f += 2) {
+      const x = pad.l + ((f - fmin) / (fmax - fmin)) * plotW;
+      ctx.fillText(String(f), x, height - 10);
+    }
+    ctx.textAlign = "right";
+    ctx.fillText("Frequency (Hz)", width - pad.r, height - 10);
+  }
+
+  function drawERP(ctx, width, height, data, task) {
+    if (!data || !data.times || !data.conditions) return;
+    const conds = getCondNames(task).filter(c => data.conditions[c]);
+    if (conds.length === 0) return;
+    const times = data.times;
+    const pad = { t: 30, r: 40, b: 35, l: 45 };
+    const plotW = width - pad.l - pad.r;
+    const plotH = height - pad.t - pad.b;
+    const tMin = Math.min(...times), tMax = Math.max(...times);
+    let vMin = Infinity, vMax = -Infinity;
+    conds.forEach(c => {
+      data.conditions[c].forEach(x => { vMin = Math.min(vMin, x); vMax = Math.max(vMax, x); });
+    });
+    if (vMax <= vMin) vMax = vMin + 1;
+    vMin -= (vMax - vMin) * 0.05;
+    vMax += (vMax - vMin) * 0.05;
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = "#e5e5e5";
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.t + (plotH * i) / 4;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, y);
+      ctx.lineTo(width - pad.r, y);
+      ctx.stroke();
+    }
+    const t0x = pad.l + ((0 - tMin) / (tMax - tMin)) * plotW;
+    if (t0x >= pad.l && t0x <= width - pad.r) {
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "rgba(0,0,0,0.4)";
+      ctx.beginPath();
+      ctx.moveTo(t0x, pad.t);
+      ctx.lineTo(t0x, height - pad.b);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "#6e6e73";
+      ctx.font = "10px -apple-system, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Stimulus", t0x, pad.t - 8);
+    }
+
+    conds.forEach((c, i) => {
+      const vals = data.conditions[c];
+      const sems = data.sem && data.sem[c] ? data.sem[c] : null;
+      const pts = times.map((t, j) => ({
+        x: pad.l + ((t - tMin) / (tMax - tMin)) * plotW,
+        y: pad.t + plotH - ((vals[j] - vMin) / (vMax - vMin)) * plotH
+      }));
+      if (sems) {
+        ctx.fillStyle = (COND_COLORS[c] || "#333") + "26";
+        ctx.beginPath();
+        for (let j = 0; j < pts.length; j++) {
+          const yy = pad.t + plotH - ((vals[j] + sems[j] - vMin) / (vMax - vMin)) * plotH;
+          if (j === 0) ctx.moveTo(pts[j].x, yy);
+          else ctx.lineTo(pts[j].x, yy);
+        }
+        for (let j = pts.length - 1; j >= 0; j--) {
+          const yy = pad.t + plotH - ((vals[j] - sems[j] - vMin) / (vMax - vMin)) * plotH;
+          ctx.lineTo(pts[j].x, yy);
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.strokeStyle = COND_COLORS[c] || "#333";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      for (let j = 1; j < pts.length; j++) ctx.lineTo(pts[j].x, pts[j].y);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "11px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    const step = (tMax - tMin) <= 1 ? 0.2 : 0.5;
+    for (let t = Math.ceil(tMin * 10) / 10; t <= tMax; t += step) {
+      const x = pad.l + ((t - tMin) / (tMax - tMin)) * plotW;
+      ctx.fillText(t.toFixed(1), x, height - 10);
+    }
+    ctx.textAlign = "right";
+    ctx.fillText("Time (s)", width - pad.r, height - 10);
+  }
+
+  function drawGazeMetric(ctx, width, height, data, task) {
+    if (!data || !data.conditions || !data.means) return;
+    const conds = data.conditions;
+    const pad = { t: 30, r: 30, b: 45, l: 45 };
+    const plotW = width - pad.l - pad.r;
+    const plotH = height - pad.t - pad.b;
+    const n = conds.length;
+    const colW = plotW / (n + 1);
+    const vMin = 0;
+    const vMax = Math.max(...data.means) * 1.2 || 1;
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "11px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    conds.forEach((c, i) => ctx.fillText(c, pad.l + colW * (i + 1), height - 15));
+
+    conds.forEach((c, i) => {
+      const x = pad.l + colW * (i + 1);
+      const m = data.means[i];
+      const s = (data.sds && data.sds[i]) || 0;
+      const y0 = pad.t + plotH - ((m - vMin) / (vMax - vMin)) * plotH;
+      const h = (s / (vMax - vMin)) * plotH;
+      ctx.fillStyle = (COND_COLORS[c] || "#333") + "30";
+      ctx.fillRect(x - 12, y0 - h / 2, 24, h);
+      ctx.strokeStyle = "#1d1d1f";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x - 12, y0);
+      ctx.lineTo(x + 12, y0);
+      ctx.stroke();
+      if (data.individual_subject_means && data.individual_subject_means[c]) {
+        data.individual_subject_means[c].forEach((v, j) => {
+          const yy = pad.t + plotH - ((v - vMin) / (vMax - vMin)) * plotH;
+          const jx = x + (Math.random() - 0.5) * 16;
+          ctx.fillStyle = (COND_COLORS[c] || "#333") + "99";
+          ctx.beginPath();
+          ctx.arc(jx, yy, 3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+    });
+  }
+
+  function drawPlaceholder(ctx, width, height, msg) {
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "14px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(msg || "data not yet available", width / 2, height / 2);
+  }
+
+  function drawBehavior(ctx, width, height, data, task) {
+    if (!data || !data.conditions) return;
+    const conds = data.conditions;
+    if (!conds || conds.length === 0) return;
+    const accM = data.accuracy_mean || [];
+    const accS = data.accuracy_sd || [];
+    const rtM = data.reaction_time_mean || [];
+    const rtS = data.reaction_time_sd || [];
+    const pad = { t: 24, r: 24, b: 36, l: 44 };
+    const split = Math.floor((height - pad.t - pad.b - 18) / 2);
+    const topY = pad.t;
+    const botY = pad.t + split + 18;
+    const plotW = width - pad.l - pad.r;
+    const n = conds.length;
+    const step = plotW / Math.max(n + 1, 2);
+
+    function drawSeries(y0, plotH, means, sds, label, color, forceZero) {
+      const vals = means.map(v => Number(v)).filter(v => Number.isFinite(v));
+      if (vals.length === 0) return;
+      let vMin = forceZero ? 0 : Math.min(...vals);
+      let vMax = Math.max(...vals);
+      if (sds && sds.length) {
+        for (let i = 0; i < means.length; i++) {
+          const m = Number(means[i]);
+          const s = Number(sds[i] || 0);
+          if (Number.isFinite(m) && Number.isFinite(s)) {
+            vMin = Math.min(vMin, m - s);
+            vMax = Math.max(vMax, m + s);
+          }
+        }
+      }
+      if (vMax <= vMin) vMax = vMin + 1;
+      const span = vMax - vMin;
+      vMin -= span * 0.08;
+      vMax += span * 0.08;
+
+      ctx.strokeStyle = "#e5e5e5";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 3; i++) {
+        const gy = y0 + (plotH * i) / 3;
+        ctx.beginPath();
+        ctx.moveTo(pad.l, gy);
+        ctx.lineTo(width - pad.r, gy);
+        ctx.stroke();
+      }
+
+      const pts = [];
+      for (let i = 0; i < conds.length; i++) {
+        const m = Number(means[i]);
+        if (!Number.isFinite(m)) continue;
+        const x = pad.l + (i + 1) * step;
+        const y = y0 + plotH - ((m - vMin) / (vMax - vMin)) * plotH;
+        pts.push({ i, x, y, m });
+      }
+      if (pts.length > 0) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.7;
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+        ctx.stroke();
+
+        pts.forEach(p => {
+          const s = Number(sds[p.i] || 0);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1.2;
+          if (Number.isFinite(s) && s > 0) {
+            const y1 = y0 + plotH - (((p.m - s) - vMin) / (vMax - vMin)) * plotH;
+            const y2 = y0 + plotH - (((p.m + s) - vMin) / (vMax - vMin)) * plotH;
+            ctx.beginPath();
+            ctx.moveTo(p.x, y1);
+            ctx.lineTo(p.x, y2);
+            ctx.stroke();
+          }
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      ctx.fillStyle = "#6e6e73";
+      ctx.font = "10px -apple-system, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(label, pad.l, y0 - 8);
+    }
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, width, height);
+    drawSeries(topY, split, accM, accS, "Accuracy", "#1d4ed8", true);
+    drawSeries(botY, split, rtM, rtS, "Reaction Time", "#b45309", false);
+
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "11px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    for (let i = 0; i < conds.length; i++) {
+      const x = pad.l + (i + 1) * step;
+      ctx.fillText(String(conds[i]), x, height - 10);
+    }
+  }
+
+  async function render() {
+    if (renderAbortController) renderAbortController.abort();
+    renderAbortController = new AbortController();
+    const signal = renderAbortController.signal;
+
+    updateVizAvailability();
+    syncPillClasses();
+
+    const container = document.getElementById("viz-content");
+    container.innerHTML = "";
+    const selectedViz = [...state.viz];
+    const selectedTask = [...state.task];
+    const procsOrdered = PROC_ORDER.filter(p => state.proc.has(p));
+    if (selectedViz.length === 0 || selectedTask.length === 0 || procsOrdered.length === 0) return;
+
+    for (const viz of VIZ_ORDER) {
+      if (!selectedViz.includes(viz)) continue;
+      const isGaze = !EEG_VIZ.includes(viz);
+      const block = document.createElement("div");
+      block.className = "aoc-viz-block " + (isGaze ? "gaze-viz" : "eeg-viz");
+      const title = document.createElement("div");
+      title.className = "aoc-viz-title";
+      title.textContent = viz.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      block.appendChild(title);
+      const panels = document.createElement("div");
+      panels.className = "aoc-panels" + (selectedTask.length > 1 ? " two-cols" : "");
+      block.appendChild(panels);
+      container.appendChild(block);
+
+      for (const task of selectedTask) {
+        const panel = document.createElement("div");
+        panel.className = "aoc-panel";
+        const panelTitle = document.createElement("div");
+        panelTitle.className = "aoc-panel-title";
+        panelTitle.textContent = TASK_LABELS[task];
+        panel.appendChild(panelTitle);
+
+        const procLoop = viz === "behavior" ? ["raw"] : procsOrdered;
+        for (const proc of procLoop) {
+          const procBlock = document.createElement("div");
+          const procLabel = document.createElement("div");
+          procLabel.className = "aoc-proc-label";
+          procLabel.textContent = viz === "behavior" ? "Raw (trial-level)" : (PROC_LABELS[proc] || proc);
+          procBlock.appendChild(procLabel);
+
+          const wrap = document.createElement("div");
+          wrap.className = "aoc-canvas-wrap" + (["spectrum", "erp", "tfr", "topo"].includes(viz) ? " tall" : "");
+          const spinner = document.createElement("div");
+          spinner.className = "aoc-spinner";
+          wrap.appendChild(spinner);
+          procBlock.appendChild(wrap);
+          panel.appendChild(procBlock);
+
+          if (!comboHasFile(viz, proc, task)) {
+            spinner.remove();
+            const canvas = document.createElement("canvas");
+            const dpr = window.devicePixelRatio || 1;
+            const rect = wrap.getBoundingClientRect();
+            const w = rect.width || 400;
+            const h = rect.height || 340;
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            wrap.appendChild(canvas);
+            const ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+            drawPlaceholder(ctx, canvas.width / dpr, canvas.height / dpr, "not exported for this selection");
+            continue;
+          }
+
+          loadData(viz, proc, task, signal).then(data => {
+            if (signal.aborted) return;
+            spinner.remove();
+            const canvas = document.createElement("canvas");
+            const dpr = window.devicePixelRatio || 1;
+            const rect = wrap.getBoundingClientRect();
+            const w = rect.width || 400;
+            const h = rect.height || 340;
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            wrap.appendChild(canvas);
+            const ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+            const cw = canvas.width / dpr, ch = canvas.height / dpr;
+            if (!data) drawPlaceholder(ctx, cw, ch, "data not yet available");
+            else if (viz === "spectrum") drawSpectrum(ctx, cw, ch, data, task);
+            else if (viz === "erp") drawERP(ctx, cw, ch, data, task);
+            else if (["gaze_deviation", "spl", "gaze_velocity", "bcea"].includes(viz)) drawGazeMetric(ctx, cw, ch, data, task);
+            else if (viz === "behavior") drawBehavior(ctx, cw, ch, data, task);
+            else drawPlaceholder(ctx, cw, ch, "TFR / Topography coming soon");
+            if (data && data.conditions) {
+              const leg = document.createElement("div");
+              leg.className = "aoc-legend";
+              Object.keys(data.conditions).forEach(c => {
+                const s = document.createElement("span");
+                s.innerHTML = '<dot style="background:' + (COND_COLORS[c] || "#333") + '"></dot> ' + c;
+                leg.appendChild(s);
+              });
+              procBlock.appendChild(leg);
+            }
+          }).catch(function (e) {
+            if (e && e.name === "AbortError") return;
+          });
+        }
+        panels.appendChild(panel);
+      }
+    }
+  }
+
+  document.querySelectorAll("#viz-pills .aoc-pill").forEach(p => {
+    p.addEventListener("click", () => {
+      if (p.disabled) return;
+      const v = p.dataset.viz;
+      if (state.viz.has(v)) state.viz.delete(v);
+      else state.viz.add(v);
+      syncPillClasses();
+      updateProcVisibility();
+      render();
+    });
+  });
+
+  document.querySelectorAll("#proc-pills .aoc-pill").forEach(p => {
+    p.addEventListener("click", () => {
+      if (p.disabled) return;
+      const pr = p.dataset.proc;
+      if (state.proc.has(pr)) {
+        if (state.proc.size > 1) state.proc.delete(pr);
+      } else {
+        state.proc.add(pr);
+      }
+      syncPillClasses();
+      render();
+    });
+  });
+
+  document.querySelectorAll("#task-pills .aoc-pill").forEach(p => {
+    p.addEventListener("click", () => {
+      if (p.disabled) return;
+      const t = p.dataset.task;
+      if (state.task.has(t)) state.task.delete(t);
+      else state.task.add(t);
+      syncPillClasses();
+      updateProcVisibility();
+      render();
+    });
+  });
+
+  const runtimeNote = document.getElementById("aoc-runtime-note");
+  if (window.location.protocol === "file:") {
+    runtimeNote.style.display = "";
+    runtimeNote.textContent = "Local file mode detected. Load this page via a local web server (e.g., python3 -m http.server) to enable data loading.";
+  }
+  fetch(DATA_BASE + "data_manifest.json")
+    .then(r => r.ok ? r.json() : null)
+    .then(man => {
+      if (man && Array.isArray(man.files)) availableFiles = new Set(man.files);
+    })
+    .catch(() => {})
+    .finally(() => {
+      syncPillClasses();
+      updateProcVisibility();
+      render();
+    });
+
+  const FIGS_BASE = "resources/AOC/figures/";
+  function openLightbox(url, isPdf) {
+    const lb = document.getElementById("lightbox");
+    const img = document.getElementById("lightbox-img");
+    const pdf = document.getElementById("lightbox-pdf");
+    if (isPdf) {
+      img.style.display = "none";
+      pdf.style.display = "block";
+      pdf.src = url;
+    } else {
+      pdf.style.display = "none";
+      pdf.src = "";
+      img.style.display = "block";
+      img.src = url;
+    }
+    lb.classList.add("open");
+  }
+  function closeLightbox() {
+    const lb = document.getElementById("lightbox");
+    lb.classList.remove("open");
+    document.getElementById("lightbox-pdf").src = "";
+  }
+  fetch(FIGS_BASE + "manifest.json").then(r => r.ok ? r.json() : []).then(manifest => {
+    const grid = document.getElementById("multiverse-grid");
+    (manifest || []).filter(m => m.section === "multiverse").forEach(m => {
+      const url = FIGS_BASE + m.file;
+      const isPdf = /\.pdf$/i.test(m.file || "");
+      const a = document.createElement("a");
+      a.href = "#";
+      a.className = "aoc-fig-item";
+      const thumb = isPdf
+        ? '<iframe class="aoc-fig-pdf" loading="lazy" src="' + url + '" title=""></iframe>'
+        : '<img loading="lazy" src="' + url + '" alt="">';
+      a.innerHTML = thumb + '<div class="aoc-fig-caption">' + (m.caption || "") + "</div>";
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        openLightbox(url, isPdf);
+      });
+      grid.appendChild(a);
+    });
+  }).catch(() => {});
+
+  document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+  document.getElementById("lightbox").addEventListener("click", e => { if (e.target === e.currentTarget) closeLightbox(); });
+
+  new ResizeObserver(() => render()).observe(document.getElementById("viz-card"));
+})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {"file": "multiverse/AOC_multiverse_nback_grouped.pdf", "caption": "N-back: multiverse specification (grouped)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_nback_condition_alpha.pdf", "caption": "N-back: alpha power by condition (384 universes)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_nback_condition_gaze.pdf", "caption": "N-back: effect of WM load on gaze (384 universes)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_nback_interaction.pdf", "caption": "N-back: alpha × gaze interaction", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_nback_aperiodic_exponent_spec.pdf", "caption": "N-back: multiverse aperiodic exponent (spectrum)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_nback_aperiodic_offset_spec.pdf", "caption": "N-back: multiverse aperiodic offset (spectrum)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_grouped.pdf", "caption": "Sternberg: multiverse specification (grouped)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_condition_alpha.pdf", "caption": "Sternberg: alpha power by condition (384 universes)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_condition_gaze.pdf", "caption": "Sternberg: effect of WM load on gaze (384 universes)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_interaction.pdf", "caption": "Sternberg: alpha × gaze interaction", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_aperiodic_exponent_spec.pdf", "caption": "Sternberg: multiverse aperiodic exponent (spectrum)", "section": "multiverse"},
+  {"file": "multiverse/AOC_multiverse_sternberg_aperiodic_offset_spec.pdf", "caption": "Sternberg: multiverse aperiodic offset (spectrum)", "section": "multiverse"}
+]
