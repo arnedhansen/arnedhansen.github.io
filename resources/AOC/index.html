@@ -33,15 +33,17 @@
     .aoc-links a:hover { opacity: 1; text-decoration: underline; }
     .aoc-row { margin-bottom: 20px; }
     .aoc-row-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
+    .aoc-viz-groups { display: grid; gap: 10px; }
+    .aoc-viz-group { border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 14px; padding: 10px 12px 12px; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); }
+    .aoc-viz-group-title { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6e6e73; margin-bottom: 8px; }
     .aoc-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
-    .aoc-pill { flex-shrink: 0; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.05); color: var(--text); font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease; }
-    .aoc-pill:hover { background: rgba(139,32,32,0.09); color: var(--accent); }
-    .aoc-pill.active { background: var(--surface); color: var(--accent); border-color: var(--accent); }
+    .aoc-pill { --pill-accent: #6e6e73; flex-shrink: 0; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.15); background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(242,244,247,0.88)); color: #1d1d1f; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85); transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease; }
+    .aoc-pill:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--pill-accent) 45%, #ffffff); box-shadow: 0 5px 14px rgba(15, 23, 42, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95); }
+    .aoc-pill.active { color: #ffffff; border-color: color-mix(in srgb, var(--pill-accent) 70%, #111827); background: linear-gradient(180deg, color-mix(in srgb, var(--pill-accent) 95%, #ffffff 5%), color-mix(in srgb, var(--pill-accent) 78%, #0f172a 22%)); box-shadow: 0 8px 18px color-mix(in srgb, var(--pill-accent) 30%, #0f172a 70%), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
     .aoc-pill:disabled, .aoc-pill.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; color: var(--muted); }
-    .aoc-pill.eeg-accent { border-left: 2px solid #6b7280; }
-    .aoc-pill.gaze-accent { border-left: 2px solid #b45309; }
-    .aoc-pill.behavior-accent { border-left: 2px solid #1d4ed8; }
-    .aoc-pill.active.eeg-accent, .aoc-pill.active.gaze-accent, .aoc-pill.active.behavior-accent { border-left-color: transparent; }
+    .aoc-pill.eeg-accent { --pill-accent: #7c8596; }
+    .aoc-pill.gaze-accent { --pill-accent: #b77857; }
+    .aoc-pill.behavior-accent { --pill-accent: #4f83bf; }
     .aoc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-top: 24px; box-shadow: none; }
     .aoc-card.eeg-viz { border-top: 2px solid #6b7280; }
     .aoc-card.gaze-viz { border-top: 2px solid #b45309; }
@@ -88,7 +90,7 @@
     <div class="aoc-header">
       <a href="/resources.html" style="font-size:0.78rem;color:#6e6e73;margin-bottom:12px;display:inline-block;">← Resources</a>
       <h1 class="aoc-title">Alpha Oculomotor Control</h1>
-      <p class="aoc-subtitle">N = 104 · EEG + Eye Tracking · UZH 2024–2025</p>
+      <p class="aoc-subtitle">N = 104</p>
       <div class="aoc-links">
         <a href="#" target="_blank" rel="noopener">Paper ↗</a>
         <a href="#" target="_blank" rel="noopener">OSF ↗</a>
@@ -99,16 +101,31 @@
 
     <div class="aoc-row">
       <div class="aoc-row-label">Visualization</div>
-      <div class="aoc-pills" id="viz-pills">
-        <button class="aoc-pill eeg-accent" data-viz="erp">ERP</button>
-        <button class="aoc-pill eeg-accent" data-viz="spectrum">Power Spectrum</button>
-        <button class="aoc-pill eeg-accent" data-viz="tfr">TFR</button>
-        <button class="aoc-pill eeg-accent" data-viz="topo">Topography</button>
-        <button class="aoc-pill gaze-accent" data-viz="gaze_deviation">Gaze Deviation</button>
-        <button class="aoc-pill gaze-accent" data-viz="spl">SPL</button>
-        <button class="aoc-pill gaze-accent" data-viz="gaze_velocity">Gaze Velocity</button>
-        <button class="aoc-pill gaze-accent" data-viz="bcea">BCEA</button>
-        <button class="aoc-pill behavior-accent" data-viz="behavior">Behavioral</button>
+      <div class="aoc-viz-groups" id="viz-pills">
+        <div class="aoc-viz-group">
+          <div class="aoc-viz-group-title">EEG</div>
+          <div class="aoc-pills">
+            <button class="aoc-pill eeg-accent" data-viz="erp">ERP</button>
+            <button class="aoc-pill eeg-accent" data-viz="spectrum">Power Spectrum</button>
+            <button class="aoc-pill eeg-accent" data-viz="tfr">TFR</button>
+            <button class="aoc-pill eeg-accent" data-viz="topo">Topography</button>
+          </div>
+        </div>
+        <div class="aoc-viz-group">
+          <div class="aoc-viz-group-title">Gaze</div>
+          <div class="aoc-pills">
+            <button class="aoc-pill gaze-accent" data-viz="gaze_deviation">Gaze Deviation</button>
+            <button class="aoc-pill gaze-accent" data-viz="spl">SPL</button>
+            <button class="aoc-pill gaze-accent" data-viz="gaze_velocity">Gaze Velocity</button>
+            <button class="aoc-pill gaze-accent" data-viz="bcea">BCEA</button>
+          </div>
+        </div>
+        <div class="aoc-viz-group">
+          <div class="aoc-viz-group-title">Behavioural</div>
+          <div class="aoc-pills">
+            <button class="aoc-pill behavior-accent" data-viz="behavior">Behavioural</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -158,7 +175,22 @@
   const PROC_ORDER = ["raw", "baselined", "parameterized"];
   const PROC_LABELS = { raw: "Raw", baselined: "Baselined", parameterized: "Baselined + SpecParam" };
   const TASK_LABELS = { nback: "N-back", sternberg: "Sternberg" };
-  const COND_COLORS = { "1back": "#2d7d46", "2back": "#3d9960", "3back": "#4db37a", "2items": "#b45309", "4items": "#c96a15", "6items": "#de8220" };
+  const COND_COLORS = {
+    "1back": "#ADD8E6",
+    "2back": "#99CC99",
+    "3back": "#FFB3BF",
+    "2items": "#ADD8E6",
+    "4items": "#99CC99",
+    "6items": "#FFB3BF"
+  };
+  const COND_LABELS = {
+    "1back": "1-back",
+    "2back": "2-back",
+    "3back": "3-back",
+    "2items": "WM load 2",
+    "4items": "WM load 4",
+    "6items": "WM load 6"
+  };
 
   let state = { viz: new Set(["spectrum"]), proc: new Set(["raw"]), task: new Set(["nback", "sternberg"]) };
   let dataCache = new Map();
@@ -239,12 +271,57 @@
     return task === "nback" ? ["1back", "2back", "3back"] : ["2items", "4items", "6items"];
   }
 
+  function getCondLabel(cond) {
+    return COND_LABELS[cond] || cond;
+  }
+
+  function quantile(sortedVals, q) {
+    if (!sortedVals || sortedVals.length === 0) return NaN;
+    if (sortedVals.length === 1) return sortedVals[0];
+    const idx = (sortedVals.length - 1) * q;
+    const lo = Math.floor(idx);
+    const hi = Math.ceil(idx);
+    if (lo === hi) return sortedVals[lo];
+    const w = idx - lo;
+    return sortedVals[lo] * (1 - w) + sortedVals[hi] * w;
+  }
+
+  function deterministicJitter(pointIdx, condIdx, spread) {
+    const seed = Math.sin((pointIdx + 1) * 12.9898 + (condIdx + 1) * 78.233) * 43758.5453;
+    return ((seed - Math.floor(seed)) - 0.5) * spread;
+  }
+
+  function drawYAxisTicksAndLabel(ctx, pad, plotH, vMin, vMax, label, decimals) {
+    const tickCount = 4;
+    const d = Number.isFinite(decimals) ? decimals : 2;
+    ctx.fillStyle = "#6e6e73";
+    ctx.font = "11px -apple-system, sans-serif";
+    for (let i = 0; i <= tickCount; i++) {
+      const val = vMax - ((vMax - vMin) * i) / tickCount;
+      const y = pad.t + (plotH * i) / tickCount;
+      ctx.strokeStyle = "#9ca3af";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, y);
+      ctx.lineTo(pad.l - 5, y);
+      ctx.stroke();
+      ctx.textAlign = "right";
+      ctx.fillText(val.toFixed(d), pad.l - 8, y + 3);
+    }
+    ctx.textAlign = "center";
+    ctx.save();
+    ctx.translate(16, pad.t + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(label, 0, 0);
+    ctx.restore();
+  }
+
   function drawSpectrum(ctx, width, height, data, task) {
     if (!data || !data.freqs || !data.conditions) return;
     const conds = getCondNames(task).filter(c => data.conditions[c]);
     if (conds.length === 0) return;
     const freqs = data.freqs;
-    const pad = { t: 30, r: 40, b: 35, l: 45 };
+    const pad = { t: 24, r: 18, b: 62, l: 62 };
     const plotW = width - pad.l - pad.r;
     const plotH = height - pad.t - pad.b;
     const fmin = 4, fmax = 20;
@@ -261,22 +338,13 @@
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, width, height);
 
-    ctx.strokeStyle = "#e5e5e5";
+    ctx.strokeStyle = "#c7c7cc";
     ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = pad.t + (plotH * i) / 4;
-      ctx.beginPath();
-      ctx.moveTo(pad.l, y);
-      ctx.lineTo(width - pad.r, y);
-      ctx.stroke();
-    }
-    for (let i = 0; i <= 8; i++) {
-      const x = pad.l + (plotW * i) / 8;
-      ctx.beginPath();
-      ctx.moveTo(x, pad.t);
-      ctx.lineTo(x, height - pad.b);
-      ctx.stroke();
-    }
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    ctx.lineTo(pad.l, height - pad.b);
+    ctx.lineTo(width - pad.r, height - pad.b);
+    ctx.stroke();
 
     if (data.iaf) {
       const iafx = pad.l + ((data.iaf - fmin) / (fmax - fmin)) * plotW;
@@ -291,8 +359,6 @@
       }
     }
 
-    const colors = ["#2d7d46", "#3d9960", "#4db37a"];
-    if (task === "sternberg") Object.assign(colors, ["#b45309", "#c96a15", "#de8220"]);
     conds.forEach((c, i) => {
       const vals = data.conditions[c];
       const sems = data.sem && data.sem[c] ? data.sem[c] : null;
@@ -301,7 +367,7 @@
         y: pad.t + plotH - ((vals[j] - vMin) / (vMax - vMin)) * plotH
       }));
       if (sems) {
-        ctx.fillStyle = (COND_COLORS[c] || colors[i] || "#333") + "26";
+        ctx.fillStyle = (COND_COLORS[c] || "#333") + "26";
         ctx.beginPath();
         for (let j = 0; j < pts.length; j++) {
           const yy = pad.t + plotH - ((vals[j] + sems[j] - vMin) / (vMax - vMin)) * plotH;
@@ -315,7 +381,7 @@
         ctx.closePath();
         ctx.fill();
       }
-      ctx.strokeStyle = COND_COLORS[c] || colors[i] || "#333";
+      ctx.strokeStyle = COND_COLORS[c] || "#333";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(pts[0].x, pts[0].y);
@@ -328,10 +394,11 @@
     ctx.textAlign = "center";
     for (let f = 4; f <= 20; f += 2) {
       const x = pad.l + ((f - fmin) / (fmax - fmin)) * plotW;
-      ctx.fillText(String(f), x, height - 10);
+      ctx.fillText(String(f), x, height - pad.b + 18);
     }
-    ctx.textAlign = "right";
-    ctx.fillText("Frequency (Hz)", width - pad.r, height - 10);
+    drawYAxisTicksAndLabel(ctx, pad, plotH, vMin, vMax, "Power (a.u.)", 2);
+    ctx.textAlign = "center";
+    ctx.fillText("Frequency (Hz)", pad.l + plotW / 2, height - 12);
   }
 
   function drawERP(ctx, width, height, data, task) {
@@ -339,7 +406,7 @@
     const conds = getCondNames(task).filter(c => data.conditions[c]);
     if (conds.length === 0) return;
     const times = data.times;
-    const pad = { t: 30, r: 40, b: 35, l: 45 };
+    const pad = { t: 24, r: 18, b: 62, l: 62 };
     const plotW = width - pad.l - pad.r;
     const plotH = height - pad.t - pad.b;
     const tMin = Math.min(...times), tMax = Math.max(...times);
@@ -354,15 +421,13 @@
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, width, height);
 
-    ctx.strokeStyle = "#e5e5e5";
+    ctx.strokeStyle = "#c7c7cc";
     ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = pad.t + (plotH * i) / 4;
-      ctx.beginPath();
-      ctx.moveTo(pad.l, y);
-      ctx.lineTo(width - pad.r, y);
-      ctx.stroke();
-    }
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    ctx.lineTo(pad.l, height - pad.b);
+    ctx.lineTo(width - pad.r, height - pad.b);
+    ctx.stroke();
     const t0x = pad.l + ((0 - tMin) / (tMax - tMin)) * plotW;
     if (t0x >= pad.l && t0x <= width - pad.r) {
       ctx.setLineDash([4, 4]);
@@ -414,30 +479,56 @@
     const step = (tMax - tMin) <= 1 ? 0.2 : 0.5;
     for (let t = Math.ceil(tMin * 10) / 10; t <= tMax; t += step) {
       const x = pad.l + ((t - tMin) / (tMax - tMin)) * plotW;
-      ctx.fillText(t.toFixed(1), x, height - 10);
+      ctx.fillText(t.toFixed(1), x, height - pad.b + 18);
     }
-    ctx.textAlign = "right";
-    ctx.fillText("Time (s)", width - pad.r, height - 10);
+    drawYAxisTicksAndLabel(ctx, pad, plotH, vMin, vMax, "Amplitude (a.u.)", 2);
+    ctx.textAlign = "center";
+    ctx.fillText("Time (s)", pad.l + plotW / 2, height - 12);
   }
 
   function drawGazeMetric(ctx, width, height, data, task) {
     if (!data || !data.conditions || !data.means) return;
     const conds = data.conditions;
-    const pad = { t: 30, r: 30, b: 45, l: 45 };
+    const pad = { t: 24, r: 18, b: 62, l: 62 };
     const plotW = width - pad.l - pad.r;
     const plotH = height - pad.t - pad.b;
     const n = conds.length;
     const colW = plotW / (n + 1);
-    const vMin = 0;
-    const vMax = Math.max(...data.means) * 1.2 || 1;
+    const allVals = [];
+    if (Array.isArray(data.means)) allVals.push(...data.means);
+    if (data.individual_subject_means) {
+      conds.forEach(c => {
+        if (Array.isArray(data.individual_subject_means[c])) allVals.push(...data.individual_subject_means[c]);
+      });
+    }
+    let vMin = Math.min(...allVals.filter(v => Number.isFinite(v)));
+    let vMax = Math.max(...allVals.filter(v => Number.isFinite(v)));
+    if (!Number.isFinite(vMin) || !Number.isFinite(vMax) || vMax <= vMin) {
+      vMin = 0;
+      vMax = 1;
+    }
+    const span = vMax - vMin;
+    vMin -= span * 0.08;
+    vMax += span * 0.08;
 
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, width, height);
 
+    ctx.strokeStyle = "#c7c7cc";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    ctx.lineTo(pad.l, height - pad.b);
+    ctx.lineTo(width - pad.r, height - pad.b);
+    ctx.stroke();
+
     ctx.fillStyle = "#6e6e73";
     ctx.font = "11px -apple-system, sans-serif";
     ctx.textAlign = "center";
-    conds.forEach((c, i) => ctx.fillText(c, pad.l + colW * (i + 1), height - 15));
+    conds.forEach((c, i) => ctx.fillText(getCondLabel(c), pad.l + colW * (i + 1), height - pad.b + 18));
+    drawYAxisTicksAndLabel(ctx, pad, plotH, vMin, vMax, "Value", 2);
+    ctx.textAlign = "center";
+    ctx.fillText("Condition", pad.l + plotW / 2, height - 12);
 
     conds.forEach((c, i) => {
       const x = pad.l + colW * (i + 1);
@@ -456,7 +547,7 @@
       if (data.individual_subject_means && data.individual_subject_means[c]) {
         data.individual_subject_means[c].forEach((v, j) => {
           const yy = pad.t + plotH - ((v - vMin) / (vMax - vMin)) * plotH;
-          const jx = x + (Math.random() - 0.5) * 16;
+          const jx = x + deterministicJitter(j, i, 16);
           ctx.fillStyle = (COND_COLORS[c] || "#333") + "99";
           ctx.beginPath();
           ctx.arc(jx, yy, 3, 0, Math.PI * 2);
@@ -479,101 +570,117 @@
     if (!data || !data.conditions) return;
     const conds = data.conditions;
     if (!conds || conds.length === 0) return;
-    const accM = data.accuracy_mean || [];
-    const accS = data.accuracy_sd || [];
-    const rtM = data.reaction_time_mean || [];
-    const rtS = data.reaction_time_sd || [];
-    const pad = { t: 24, r: 24, b: 36, l: 44 };
-    const split = Math.floor((height - pad.t - pad.b - 18) / 2);
+    const accByCond = (data.individual_subject_means && data.individual_subject_means.accuracy) ? data.individual_subject_means.accuracy : {};
+    const rtByCond = (data.individual_subject_means && data.individual_subject_means.reaction_time) ? data.individual_subject_means.reaction_time : {};
+    const pad = { t: 30, r: 20, b: 68, l: 62 };
+    const gap = 28;
+    const split = Math.floor((height - pad.t - pad.b - gap) / 2);
     const topY = pad.t;
-    const botY = pad.t + split + 18;
+    const botY = pad.t + split + gap;
     const plotW = width - pad.l - pad.r;
     const n = conds.length;
     const step = plotW / Math.max(n + 1, 2);
 
-    function drawSeries(y0, plotH, means, sds, label, color, forceZero) {
-      const vals = means.map(v => Number(v)).filter(v => Number.isFinite(v));
-      if (vals.length === 0) return;
-      let vMin = forceZero ? 0 : Math.min(...vals);
-      let vMax = Math.max(...vals);
-      if (sds && sds.length) {
-        for (let i = 0; i < means.length; i++) {
-          const m = Number(means[i]);
-          const s = Number(sds[i] || 0);
-          if (Number.isFinite(m) && Number.isFinite(s)) {
-            vMin = Math.min(vMin, m - s);
-            vMax = Math.max(vMax, m + s);
-          }
-        }
-      }
+    function drawSeries(y0, plotH, byCond, fallbackMeans, label) {
+      const seriesVals = conds.flatMap(c => Array.isArray(byCond[c]) ? byCond[c] : []);
+      const fallbackVals = (fallbackMeans || []).filter(v => Number.isFinite(v));
+      const baseVals = seriesVals.length > 0 ? seriesVals : fallbackVals;
+      if (!baseVals || baseVals.length === 0) return;
+
+      let vMin = Math.min(...baseVals);
+      let vMax = Math.max(...baseVals);
+      if (label === "Accuracy") vMin = Math.min(0.4, vMin);
       if (vMax <= vMin) vMax = vMin + 1;
       const span = vMax - vMin;
       vMin -= span * 0.08;
       vMax += span * 0.08;
 
-      ctx.strokeStyle = "#e5e5e5";
+      ctx.strokeStyle = "#c7c7cc";
       ctx.lineWidth = 1;
-      for (let i = 0; i <= 3; i++) {
-        const gy = y0 + (plotH * i) / 3;
-        ctx.beginPath();
-        ctx.moveTo(pad.l, gy);
-        ctx.lineTo(width - pad.r, gy);
-        ctx.stroke();
-      }
+      ctx.beginPath();
+      ctx.moveTo(pad.l, y0);
+      ctx.lineTo(pad.l, y0 + plotH);
+      ctx.lineTo(width - pad.r, y0 + plotH);
+      ctx.stroke();
 
-      const pts = [];
-      for (let i = 0; i < conds.length; i++) {
-        const m = Number(means[i]);
-        if (!Number.isFinite(m)) continue;
-        const x = pad.l + (i + 1) * step;
-        const y = y0 + plotH - ((m - vMin) / (vMax - vMin)) * plotH;
-        pts.push({ i, x, y, m });
-      }
-      if (pts.length > 0) {
+      const localPad = { t: y0, l: pad.l };
+      drawYAxisTicksAndLabel(ctx, localPad, plotH, vMin, vMax, "", 2);
+
+      conds.forEach((c, condIdx) => {
+        const x = pad.l + (condIdx + 1) * step;
+        const values = Array.isArray(byCond[c]) ? byCond[c].filter(v => Number.isFinite(v)).slice().sort((a, b) => a - b) : [];
+        if (values.length === 0) return;
+
+        const q1 = quantile(values, 0.25);
+        const q2 = quantile(values, 0.5);
+        const q3 = quantile(values, 0.75);
+        const low = values[0];
+        const high = values[values.length - 1];
+        const boxTop = y0 + plotH - ((q3 - vMin) / (vMax - vMin)) * plotH;
+        const boxBot = y0 + plotH - ((q1 - vMin) / (vMax - vMin)) * plotH;
+        const medY = y0 + plotH - ((q2 - vMin) / (vMax - vMin)) * plotH;
+        const lowY = y0 + plotH - ((low - vMin) / (vMax - vMin)) * plotH;
+        const highY = y0 + plotH - ((high - vMin) / (vMax - vMin)) * plotH;
+        const color = COND_COLORS[c] || "#333";
+
         ctx.strokeStyle = color;
-        ctx.lineWidth = 1.7;
+        ctx.fillStyle = color + "42";
+        ctx.lineWidth = 1.2;
+        ctx.fillRect(x - 13, boxTop, 26, Math.max(1, boxBot - boxTop));
+        ctx.strokeRect(x - 13, boxTop, 26, Math.max(1, boxBot - boxTop));
         ctx.beginPath();
-        ctx.moveTo(pts[0].x, pts[0].y);
-        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+        ctx.moveTo(x, highY);
+        ctx.lineTo(x, boxTop);
+        ctx.moveTo(x, boxBot);
+        ctx.lineTo(x, lowY);
+        ctx.moveTo(x - 6, highY);
+        ctx.lineTo(x + 6, highY);
+        ctx.moveTo(x - 6, lowY);
+        ctx.lineTo(x + 6, lowY);
+        ctx.stroke();
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(x - 12, medY);
+        ctx.lineTo(x + 12, medY);
         ctx.stroke();
 
-        pts.forEach(p => {
-          const s = Number(sds[p.i] || 0);
-          ctx.strokeStyle = color;
-          ctx.lineWidth = 1.2;
-          if (Number.isFinite(s) && s > 0) {
-            const y1 = y0 + plotH - (((p.m - s) - vMin) / (vMax - vMin)) * plotH;
-            const y2 = y0 + plotH - (((p.m + s) - vMin) / (vMax - vMin)) * plotH;
-            ctx.beginPath();
-            ctx.moveTo(p.x, y1);
-            ctx.lineTo(p.x, y2);
-            ctx.stroke();
-          }
-          ctx.fillStyle = color;
+        values.forEach((v, pointIdx) => {
+          const yy = y0 + plotH - ((v - vMin) / (vMax - vMin)) * plotH;
+          const xx = x + deterministicJitter(pointIdx, condIdx, 20);
+          ctx.fillStyle = color + "8A";
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
+          ctx.arc(xx, yy, 2.4, 0, Math.PI * 2);
           ctx.fill();
         });
-      }
+      });
 
+      ctx.fillStyle = "#4b5563";
+      ctx.font = "11px -apple-system, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(label, pad.l, y0 - 10);
+      ctx.save();
       ctx.fillStyle = "#6e6e73";
       ctx.font = "10px -apple-system, sans-serif";
-      ctx.textAlign = "left";
-      ctx.fillText(label, pad.l, y0 - 8);
+      ctx.textAlign = "center";
+      ctx.translate(16, y0 + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(label === "Accuracy" ? "Accuracy" : "Reaction Time (s)", 0, 0);
+      ctx.restore();
     }
 
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, width, height);
-    drawSeries(topY, split, accM, accS, "Accuracy", "#1d4ed8", true);
-    drawSeries(botY, split, rtM, rtS, "Reaction Time", "#b45309", false);
+    drawSeries(topY, split, accByCond, data.accuracy_mean || [], "Accuracy");
+    drawSeries(botY, split, rtByCond, data.reaction_time_mean || [], "Reaction Time (s)");
 
     ctx.fillStyle = "#6e6e73";
     ctx.font = "11px -apple-system, sans-serif";
     ctx.textAlign = "center";
     for (let i = 0; i < conds.length; i++) {
       const x = pad.l + (i + 1) * step;
-      ctx.fillText(String(conds[i]), x, height - 10);
+      ctx.fillText(getCondLabel(conds[i]), x, height - pad.b + 18);
     }
+    ctx.fillText("Condition", pad.l + plotW / 2, height - 12);
   }
 
   async function render() {
@@ -669,12 +776,12 @@
             else if (["gaze_deviation", "spl", "gaze_velocity", "bcea"].includes(viz)) drawGazeMetric(ctx, cw, ch, data, task);
             else if (viz === "behavior") drawBehavior(ctx, cw, ch, data, task);
             else drawPlaceholder(ctx, cw, ch, "TFR / Topography coming soon");
-            if (data && data.conditions) {
+            if (data && data.conditions && ["spectrum", "erp"].includes(viz)) {
               const leg = document.createElement("div");
               leg.className = "aoc-legend";
-              Object.keys(data.conditions).forEach(c => {
+              getCondNames(task).filter(c => data.conditions[c]).forEach(c => {
                 const s = document.createElement("span");
-                s.innerHTML = '<dot style="background:' + (COND_COLORS[c] || "#333") + '"></dot> ' + c;
+                s.innerHTML = '<dot style="background:' + (COND_COLORS[c] || "#333") + '"></dot> ' + getCondLabel(c);
                 leg.appendChild(s);
               });
               procBlock.appendChild(leg);
