@@ -34,16 +34,23 @@
     .aoc-row { margin-bottom: 20px; }
     .aoc-row-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
     .aoc-viz-groups { display: grid; gap: 10px; }
-    .aoc-viz-group { border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 14px; padding: 10px 12px 12px; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); }
+    .aoc-viz-group { border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px 12px; background: rgba(255, 255, 255, 0.5); }
     .aoc-viz-group-title { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6e6e73; margin-bottom: 8px; }
     .aoc-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
-    .aoc-pill { --pill-accent: #6e6e73; flex-shrink: 0; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.15); background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(242,244,247,0.88)); color: #1d1d1f; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85); transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease; }
-    .aoc-pill:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--pill-accent) 45%, #ffffff); box-shadow: 0 5px 14px rgba(15, 23, 42, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95); }
-    .aoc-pill.active { color: #ffffff; border-color: color-mix(in srgb, var(--pill-accent) 70%, #111827); background: linear-gradient(180deg, color-mix(in srgb, var(--pill-accent) 95%, #ffffff 5%), color-mix(in srgb, var(--pill-accent) 78%, #0f172a 22%)); box-shadow: 0 8px 18px color-mix(in srgb, var(--pill-accent) 30%, #0f172a 70%), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
+    .aoc-pill { flex-shrink: 0; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.045); color: var(--text); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+    .aoc-pill:hover { background: rgba(0,0,0,0.08); text-decoration: none; }
+    .aoc-pill.active { color: #fff; border-color: transparent; background: #6f7380; }
     .aoc-pill:disabled, .aoc-pill.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; color: var(--muted); }
-    .aoc-pill.eeg-accent { --pill-accent: #7c8596; }
-    .aoc-pill.gaze-accent { --pill-accent: #b77857; }
-    .aoc-pill.behavior-accent { --pill-accent: #4f83bf; }
+    .aoc-pill.eeg-accent.active { background: #6f7380; }
+    .aoc-pill.gaze-accent.active { background: #8a6e62; }
+    .aoc-pill.behavior-accent.active { background: #607891; }
+    .aoc-multiverse-controls { margin-top: 20px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .aoc-switch { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: none; padding: 0; color: var(--text); cursor: pointer; font: inherit; }
+    .aoc-switch-track { width: 42px; height: 24px; border-radius: 999px; background: #d3d3d7; position: relative; transition: background 0.22s ease; }
+    .aoc-switch-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.22s ease; }
+    .aoc-switch.is-on .aoc-switch-track { background: #6f7380; }
+    .aoc-switch.is-on .aoc-switch-thumb { transform: translateX(18px); }
+    .aoc-switch-label { font-size: 0.78rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; min-width: 26px; text-align: left; }
     .aoc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-top: 24px; box-shadow: none; }
     .aoc-card.eeg-viz { border-top: 2px solid #6b7280; }
     .aoc-card.gaze-viz { border-top: 2px solid #b45309; }
@@ -150,6 +157,14 @@
       <div id="viz-content"></div>
     </div>
 
+    <div class="aoc-row aoc-multiverse-controls">
+      <div class="aoc-row-label" style="margin-bottom:0;">Multiverse</div>
+      <button id="multiverse-toggle" class="aoc-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Toggle multiverse display">
+        <span class="aoc-switch-track"><span class="aoc-switch-thumb"></span></span>
+        <span class="aoc-switch-label">On</span>
+      </button>
+    </div>
+
     <div class="aoc-multiverse" id="multiverse-section">
       <div class="aoc-multiverse-title">Multiverse analyses</div>
       <div class="aoc-fig-grid" id="multiverse-grid"></div>
@@ -173,6 +188,7 @@
   const VIZ_WITH_PARAM = ["spectrum", "tfr", "topo"];
   const EEG_VIZ = ["erp", "spectrum", "tfr", "topo"];
   const PROC_ORDER = ["raw", "baselined", "parameterized"];
+  const MULTIVERSE_STORAGE_KEY = "aoc_multiverse_visible";
   const PROC_LABELS = { raw: "Raw", baselined: "Baselined", parameterized: "Baselined + SpecParam" };
   const TASK_LABELS = { nback: "N-back", sternberg: "Sternberg" };
   const COND_COLORS = {
@@ -192,7 +208,7 @@
     "6items": "WM load 6"
   };
 
-  let state = { viz: new Set(["spectrum"]), proc: new Set(["raw"]), task: new Set(["nback", "sternberg"]) };
+  let state = { viz: new Set(["spectrum"]), proc: new Set(["raw"]), task: new Set(["nback", "sternberg"]), multiverseVisible: true };
   let dataCache = new Map();
   let renderAbortController = null;
   let availableFiles = null;
@@ -265,6 +281,17 @@
     if (!hasParam) state.proc.delete("parameterized");
     if (state.proc.size === 0) state.proc.add("raw");
     syncPillClasses();
+  }
+
+  function applyMultiverseVisibility() {
+    const section = document.getElementById("multiverse-section");
+    const toggle = document.getElementById("multiverse-toggle");
+    const label = toggle ? toggle.querySelector(".aoc-switch-label") : null;
+    if (!section || !toggle || !label) return;
+    section.style.display = state.multiverseVisible ? "" : "none";
+    toggle.classList.toggle("is-on", state.multiverseVisible);
+    toggle.setAttribute("aria-checked", state.multiverseVisible ? "true" : "false");
+    label.textContent = state.multiverseVisible ? "On" : "Off";
   }
 
   function getCondNames(task) {
@@ -832,6 +859,23 @@
       render();
     });
   });
+
+  const multiverseToggle = document.getElementById("multiverse-toggle");
+  if (multiverseToggle) {
+    multiverseToggle.addEventListener("click", () => {
+      state.multiverseVisible = !state.multiverseVisible;
+      try {
+        localStorage.setItem(MULTIVERSE_STORAGE_KEY, state.multiverseVisible ? "1" : "0");
+      } catch (_) {}
+      applyMultiverseVisibility();
+    });
+  }
+
+  try {
+    const storedMultiverse = localStorage.getItem(MULTIVERSE_STORAGE_KEY);
+    if (storedMultiverse === "0") state.multiverseVisible = false;
+  } catch (_) {}
+  applyMultiverseVisibility();
 
   const runtimeNote = document.getElementById("aoc-runtime-note");
   if (window.location.protocol === "file:") {
