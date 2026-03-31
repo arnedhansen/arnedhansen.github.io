@@ -286,6 +286,13 @@ a:hover { text-decoration: underline; }
   vertical-align: top; line-height: 1.5;
 }
 .teaching-table td:first-child { color: var(--muted); font-size: 0.75rem; white-space: nowrap; }
+.teaching-table td:nth-child(2) {
+  white-space: nowrap;
+}
+.course-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 
 /* ══ AWARDS ══════════════════════════════════ */
 .award-entry {
@@ -296,6 +303,7 @@ a:hover { text-decoration: underline; }
 .award-title { font-size: 0.845rem; font-weight: 500; line-height: 1.45; }
 .award-amt   { font-size: 0.75rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .award-desc  { grid-column: 2 / -1; font-size: 0.78rem; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+.award-desc .pub-journal { margin-top: 5px; margin-bottom: 0; }
 
 /* ══ OUTREACH ════════════════════════════════ */
 .outreach-entry { padding: 14px 0; border-bottom: 1px solid var(--border); }
