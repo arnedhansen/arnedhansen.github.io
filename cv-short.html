@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Short CV - Arne D. Hansen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .print-bar { position: sticky; top: 0; z-index: 300; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .print-bar-label { font-size: 0.78rem; color: var(--muted); }
+    .print-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+    .cv-header { padding: 1.6rem 0 1.2rem; border-bottom: 2px solid var(--border); margin-bottom: 0.8rem; }
+    .cv-header h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .cv-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .cv-contacts { font-size: 0.77rem; line-height: 1.7; }
+    .tight .tl-content { padding-bottom: 20px; }
+    @media print {
+      .print-bar, .nav, .site-footer { display: none !important; }
+      @page { margin: 12mm 14mm; size: A4; }
+      body { font-size: 9.2pt; line-height: 1.35; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .sh-icon, .tl-line-col, .tl-tag, .os-badges { display: none !important; }
+      .section-heading { margin-top: 10pt; margin-bottom: 3pt; }
+      .tl-row { grid-template-columns: 70pt 1fr; page-break-inside: avoid; }
+      .tl-date { font-size: 7pt; }
+      .tl-title { font-size: 8.8pt; margin-bottom: 0; }
+      .tl-subtitle { font-size: 7.5pt; margin-bottom: 1pt; }
+      .tl-detail { font-size: 7pt; margin-bottom: 2pt; }
+      .tl-bullets { font-size: 7.2pt; line-height: 1.5; margin-top: 1pt; }
+      .tl-content { padding-left: 6pt; padding-bottom: 8pt; }
+      .pub-entry { padding: 0 0 10pt 0; margin-bottom: 10pt; }
+      .pub-title { font-size: 8.6pt; }
+      .pub-authors, .pub-journal, .pub-summary { font-size: 7.2pt; }
+      .skills-grid { gap: 7pt 24pt; }
+      .skill-group-label { font-size: 6.3pt; margin-bottom: 4pt; }
+      .skill-row { padding: 2pt 0; }
+      .skill-name { font-size: 7.5pt; }
+      .skill-level { font-size: 6.8pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-bar">
+    <span class="print-bar-label"><strong>Short CV</strong> · Automatically generated from website pages.</span>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+  </div>
+
+  <div class="container">
+    <div class="cv-header">
+      <h1 id="cv-name">Arne D. Hansen</h1>
+      <div class="cv-subtitle" id="cv-subtitle"></div>
+      <div class="cv-contacts" id="cv-contacts"></div>
+    </div>
+
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>Education</div>
+    <div class="timeline tight" id="cv-education"></div>
+
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></span>Selected Experience</div>
+    <div class="timeline tight" id="cv-experience"></div>
+
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span>Selected Publications</div>
+    <div id="cv-publications"></div>
+
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07A8.001 8.001 0 0 1 4.07 13H4v-2h.07A8.001 8.001 0 0 1 11 4.07V4h2v.07A8.001 8.001 0 0 1 19.93 11H20v2h-.07A8.001 8.001 0 0 1 13 19.93z"/></svg></span>Skills</div>
+    <div id="cv-skills"></div>
+
+  </div>
+
+  <footer class="site-footer">Last updated March 2026</footer>
+  <script src="cv-builder.js"></script>
+  <script>
+    async function renderShortCV() {
+      try {
+        const [profile, sections] = await Promise.all([CVBuilder.loadProfile(), CVBuilder.loadAllSections()]);
+        document.getElementById("cv-name").textContent = profile.name;
+        document.getElementById("cv-subtitle").innerHTML = profile.subtitle;
+        document.getElementById("cv-contacts").innerHTML = profile.contacts;
+        CVBuilder.renderInto(document.getElementById("cv-education"), sections.educationRows, 2);
+        CVBuilder.renderInto(document.getElementById("cv-experience"), sections.experienceRows, 5);
+        CVBuilder.renderInto(document.getElementById("cv-publications"), sections.publicationSections, 1);
+        if (sections.skillsGrid) {
+          document.getElementById("cv-skills").appendChild(sections.skillsGrid);
+        }
+      } catch (error) {
+        console.error("Short CV rendering failed:", error);
+        const contacts = document.getElementById("cv-contacts");
+        if (contacts) {
+          contacts.innerHTML = "Unable to load CV sections. Open this page via a local web server or on the deployed site.";
+        }
+      }
+    }
+    renderShortCV();
+  </script>
+</body>
+</html>

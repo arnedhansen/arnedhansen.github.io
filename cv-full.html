@@ -4,784 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Full CV – Arne D. Hansen</title>
+  <title>Full CV - Arne D. Hansen</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Print bar (screen only) ── */
-    .print-bar {
-      position: sticky;
-      top: 0;
-      z-index: 300;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .print-bar-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .print-bar-label strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-    .print-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 18px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: opacity 0.15s;
-    }
-    .print-btn:hover { opacity: 0.85; text-decoration: none; color: #fff; }
-    .print-btn svg { fill: #fff; width: 16px; height: 16px; display: block; }
-
-    /* ── CV header (print page) ── */
-    .cv-header {
-      padding: 2rem 0 1.5rem;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 1rem;
-    }
-    .cv-header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.25rem;
-    }
-    .cv-header .cv-subtitle {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-    .cv-header .cv-contacts {
-      font-size: 0.8rem;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-      line-height: 1.8;
-    }
-    .cv-header .cv-contacts a { color: var(--accent); }
-    .cv-icon-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 0.5rem;
-    }
-    .cv-icon-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.78rem;
-      color: var(--text);
-      opacity: 0.7;
-      text-decoration: none;
-      transition: opacity 0.15s;
-    }
-    .cv-icon-link:hover { opacity: 1; color: var(--accent); text-decoration: none; }
-    .cv-icon-link svg { width: 14px; height: 14px; fill: currentColor; display: block; }
-
-    /* ── Print styles ── */
+    .print-bar { position: sticky; top: 0; z-index: 300; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .print-bar-label { font-size: 0.78rem; color: var(--muted); }
+    .print-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+    .cv-header { padding: 2rem 0 1.5rem; border-bottom: 2px solid var(--border); margin-bottom: 1rem; }
+    .cv-header h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+    .cv-subtitle { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .cv-contacts { font-size: 0.8rem; margin-bottom: 0.75rem; line-height: 1.8; }
+    .cv-icon-links { display: flex; flex-wrap: wrap; gap: 14px; }
+    .cv-icon-links .icon-link { opacity: 0.7; }
     @media print {
-      .print-bar,
-      .nav { display: none !important; }
-
-      @page {
-        margin: 14mm 18mm;
-        size: A4;
-      }
-
-      /* Override CSS variables so muted colours stay visible in print */
-      :root {
-        --bg:      #fff;
-        --surface: #fff;
-        --text:    #111;
-        --muted:   #444;
-        --accent:  #8b2020;
-        --border:  #bbb;
-        --line:    #bbb;
-        --dot:     #111;
-      }
-
-      body {
-        background: #fff !important;
-        color: #111 !important;
-        font-size: 10pt;
-        line-height: 1.45;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-
-      .container {
-        max-width: 100% !important;
-        padding: 0 !important;
-      }
-
-      /* CV header */
-      .cv-header {
-        padding: 0 0 8pt;
-        margin-bottom: 4pt;
-      }
-      .cv-header h1 { font-size: 18pt; margin-bottom: 3pt; }
-      .cv-header .cv-subtitle { font-size: 9.5pt; color: #444; margin-bottom: 4pt; }
-      .cv-header .cv-contacts { font-size: 9pt; color: #111; margin-bottom: 4pt; }
-      .cv-header .cv-contacts a { color: #111; text-decoration: none; }
-      .cv-icon-links { gap: 12pt; margin-top: 3pt; }
-      .cv-icon-link { font-size: 8pt; color: #111; opacity: 1; text-decoration: none; }
-      .cv-icon-link svg { display: none; } /* hide icons — labels are sufficient */
-
-      /* Section headings */
-      .section-heading {
-        font-size: 10.5pt;
-        font-weight: 700;
-        margin-top: 12pt;
-        margin-bottom: 5pt;
-        padding-bottom: 3pt;
-        border-bottom: 1px solid #bbb;
-        page-break-after: avoid;
-        color: #111;
-      }
-      .sh-icon { display: none; } /* hide section icons in print */
-
-      /* Timeline — 2-column layout, no dot/line */
+      .print-bar, .nav, .site-footer { display: none !important; }
+      @page { margin: 14mm 18mm; size: A4; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .sh-icon, .tl-line-col, .tl-tag, .os-badges { display: none !important; }
       .tl-row { grid-template-columns: 72pt 1fr; page-break-inside: avoid; }
-      .tl-line-col { display: none; }
-      .tl-tag  { display: none; }
-      .tl-date { font-size: 7.5pt; color: #444; padding-top: 0; }
-      .tl-content { padding-top: 0; }
-      .tl-title { font-size: 9.5pt; font-weight: 700; color: #111; margin-top: 0; margin-bottom: 1pt; }
-      .tl-subtitle { font-size: 8pt; color: #444; margin-bottom: 1pt; }
-      .tl-detail   { font-size: 7.5pt; color: #444; margin-bottom: 3pt; }
-      .tl-bullets  { font-size: 8pt; color: #444; line-height: 1.6; margin-top: 2pt; }
-      .tl-bullets li { font-size: 8pt; }
-      .tl-content { padding-bottom: 14pt; padding-left: 6pt; }
-
-      /* Publications */
-      .pub-entry { page-break-inside: avoid; }
-      .pub-section-label { font-size: 7pt; color: #444; }
-      .pub-title   { font-size: 9.5pt; font-weight: 600; color: #111; }
-      .pub-authors { font-size: 8pt; color: #444; }
-      .pub-journal { font-size: 8pt; color: #444; }
-      .pub-journal a { color: #444; text-decoration: none; }
-      .pub-badge { font-size: 6pt; }
-
-      /* Science outreach */
-      .outreach-entry { page-break-inside: avoid; }
-      .outreach-title { font-size: 9pt; color: #111; }
-      .outreach-meta  { font-size: 7.5pt; color: #444; }
-      .outreach-meta a { color: #444; text-decoration: none; }
-
-      /* Awards */
-      .award-entry { page-break-inside: avoid; font-size: 9pt; }
-      .award-date  { font-size: 7.5pt; color: #444; }
-      .award-title { font-size: 9pt; color: #111; }
-      .award-amt   { font-size: 8pt; color: #444; }
-
-      /* Skills */
-      .skills-grid { gap: 8pt 36pt; }
-      .skill-group-label { font-size: 7pt; color: #444; }
-      .skill-row  { font-size: 8.5pt; }
-      .skill-name { color: #111; }
-      .skill-level { font-size: 7.5pt; color: #444; }
-
-      /* Workshops */
-      .pres-entry { page-break-inside: avoid; }
-      .pres-date  { font-size: 7.5pt; color: #444; }
-      .pres-title { font-size: 9pt; color: #111; }
-      .pres-venue { font-size: 7.5pt; color: #444; }
-
-      /* Membership / engagement */
-      .member-entry { page-break-inside: avoid; }
-      .member-date  { font-size: 7.5pt; color: #444; }
-      .member-org   { font-size: 9pt; color: #111; }
-      .member-role  { font-size: 7.5pt; color: #444; }
-      .member-inst  { font-size: 7pt; color: #444; }
-
-      /* Suppress URL appending — links are identified by their text */
-      a { color: inherit !important; text-decoration: none !important; }
-
-      .site-footer { display: none; }
+      .tl-content { padding-left: 6pt; padding-bottom: 12pt; }
+      .section-heading { page-break-after: avoid; }
+      .pub-entry, .award-entry, .pres-entry, .member-entry, .outreach-entry { page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Print bar (hidden when printing) -->
   <div class="print-bar">
-    <span class="print-bar-label"><strong>Full CV – Arne D. Hansen</strong> &nbsp;·&nbsp; In the print dialog: choose <em>Save as PDF</em> and disable <em>Headers and footers</em></span>
-    <button class="print-btn" onclick="window.print()">
-      <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
-      Save as PDF
-    </button>
+    <span class="print-bar-label"><strong>Full CV</strong> · Automatically generated from website pages.</span>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
   </div>
 
   <div class="container">
-
-    <!-- ── CV Header ── -->
     <div class="cv-header">
-      <h1>Arne D. Hansen</h1>
-      <div class="cv-subtitle">PhD Student in Cognitive Neuroscience · University of Zurich &amp; Center for Neuroscience Zurich (ZNZ)</div>
-      <div class="cv-contacts">
-        <a href="mailto:arne.hansen@psychologie.uzh.ch">arne.hansen@psychologie.uzh.ch</a> &nbsp;·&nbsp;
-        <a href="mailto:arne.hansen@uzh.ch">arne96.hansen@gmail.com</a>
-      </div>
-      <div class="cv-icon-links">
-        <a href="https://www.psychology.uzh.ch/en/areas/nec/plafor/team/Doctoral-students/hansen.html" target="_blank" rel="noopener noreferrer" class="cv-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M12 3 2 8.5l2 1.09V16l8 4.5 8-4.5v-6.41L22 8.5 12 3zm6 11.91-6 3.38-6-3.38V10.58l6 3.27 6-3.27v4.33zM12 12.35 4.77 8.5 12 4.65 19.23 8.5 12 12.35z"/></svg>
-          UZH Profile
-        </a>
-        <a href="https://orcid.org/0009-0007-6522-1719" target="_blank" rel="noopener noreferrer" class="cv-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.254 4.494a.836.836 0 0 1 0 1.672.836.836 0 0 1 0-1.672zm-1.131 2.94h2.26v9.133H6.123zm4.297 0h3.717c3.542 0 5.095 2.532 5.095 4.566 0 2.47-1.927 4.567-5.077 4.567h-3.735zm2.262 1.73v5.634h1.356c1.936 0 2.804-1.41 2.804-2.817 0-1.512-.978-2.817-2.804-2.817z"/></svg>
-          ORCID 0009-0007-6522-1719
-        </a>
-        <a href="https://github.com/arnedhansen" target="_blank" rel="noopener noreferrer" class="cv-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          github.com/arnedhansen
-        </a>
-        <a href="https://scholar.google.com/citations?user=wbqQ83MAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer" class="cv-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-          Google Scholar
-        </a>
-        <a href="https://www.linkedin.com/in/arne-hansen1/" target="_blank" rel="noopener noreferrer" class="cv-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-      </div>
+      <h1 id="cv-name">Arne D. Hansen</h1>
+      <div class="cv-subtitle" id="cv-subtitle"></div>
+      <div class="cv-contacts" id="cv-contacts"></div>
+      <div class="cv-icon-links profile-icon-links" id="cv-links"></div>
     </div>
 
-    <!-- ── 1. Education ── -->
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>Education</div>
-    <div class="timeline">
+    <div class="timeline" id="cv-education"></div>
 
-      <div class="tl-row">
-        <div class="tl-date">Apr 2024 – Present</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Doctorate</div>
-          <div class="tl-title">PhD in Cognitive Neuroscience</div>
-          <div class="tl-subtitle">Department of Psychology, University of Zurich &amp; Center for Neuroscience Zurich (ZNZ)</div>
-          <div class="tl-detail">Dr. Tzvetan Popov · Prof. Dr. N. Langer · Prof. Dr. P. Sauseng · Prof. Dr. A. Hervais-Adelman</div>
-          <ul class="tl-bullets">
-            <li>Dissertation: <em>«EEG Signatures of Oculomotor Control»</em></li>
-            <li>Jointly enrolled in the doctoral program in Psychology (UZH) and the International PhD Program in Neuroscience (ZNZ; UZH &amp; ETH)</li>
-          </ul>
-        </div>
-      </div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg></span>Professional Experience</div>
+    <div class="timeline" id="cv-experience"></div>
 
-      <div class="tl-row">
-        <div class="tl-date">Feb 2021 – Dec 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Master's degree</div>
-          <div class="tl-title">MSc in Psychology</div>
-          <div class="tl-subtitle">Department of Psychology, University of Zurich</div>
-          <div class="tl-detail">Grade: 5.6 (summa cum laude) · Focus: Neuropsychology &amp; Cognitive Neuroscience</div>
-          <div class="tl-detail">Prof. Dr. Nicolas Langer · Dr. Tzvetan Popov</div>
-          <ul class="tl-bullets">
-            <li>Thesis: <em>«On the Consistency of Co-Varying Eye Movements and Power Modulations of Alpha Oscillations During Working Memory Maintenance»</em> — Grade: 6.0</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tl-row last">
-        <div class="tl-date">Sep 2017 – Dec 2020</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Bachelor's degree</div>
-          <div class="tl-title">BSc in Psychology</div>
-          <div class="tl-subtitle">Department of Psychology, University of Zurich</div>
-          <div class="tl-detail">Grade: 4.8 · Major: Psychology (120 ECTS) · Minor: Dutch Philology (60 ECTS)</div>
-          <div class="tl-detail">Prof. Dr. Martin Meyer</div>
-          <ul class="tl-bullets">
-            <li>Thesis: <em>«Jenseits von Broca und Wernicke – Die aktuelle Perspektive zur Sprache im Gehirn»</em> — Grade: 6.0</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── 2. Professional Experience ── -->
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1a3 3 0 0 0-6 0c0 .12.11.56.18 1H10c0-.12-.08-.56-.18-1A3 3 0 0 0 4 5c0 .12.11.56.18 1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zM9 5a1 1 0 0 1 2 0c0 .12-.08.56-.08.56S10.12 6 10 6H9.08S9 5.12 9 5zm6 0a1 1 0 0 1 2 0c0 .12-.08.56-.08.56S16.12 6 16 6h-.92S15 5.12 15 5zM20 19H2V8h18v11z"/></svg></span>Professional Experience</div>
-    <div class="timeline">
-
-      <div class="tl-row">
-        <div class="tl-date">Apr 2024 – Present</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Doctoral Candidate</div>
-          <div class="tl-subtitle">Methods of Plasticity Research, Department of Psychology, UZH</div>
-          <div class="tl-detail">Dr. Tzvetan Popov &amp; Prof. Dr. Nicolas Langer</div>
-          <ul class="tl-bullets"><li>Development of automated signal processing pipelines for EEG and eye-tracking data</li><li>Quantification of oculomotor behaviour to characterise mechanisms of attentional control</li><li>Building statistical and computational models</li><li>Development of open-science workflows for transparent and reproducible analysis</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Sep 2023 – Present</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Management</div>
-          <div class="tl-title">Managing Director (20%)</div>
-          <div class="tl-subtitle">Competence Center for Language &amp; Medicine Zurich, UZH</div>
-          <div class="tl-detail">Prof. Dr. Nathalie Giroud &amp; Prof. Dr. Johannes Kabatek</div>
-          <ul class="tl-bullets"><li>Financial oversight in SAP</li><li>Organization of an international conference, colloquia, talks, and other events</li><li>Hosting invited speakers; website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Apr 2024 – Sep 2025</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Website Administrator</div>
-          <div class="tl-subtitle">Administration, Department of Comparative Language Sciences, UZH</div>
-          <div class="tl-detail">Anke Benker</div>
-          <ul class="tl-bullets"><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Sep 2023 – Feb 2024</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Administrative Assistant</div>
-          <div class="tl-subtitle">Dean's Office of the Faculty of Arts and Humanities, UZH</div>
-          <div class="tl-detail">Dr. Katayoun Safi &amp; Anke Benker</div>
-          <ul class="tl-bullets"><li>MS Teams workflow automatisation with Power Automate</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Mar 2023 – Mar 2024</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Assistant</div>
-          <div class="tl-subtitle">Methods of Plasticity Research, Department of Psychology, UZH</div>
-          <div class="tl-detail">Dr. Tzvetan Popov &amp; Prof. Dr. Nicolas Langer</div>
-          <ul class="tl-bullets"><li>SNF-Project «Brain rhythms relate to cognition through oculomotor action: OculoCortical Coherence (OCC)»</li><li>EEG and eye-tracking data acquisition, preprocessing and analysis</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Mar 2023 – Jan 2024</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Teaching</div>
-          <div class="tl-title">Teaching Assistant</div>
-          <div class="tl-subtitle">Neuropsychology, Department of Psychology, UZH</div>
-          <div class="tl-detail">Prof. Dr. Paul Sauseng, Yifan Zeng M.Sc. &amp; Larissa Behnke M.Sc.</div>
-          <ul class="tl-bullets"><li>Preparation of lecture slides; course management in OLAT</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Sep 2022 – Sep 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Administrative Assistant</div>
-          <div class="tl-subtitle">Center for Interdisciplinary Study of Language Evolution (ISLE), UZH</div>
-          <div class="tl-detail">Prof. Dr. Sabine Stoll &amp; Prof. Dr. Carolus Philippus van Schaik</div>
-          <ul class="tl-bullets"><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Aug 2022 – Dec 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Assistant</div>
-          <div class="tl-subtitle">Decision Science Lab, Swiss Federal Institute of Technology Zurich (ETH)</div>
-          <div class="tl-detail">Dr. Michal Berkowitz</div>
-          <ul class="tl-bullets"><li>Survey creation in Qualtrics</li><li>Data analysis in R</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Jul 2022 – Mar 2024</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Webmaster</div>
-          <div class="tl-subtitle">Methods of Plasticity Research, Department of Psychology, UZH</div>
-          <div class="tl-detail">Prof. Dr. Nicolas Langer</div>
-          <ul class="tl-bullets"><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Jun 2022 – Sep 2022</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Event</div>
-          <div class="tl-title">Student Assistant</div>
-          <div class="tl-subtitle">17th Conference of the Swiss Psychological Society (SGP)</div>
-          <div class="tl-detail">Dr. Claudia Hagmayer &amp; Prof. Dr. Johannes Ulrich</div>
-          <ul class="tl-bullets"><li>Conference organisation</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">May 2022 – Nov 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Teaching</div>
-          <div class="tl-title">Teaching Assistant</div>
-          <div class="tl-subtitle">Department of Comparative Language Sciences, UZH</div>
-          <div class="tl-detail">Prof. Dr. Martin Meyer</div>
-          <ul class="tl-bullets"><li>Creation of examination materials; preparation of lecture slides</li><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Feb 2022 – Mar 2024</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Administrative Assistant</div>
-          <div class="tl-subtitle">Administration, Department of Comparative Language Sciences, UZH</div>
-          <div class="tl-detail">Anke Benker</div>
-          <ul class="tl-bullets"><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Feb 2022 – Sep 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Administration</div>
-          <div class="tl-title">Administrative Assistant</div>
-          <div class="tl-subtitle">Competence Center for Language &amp; Medicine Zurich, UZH</div>
-          <div class="tl-detail">Prof. Dr. Nathalie Giroud &amp; Prof. Dr. Johannes Kabatek</div>
-          <ul class="tl-bullets"><li>Organisation of colloquia, talks, and other events</li><li>Website content management in CMS Magnolia</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Sep 2021 – Feb 2023</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Assistant</div>
-          <div class="tl-subtitle">Methods of Plasticity Research, Department of Psychology, UZH</div>
-          <div class="tl-detail">Prof. Dr. Nicolas Langer</div>
-          <ul class="tl-bullets"><li>Conducting EEG experiments using Geodesics system</li><li>Administering neuropsychological examinations (TMT, RAVEN, HAWIE-R/WAIS-IV)</li><li>Study participant management</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Sep 2021 – Apr 2022</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Assistant</div>
-          <div class="tl-subtitle">Computational Neuroscience of Speech &amp; Hearing, Department of Comp. Linguistics, UZH</div>
-          <div class="tl-detail">Prof. Dr. Nathalie Giroud</div>
-          <ul class="tl-bullets"><li>Website content management; organisation of colloquia</li><li>Data analysis in R; preparation of teaching materials</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Jul 2021 – Mar 2022</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Intern</div>
-          <div class="tl-subtitle">Neurolinguistics, Department of Psychology, UZH</div>
-          <div class="tl-detail">Prof. Dr. Alexis Hervais-Adelman &amp; Dr. Basil Preisig</div>
-          <ul class="tl-bullets"><li>Conducting tACS experiments</li><li>Experiment coding in PsychoPy; creation of a study manual</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Mar 2021 – Aug 2021</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Research</div>
-          <div class="tl-title">Research Intern</div>
-          <div class="tl-subtitle">Clinical Research Priority Project: Synapse &amp; Trauma, Psychiatric University Hospital Zurich</div>
-          <div class="tl-detail">Prof. Dr. Dominik Bach &amp; Dr. Jelena Wehrli</div>
-          <ul class="tl-bullets"><li>Collection of psychophysiological data (ECG, ocular EMG, SCR, respiration, eye tracking)</li><li>Administration of questionnaires (BDI, STAI); analysis of neuropsychological data (VLMT)</li><li>Participant recruitment and telephone screenings</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-date">Jan 2021 – Jun 2021</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Teaching</div>
-          <div class="tl-title">Tutor</div>
-          <div class="tl-subtitle">Applied Social and Health Psychology, Department of Psychology, UZH</div>
-          <div class="tl-detail">Dr. Daniel Hausmann-Thürig</div>
-          <ul class="tl-bullets"><li>Data preparation and analysis in MS Excel; preparation of lecture slides</li></ul>
-        </div>
-      </div>
-
-      <div class="tl-row last">
-        <div class="tl-date">Jan 2020 – Jun 2020</div>
-        <div class="tl-line-col"><div class="tl-dot"></div><div class="tl-seg"></div></div>
-        <div class="tl-content">
-          <div class="tl-tag">Teaching</div>
-          <div class="tl-title">Tutor</div>
-          <div class="tl-subtitle">Applied Social and Health Psychology, Department of Psychology, UZH</div>
-          <div class="tl-detail">Dr. Daniel Hausmann-Thürig</div>
-          <ul class="tl-bullets"><li>Data preparation and analysis in MS Excel; preparation of lecture slides</li></ul>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── 3. Publications ── -->
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span>Publications</div>
-
-    <div class="pub-section">
-      <div class="pub-section-label">Published</div>
-      <div class="pub-entry">
-        <div><span class="pub-badge published">Stage 1 IPA · Nov 2024</span></div>
-        <div class="pub-title">Modulations of posterior alpha power during working memory co-vary with task-dependent eye movement patterns</div>
-        <div class="pub-authors">Hansen, A.D., Strzelczyk, D., Troendle, M., Langer, N. &amp; Popov, T. (2024)</div>
-        <div class="pub-journal"><a href="https://www.authorea.com/users/819882/articles/1218693-modulations-of-posterior-alpha-power-during-working-memory-co-vary-with-task-dependent-eye-movement-patterns" target="_blank" rel="noopener noreferrer"><em>Psychophysiology</em> — Registered Report (Stage 1 In-Principle Acceptance)</a></div>
-      </div>
-    </div>
-
-    <div class="pub-section">
-      <div class="pub-section-label">In Preparation</div>
-      <div class="pub-entry">
-        <div><span class="pub-badge in-prep">In Preparation</span></div>
-        <div class="pub-title">Contrast-Induced Variability in Gamma Oscillations and Eye Movements</div>
-        <div class="pub-authors">Hansen, A.D., Baer, L.Z.M., Troendle, M., Strzelczyk, D., Langer, N. &amp; Popov, T.</div>
-        <div class="pub-journal">[Registered Report – Stage 1]</div>
-      </div>
-      <div class="pub-entry">
-        <div><span class="pub-badge in-prep">In Preparation</span></div>
-        <div class="pub-title">A Multiverse Analysis on the Validity of Frontal Alpha Asymmetry as a Biomarker for Depressive Disorder in Children and Adolescents</div>
-        <div class="pub-authors">Hansen, A.D., Appenzeller, N., Goetz, M., Popov, T., Strzelczyk, D. &amp; Langer, N.</div>
-      </div>
-    </div>
+    <div id="cv-publications"></div>
 
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M18 11v2h4v-2h-4zm-2 6.61c.96.71 2.21 1.65 3.2 2.39.4-.53.8-1.07 1.2-1.6-.99-.74-2.24-1.68-3.2-2.4-.4.54-.8 1.08-1.2 1.61zM20.4 5.6c-.4-.53-.8-1.07-1.2-1.6-.99.74-2.24 1.68-3.2 2.4.4.53.8 1.07 1.2 1.6.96-.72 2.21-1.65 3.2-2.4zM4 9c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h1v4h2v-4h1l5 3V6L8 9H4zm11.5 3c0-1.33-.58-2.53-1.5-3.35v6.69c.92-.81 1.5-2.01 1.5-3.34z"/></svg></span>Science Outreach</div>
-    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:24px;">Popular science articles for <em>aware</em> (Psychology Student Science Magazine), and other public-facing writing including the UZH FutureU #MeineUZH2040 scenario competition.</p>
+    <div id="cv-outreach-intro"></div>
+    <div id="cv-outreach"></div>
 
-    <div class="outreach-entry">
-      <div class="outreach-title">Alpha im Hirn - Fokus durch Inhibition</div>
-      <div class="outreach-meta"><em>aware</em>, Mar 2026 · <a href="https://aware-psymagazin.ch" target="_blank" rel="noopener noreferrer">aware-psymagazin.ch</a></div>
-    </div>
-    <div class="outreach-entry">
-      <div class="outreach-title">Thinking More by Doing Less: A Day at UZH in 2040</div>
-      <div class="outreach-meta">#MeineUZH2040, Think Tank «FutureU», UZH, Mar 2026 · <a href="assets/awards/UZH2040_AHansen.pdf" target="_blank" rel="noopener noreferrer">[PDF]</a> · <a href="https://www.usp.uzh.ch/en/uzhdigital/FutureU.html" target="_blank" rel="noopener noreferrer">[FutureU]</a></div>
-    </div>
-    <div class="outreach-entry">
-      <div class="outreach-title">Neuronale Uhren - Das Konzept des «Brain Age» in der Neurowissenschaft</div>
-      <div class="outreach-meta"><em>aware</em>, Aug 2025 · <a href="https://aware-psymagazin.ch/artikel/forschung/neuronale-uhren" target="_blank" rel="noopener noreferrer">aware-psymagazin.ch</a></div>
-    </div>
-    <div class="outreach-entry" style="border-bottom:none;">
-      <div class="outreach-title">Sehen verstehen – Wie unser Gehirn das komplexe Zusammenspiel von Augen und Wahrnehmung meistert</div>
-      <div class="outreach-meta"><em>aware</em>, Mar 2025 · <a href="https://aware-psymagazin.ch/artikel/forschung/sehen-verstehen" target="_blank" rel="noopener noreferrer">aware-psymagazin.ch</a></div>
-    </div>
-
-
-    <!-- ── 4. Grants & Awards ── -->
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1a5.002 5.002 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg></span>Awards</div>
-    <div class="award-entry" style="border-bottom:none;"><div class="award-date">May 2025</div><div class="award-title">Poster Prize (2nd place) at MaDoKo 2025, Psychological Institute, UZH</div><div class="award-amt">CHF 500</div></div>
+    <div id="cv-awards"></div>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M9.68 13.69 12 11.93l2.31 1.76-.88-2.85L15.75 9h-2.84L12 6.19 11.09 9H8.25l2.31 1.84-.88 2.85zM20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.96 1.64 5.54 4.06 6.93-.07.36-.06.83.19 1.32l1.5 2.83c.38.71 1.12 1.12 1.87 1.12h.75c.75 0 1.49-.41 1.87-1.12l1.5-2.83c.25-.49.26-.96.19-1.32C18.36 15.54 20 12.96 20 10zM9.31 19.49l-1.5-2.83c-.03-.06-.04-.12-.04-.17.51.11 1.02.17 1.52.17.83 0 1.64-.14 2.42-.38l-.53 1 .51.97h-.75c-.31 0-.56-.29-.63-.76zm5.38-2.83-1.5 2.83c-.07.47-.32.76-.63.76h-.75l.51-.97-.53-1c.78.24 1.59.38 2.42.38.5 0 1.01-.06 1.52-.17-.01.05-.01.11-.04.17zM12 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg></span>Grants</div>
-    <div class="award-entry"><div class="award-date">Apr 2026</div><div class="award-title">GRC Travel Grant, Graduate Campus of the Philosophical Faculty (GRC), UZH</div><div class="award-amt">CHF 860</div></div>
-    <div class="award-entry"><div class="award-date">Dec 2025</div><div class="award-title">GRC Travel Grant, Graduate Campus of the Philosophical Faculty (GRC), UZH</div><div class="award-amt">CHF 220</div></div>
-    <div class="award-entry"><div class="award-date">Aug 2025</div><div class="award-title">Research Support Grant, Graduate School of the Philosophical Faculty, UZH</div><div class="award-amt">CHF 1'000</div></div>
-    <div class="award-entry"><div class="award-date">Apr 2025</div><div class="award-title">SNSF Mobility Grant, Swiss National Science Foundation (SNSF)</div><div class="award-amt">CHF 11'700</div></div>
-    <div class="award-entry"><div class="award-date">Mar 2025</div><div class="award-title">Writing Retreat Grant, Graduate School of the Philosophical Faculty, UZH</div><div class="award-amt">CHF 4'000</div></div>
-    <div class="award-entry" style="border-bottom:none;"><div class="award-date">Dec 2024</div><div class="award-title">GRC Travel Grant, Graduate Campus of the Philosophical Faculty (GRC), UZH</div><div class="award-amt">CHF 1'150</div></div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M9.68 13.69 12 11.93l2.31 1.76-.88-2.85L15.75 9h-2.84L12 6.19 11.09 9H8.25l2.31 1.84-.88 2.85zM20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.96 1.64 5.54 4.06 6.93-.07.36-.06.83.19 1.32l1.5 2.83c.38.71 1.12 1.12 1.87 1.12h.75c.75 0 1.49-.41 1.87-1.12l1.5-2.83c.25-.49.26-.96.19-1.32C18.36 15.54 20 12.96 20 10z"/></svg></span>Grants</div>
+    <div id="cv-grants"></div>
 
-    <!-- ── 5. Skills ── -->
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><g transform="translate(1.4 1.2) scale(0.62)"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></g><g transform="translate(11.5 11.2) scale(0.42)"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></g></svg></span>Skills</div>
-    <div class="skills-grid">
-      <div>
-        <div class="skill-group-label">Programming</div>
-        <div class="skill-row"><span class="skill-name">MATLAB</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">Python</span><span class="skill-level">Intermediate</span></div>
-        <div class="skill-row"><span class="skill-name">R</span><span class="skill-level">Basic</span></div>
-        <div class="skill-row"><span class="skill-name">Git / GitLab</span><span class="skill-level">Version control</span></div>
-        <div class="skill-row"><span class="skill-name">LaTeX</span><span class="skill-level">Basic typesetting</span></div>
-        <div class="skill-row"><span class="skill-name">HTML</span><span class="skill-level">Basic</span></div>
-      </div>
-      <div>
-        <div class="skill-group-label">EEG Analysis</div>
-        <div class="skill-row"><span class="skill-name">EEGLab</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">FieldTrip</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">PsychoPy</span><span class="skill-level">Experiment coding</span></div>
-      </div>
-      <div>
-        <div class="skill-group-label">Neuroimaging Hardware</div>
-        <div class="skill-row"><span class="skill-name">EEG</span><span class="skill-level">ANT128, Geodesics</span></div>
-        <div class="skill-row"><span class="skill-name">Eye Tracking</span><span class="skill-level">EyeLink, TobiiPro</span></div>
-        <div class="skill-row"><span class="skill-name">Physiology</span><span class="skill-level">ECG, EMG, SCR</span></div>
-        <div class="skill-row"><span class="skill-name">Stimulation</span><span class="skill-level">tACS, tRNS</span></div>
-      </div>
-      <div>
-        <div class="skill-group-label">Software &amp; Tools</div>
-        <div class="skill-row"><span class="skill-name">MS Office</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">OLAT</span><span class="skill-level">Course management, Quiz</span></div>
-        <div class="skill-row"><span class="skill-name">Qualtrics</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">CMS Magnolia</span><span class="skill-level">Advanced</span></div>
-        <div class="skill-row"><span class="skill-name">SAP</span><span class="skill-level">Financial oversight</span></div>
-      </div>
-      <div>
-        <div class="skill-group-label">Languages</div>
-        <div class="skill-row"><span class="skill-name">German</span><span class="skill-level">Native</span></div>
-        <div class="skill-row"><span class="skill-name">Dutch</span><span class="skill-level">Native</span></div>
-        <div class="skill-row"><span class="skill-name">English</span><span class="skill-level">Fluent</span></div>
-        <div class="skill-row"><span class="skill-name">French</span><span class="skill-level">Basic</span></div>
-      </div>
-      <div>
-        <div class="skill-group-label">Transferable Skills</div>
-        <div class="skill-row"><span class="skill-name">Data Engineering</span><span class="skill-level">Pipelines &amp; automation</span></div>
-        <div class="skill-row"><span class="skill-name">Analysis</span><span class="skill-level">Complex datasets &amp; models</span></div>
-        <div class="skill-row"><span class="skill-name">Communication</span><span class="skill-level">International conferences</span></div>
-        <div class="skill-row"><span class="skill-name">Collaboration</span><span class="skill-level">Interdisciplinary teams</span></div>
-      </div>
-    </div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07A8.001 8.001 0 0 1 4.07 13H4v-2h.07A8.001 8.001 0 0 1 11 4.07V4h2v.07A8.001 8.001 0 0 1 19.93 11H20v2h-.07A8.001 8.001 0 0 1 13 19.93z"/></svg></span>Skills</div>
+    <div id="cv-skills"></div>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></span>Advanced Training &amp; Workshops</div>
-    <div class="pres-entry">
-      <div class="pres-date">Aug 2025</div>
-      <div>
-        <div class="pres-title">Analyzing Neural Time Series Summer School</div>
-        <div class="pres-venue">Prof. Michael X. Cohen</div>
-      </div>
-    </div>
-    <div class="pres-entry">
-      <div class="pres-date">Nov 2024</div>
-      <div>
-        <div class="pres-title">GitLab Workshop</div>
-        <div class="pres-venue">Prof. Renato Frey</div>
-      </div>
-    </div>
-    <div class="pres-entry">
-      <div class="pres-date">Oct 2024</div>
-      <div>
-        <div class="pres-title">Digital Signal Processing Workshop</div>
-        <div class="pres-venue">Prof. Gregory A. Miller &amp; Prof. J. Christopher Edgar</div>
-      </div>
-    </div>
-    <div class="pres-entry" style="border-bottom:none;">
-      <div class="pres-date">Jul 2023</div>
-      <div>
-        <div class="pres-title">Advanced EEG Analysis in MATLAB</div>
-        <div class="pres-venue">Prof. Andreas Keil</div>
-      </div>
-    </div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg></span>Advanced Training & Workshops</div>
+    <div id="cv-workshops"></div>
 
-    <!-- ── 6. Engagement ── -->
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></span>Institutional Activities</div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6z"/></svg></span>Institutional Activities</div>
+    <div id="cv-institutional"></div>
 
-    <div class="member-entry">
-      <div class="member-date">2024 – Present</div>
-      <div>
-        <div class="member-org">Commission for IT &amp; Data Management (ITDMK)</div>
-        <div class="member-role">Elected Student Representative</div>
-        <div class="member-inst">Department of Psychology, University of Zurich</div>
-      </div>
-    </div>
-    <div class="member-entry" style="border-bottom:none;">
-      <div class="member-date">2024 – Present</div>
-      <div>
-        <div class="member-org">Institute's Assembly (IV)</div>
-        <div class="member-role">Elected Student Representative</div>
-        <div class="member-inst">Department of Psychology, University of Zurich</div>
-      </div>
-    </div>
-
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/></svg></span>Extracurricular Activities</div>
-
-    <div class="member-entry">
-      <div class="member-date">Sep 2024 – Present</div>
-      <div>
-        <div class="member-org">Psychology Student Newspaper <em>aware</em></div>
-        <div class="member-role">Author</div>
-      </div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">Jul 2022 – Present</div>
-      <div>
-        <div class="member-org">Psychology Student Newspaper <em>aware</em></div>
-        <div class="member-role">Lector</div>
-      </div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">May 2021 – Jul 2023</div>
-      <div>
-        <div class="member-org">High School Student Buddy Program, UZHGYM</div>
-        <div class="member-role">Buddy</div>
-      </div>
-    </div>
-    <div class="member-entry" style="border-bottom:none;">
-      <div class="member-date">Sep 2018 – Jun 2019</div>
-      <div>
-        <div class="member-org">First Year Student Mentoring Program, FAPS, UZH</div>
-        <div class="member-role">Mentor</div>
-      </div>
-    </div>
-
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>Memberships</div>
-
-    <div class="member-entry">
-      <div class="member-date">2026 – Present</div>
-      <div><div class="member-org">Brainfood</div><div class="member-role">Steering Committee Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2025 – Present</div>
-      <div><div class="member-org">Psychology PhD Community Meeting</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2025 – Present</div>
-      <div><div class="member-org">EEG Peer Mentoring Group</div><div class="member-role">Founder &amp; Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2024 – Present</div>
-      <div><div class="member-org">Society for Psychophysiology</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2023 – Present</div>
-      <div><div class="member-org">EEG Journal Club</div><div class="member-role">Founder &amp; Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2023 – Present</div>
-      <div><div class="member-org">Brainfood</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2023 – Present</div>
-      <div><div class="member-org">CuttingGardens M/EEG</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2023 – Present</div>
-      <div><div class="member-org">Studentischer Nachwuchs, UZH</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry">
-      <div class="member-date">2021 – 2023</div>
-      <div><div class="member-org">Swiss Society for Neuroscience (SSN)</div><div class="member-role">Member</div></div>
-    </div>
-    <div class="member-entry" style="border-bottom:none;">
-      <div class="member-date">2017 – Present</div>
-      <div><div class="member-org">Fachverein Psychologie (FAPS), UZH</div><div class="member-role">Member</div></div>
-    </div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></span>Extracurricular Activities</div>
+    <div id="cv-extracurricular"></div>
 
   </div>
-  <footer class="site-footer">
-    Last updated March 2026
-  </footer>
+
+  <footer class="site-footer">Last updated March 2026</footer>
+  <script src="cv-builder.js"></script>
+  <script>
+    async function renderFullCV() {
+      try {
+        const [profile, sections] = await Promise.all([CVBuilder.loadProfile(), CVBuilder.loadAllSections()]);
+        document.getElementById("cv-name").textContent = profile.name;
+        document.getElementById("cv-subtitle").innerHTML = profile.subtitle;
+        document.getElementById("cv-contacts").innerHTML = profile.contacts;
+        document.getElementById("cv-links").innerHTML = profile.links;
+        CVBuilder.renderInto(document.getElementById("cv-education"), sections.educationRows);
+        CVBuilder.renderInto(document.getElementById("cv-experience"), sections.experienceRows);
+        CVBuilder.renderInto(document.getElementById("cv-publications"), sections.publicationSections);
+        if (sections.outreachIntro) {
+          document.getElementById("cv-outreach-intro").appendChild(sections.outreachIntro);
+        }
+        CVBuilder.renderInto(document.getElementById("cv-outreach"), sections.outreachEntries);
+        CVBuilder.renderInto(document.getElementById("cv-awards"), sections.awardsEntries);
+        CVBuilder.renderInto(document.getElementById("cv-grants"), sections.grantsEntries);
+        if (sections.skillsGrid) {
+          document.getElementById("cv-skills").appendChild(sections.skillsGrid);
+        }
+        CVBuilder.renderInto(document.getElementById("cv-workshops"), sections.workshopsEntries);
+        CVBuilder.renderInto(document.getElementById("cv-institutional"), sections.institutionalEntries);
+        CVBuilder.renderInto(document.getElementById("cv-extracurricular"), sections.extracurricularEntries);
+      } catch (error) {
+        console.error("Full CV rendering failed:", error);
+        const contacts = document.getElementById("cv-contacts");
+        if (contacts) {
+          contacts.innerHTML = "Unable to load CV sections. Open this page via a local web server or on the deployed site.";
+        }
+      }
+    }
+    renderFullCV();
+  </script>
 </body>
 </html>
