@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Full CV - Arne D. Hansen</title>
+  <title>CV_Arne_Hansen_long</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -32,7 +32,7 @@
 <body>
   <div class="print-bar">
     <span class="print-bar-label"><strong>Full CV</strong> · Automatically generated from website pages.</span>
-    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    <button class="print-btn" onclick="saveCVAsPDF('CV_Arne_Hansen_long')">Save as PDF</button>
   </div>
 
   <div class="container">
@@ -79,6 +79,15 @@
   <footer class="site-footer">Last updated March 2026</footer>
   <script src="cv-builder.js"></script>
   <script>
+    function saveCVAsPDF(filenameBase) {
+      const originalTitle = document.title;
+      document.title = filenameBase;
+      window.print();
+      window.setTimeout(() => {
+        document.title = originalTitle;
+      }, 1200);
+    }
+
     async function renderFullCV() {
       try {
         const [profile, sections] = await Promise.all([CVBuilder.loadProfile(), CVBuilder.loadAllSections()]);

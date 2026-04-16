@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Short CV - Arne D. Hansen</title>
+  <title>CV_Arne_Hansen_short</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -14,37 +14,45 @@
     .cv-header { padding: 1.6rem 0 1.2rem; border-bottom: 2px solid var(--border); margin-bottom: 0.8rem; }
     .cv-header h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
     .cv-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .cv-contacts { font-size: 0.77rem; line-height: 1.7; }
-    .tight .tl-content { padding-bottom: 20px; }
+    .cv-contacts { font-size: 0.77rem; line-height: 1.7; margin-bottom: 0.5rem; }
+    .cv-summary { font-size: 0.8rem; color: var(--text); line-height: 1.6; max-width: 72ch; }
+    .tight .tl-content { padding-bottom: 16px; }
+    .compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.4rem; margin-top: 0.35rem; }
+    .compact-item { border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; }
+    .compact-label { display: block; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.1rem; }
+    .compact-value { font-size: 0.8rem; }
+    .selected-output { border-bottom: 1px solid var(--border); padding: 0 0 0.45rem 0; margin-bottom: 0.45rem; }
+    .selected-output .pub-title { font-size: 0.84rem; margin-bottom: 0.15rem; }
+    .selected-output .pub-authors, .selected-output .pub-journal, .selected-output .pub-summary { font-size: 0.74rem; margin-bottom: 0.12rem; line-height: 1.4; }
     @media print {
       .print-bar, .nav, .site-footer { display: none !important; }
       @page { margin: 12mm 14mm; size: A4; }
       body { font-size: 9.2pt; line-height: 1.35; }
       .container { max-width: 100% !important; padding: 0 !important; }
       .sh-icon, .tl-line-col, .tl-tag, .os-badges { display: none !important; }
-      .section-heading { margin-top: 10pt; margin-bottom: 3pt; }
+      .section-heading { margin-top: 8pt; margin-bottom: 3pt; font-size: 8.2pt; }
       .tl-row { grid-template-columns: 70pt 1fr; page-break-inside: avoid; }
       .tl-date { font-size: 7pt; }
       .tl-title { font-size: 8.8pt; margin-bottom: 0; }
       .tl-subtitle { font-size: 7.5pt; margin-bottom: 1pt; }
       .tl-detail { font-size: 7pt; margin-bottom: 2pt; }
-      .tl-bullets { font-size: 7.2pt; line-height: 1.5; margin-top: 1pt; }
-      .tl-content { padding-left: 6pt; padding-bottom: 8pt; }
-      .pub-entry { padding: 0 0 10pt 0; margin-bottom: 10pt; }
+      .tl-bullets { font-size: 7pt; line-height: 1.35; margin-top: 1pt; }
+      .tl-content { padding-left: 6pt; padding-bottom: 6pt; }
+      .cv-summary { font-size: 7.3pt; line-height: 1.35; }
+      .compact-grid { gap: 5pt 14pt; margin-top: 2pt; }
+      .compact-item { padding-bottom: 2pt; }
+      .compact-label { font-size: 6pt; }
+      .compact-value { font-size: 7pt; }
+      .pub-entry, .selected-output { padding: 0 0 6pt 0; margin-bottom: 6pt; }
       .pub-title { font-size: 8.6pt; }
-      .pub-authors, .pub-journal, .pub-summary { font-size: 7.2pt; }
-      .skills-grid { gap: 7pt 24pt; }
-      .skill-group-label { font-size: 6.3pt; margin-bottom: 4pt; }
-      .skill-row { padding: 2pt 0; }
-      .skill-name { font-size: 7.5pt; }
-      .skill-level { font-size: 6.8pt; }
+      .pub-authors, .pub-journal, .pub-summary, .selected-output .pub-authors, .selected-output .pub-journal, .selected-output .pub-summary { font-size: 7pt; }
     }
   </style>
 </head>
 <body>
   <div class="print-bar">
-    <span class="print-bar-label"><strong>Short CV</strong> · Automatically generated from website pages.</span>
-    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    <span class="print-bar-label"><strong>Short CV</strong> · One-page concise version.</span>
+    <button class="print-btn" onclick="saveCVAsPDF('CV_Arne_Hansen_short')">Save as PDF</button>
   </div>
 
   <div class="container">
@@ -52,6 +60,9 @@
       <h1 id="cv-name">Arne D. Hansen</h1>
       <div class="cv-subtitle" id="cv-subtitle"></div>
       <div class="cv-contacts" id="cv-contacts"></div>
+      <div class="cv-summary" id="cv-summary">
+        Cognitive neuroscience researcher with a focus on EEG and eye-tracking methods for attention and working-memory research. Current doctoral work develops reproducible analysis pipelines and statistical models in oculomotor-neural coupling.
+      </div>
     </div>
 
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>Education</div>
@@ -60,29 +71,71 @@
     <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></span>Selected Experience</div>
     <div class="timeline tight" id="cv-experience"></div>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span>Selected Publications</div>
-    <div id="cv-publications"></div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span>Selected Output</div>
+    <div id="cv-output"></div>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07A8.001 8.001 0 0 1 4.07 13H4v-2h.07A8.001 8.001 0 0 1 11 4.07V4h2v.07A8.001 8.001 0 0 1 19.93 11H20v2h-.07A8.001 8.001 0 0 1 13 19.93z"/></svg></span>Skills</div>
-    <div id="cv-skills"></div>
+    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07A8.001 8.001 0 0 1 4.07 13H4v-2h.07A8.001 8.001 0 0 1 11 4.07V4h2v.07A8.001 8.001 0 0 1 19.93 11H20v2h-.07A8.001 8.001 0 0 1 13 19.93z"/></svg></span>Core Competencies</div>
+    <div class="compact-grid" id="cv-competencies">
+      <div class="compact-item"><span class="compact-label">Methods</span><span class="compact-value">EEG, eye tracking, psychophysiology</span></div>
+      <div class="compact-item"><span class="compact-label">Analysis</span><span class="compact-value">Signal processing, statistical modeling, reproducible workflows</span></div>
+      <div class="compact-item"><span class="compact-label">Programming</span><span class="compact-value">R, Python, MATLAB, JavaScript</span></div>
+      <div class="compact-item"><span class="compact-label">Research Practice</span><span class="compact-value">Open science, preregistration, transparent reporting</span></div>
+    </div>
 
   </div>
 
   <footer class="site-footer">Last updated March 2026</footer>
   <script src="cv-builder.js"></script>
   <script>
+    function saveCVAsPDF(filenameBase) {
+      const originalTitle = document.title;
+      document.title = filenameBase;
+      window.print();
+      window.setTimeout(() => {
+        document.title = originalTitle;
+      }, 1200);
+    }
+
+    function makeTimelineConcise(container, maxBullets) {
+      if (!container) return;
+      const rows = container.querySelectorAll(".tl-row");
+      rows.forEach((row) => {
+        const detail = row.querySelector(".tl-detail");
+        if (detail) detail.remove();
+        const bullets = row.querySelectorAll(".tl-bullets li");
+        bullets.forEach((li, index) => {
+          if (index >= maxBullets) li.remove();
+        });
+        row.querySelectorAll(".tl-bullets").forEach((list) => {
+          if (!list.children.length) list.remove();
+        });
+      });
+    }
+
+    function renderSelectedOutput(target, publicationSections) {
+      if (!target || !publicationSections.length) return;
+      const firstSection = publicationSections[0];
+      const firstEntry = firstSection.querySelector(".pub-entry");
+      if (!firstEntry) return;
+      const clonedEntry = firstEntry.cloneNode(true);
+      clonedEntry.classList.add("selected-output");
+      const summary = clonedEntry.querySelector(".pub-summary");
+      if (summary) summary.textContent = "Selected as representative output from current research focus.";
+      target.innerHTML = "";
+      target.appendChild(clonedEntry);
+    }
+
     async function renderShortCV() {
       try {
         const [profile, sections] = await Promise.all([CVBuilder.loadProfile(), CVBuilder.loadAllSections()]);
         document.getElementById("cv-name").textContent = profile.name;
         document.getElementById("cv-subtitle").innerHTML = profile.subtitle;
         document.getElementById("cv-contacts").innerHTML = profile.contacts;
-        CVBuilder.renderInto(document.getElementById("cv-education"), sections.educationRows, 2);
-        CVBuilder.renderInto(document.getElementById("cv-experience"), sections.experienceRows, 5);
-        CVBuilder.renderInto(document.getElementById("cv-publications"), sections.publicationSections, 1);
-        if (sections.skillsGrid) {
-          document.getElementById("cv-skills").appendChild(sections.skillsGrid);
-        }
+        CVBuilder.renderInto(document.getElementById("cv-education"), sections.educationRows, 1);
+        CVBuilder.renderInto(document.getElementById("cv-experience"), sections.experienceRows, 3);
+        makeTimelineConcise(document.getElementById("cv-education"), 1);
+        makeTimelineConcise(document.getElementById("cv-experience"), 2);
+        renderSelectedOutput(document.getElementById("cv-output"), sections.publicationSections);
       } catch (error) {
         console.error("Short CV rendering failed:", error);
         const contacts = document.getElementById("cv-contacts");
