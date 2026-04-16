@@ -37,8 +37,8 @@
     .cv-right {
       padding: 10mm 10mm 8mm;
       display: grid;
-      grid-template-rows: auto auto auto 1fr;
-      gap: 4mm;
+      grid-template-rows: auto auto auto auto 1fr;
+      gap: 3mm;
     }
     .name {
       font-size: 7.8mm;
@@ -62,7 +62,7 @@
       margin-bottom: 4.5mm;
       color: #eef2ff;
     }
-    .left-section { margin-bottom: 4.4mm; }
+    .left-section { margin-bottom: 3.8mm; }
     .left-title {
       margin: 0 0 1.5mm;
       font-size: 2.5mm;
@@ -78,7 +78,7 @@
       line-height: 1.45;
       color: #f5f7ff;
     }
-    .left-list li { margin-bottom: 1.2mm; }
+    .left-list li { margin-bottom: 1mm; }
     .left-plain {
       margin: 0;
       font-size: 2.5mm;
@@ -87,7 +87,7 @@
     }
     .section {
       border-bottom: 0.35mm solid var(--cv-soft);
-      padding-bottom: 2.8mm;
+      padding-bottom: 2.2mm;
     }
     .section:last-child { border-bottom: none; padding-bottom: 0; }
     .section-title {
@@ -100,11 +100,11 @@
     }
     .summary {
       margin: 0;
-      font-size: 2.7mm;
-      line-height: 1.45;
+      font-size: 2.6mm;
+      line-height: 1.4;
       color: var(--cv-muted);
     }
-    .experience-item { margin-bottom: 2.4mm; }
+    .experience-item { margin-bottom: 1.9mm; }
     .experience-item:last-child { margin-bottom: 0; }
     .experience-head {
       display: flex;
@@ -119,11 +119,11 @@
     .experience-bullets {
       margin: 0;
       padding-left: 4mm;
-      font-size: 2.4mm;
-      line-height: 1.4;
+      font-size: 2.35mm;
+      line-height: 1.33;
       color: var(--cv-text);
     }
-    .experience-bullets li { margin-bottom: 0.7mm; }
+    .experience-bullets li { margin-bottom: 0.45mm; }
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -131,10 +131,18 @@
     }
     .micro {
       margin: 0;
-      font-size: 2.4mm;
-      line-height: 1.45;
+      font-size: 2.35mm;
+      line-height: 1.38;
       color: var(--cv-text);
     }
+    .micro-list {
+      margin: 0;
+      padding-left: 3.5mm;
+      font-size: 2.3mm;
+      line-height: 1.34;
+      color: var(--cv-text);
+    }
+    .micro-list li { margin-bottom: 0.4mm; }
     .micro strong { color: var(--cv-mid); }
     @media print {
       .print-bar, .site-footer, .nav { display: none !important; }
@@ -169,6 +177,7 @@
           <li>Signal and behavioral data analysis</li>
           <li>Workflow automation and documentation</li>
           <li>Stakeholder and project coordination</li>
+          <li>Scientific communication for mixed audiences</li>
         </ul>
       </section>
 
@@ -181,13 +190,23 @@
         <h2 class="left-title">Languages</h2>
         <p class="left-plain">German (native), English (professional), French (working)</p>
       </section>
+
+      <section class="left-section">
+        <h2 class="left-title">Target Roles</h2>
+        <ul class="left-list">
+          <li>Behavioral Data Scientist</li>
+          <li>Product / UX Research (Quant)</li>
+          <li>Research Operations</li>
+          <li>People or Health Analytics</li>
+        </ul>
+      </section>
     </aside>
 
     <section class="cv-right">
       <section class="section">
         <h2 class="section-title">Profile</h2>
         <p class="summary">
-          Doctoral researcher in cognitive neuroscience with hands-on experience turning complex behavioral and physiological datasets into actionable insights. Background combines rigorous analytics, reproducible workflows, and operational coordination across research and administrative functions.
+          Doctoral researcher in cognitive neuroscience with applied experience in transforming behavioral and physiological data into decision-relevant insights. Profile combines analytics, reproducible workflows, and operational delivery across research and institutional settings.
         </p>
       </section>
 
@@ -202,8 +221,19 @@
           <div id="cv-education" class="micro"></div>
         </div>
         <div>
-          <h2 class="section-title">Selected Output</h2>
+          <h2 class="section-title">Selected Publications</h2>
           <div id="cv-output" class="micro"></div>
+        </div>
+      </section>
+
+      <section class="section two-col">
+        <div>
+          <h2 class="section-title">Awards & Funding</h2>
+          <ul id="cv-awards" class="micro-list"></ul>
+        </div>
+        <div>
+          <h2 class="section-title">Advanced Training</h2>
+          <ul id="cv-workshops" class="micro-list"></ul>
         </div>
       </section>
 
@@ -239,7 +269,7 @@
       const target = document.getElementById("cv-experience");
       if (!target || !rows.length) return;
 
-      const preferred = ["Doctoral Candidate", "Managing Director", "Research Assistant"];
+      const preferred = ["Doctoral Candidate", "Managing Director (20%)", "Research Assistant", "Website Administrator"];
       const selected = [];
       preferred.forEach((roleName) => {
         const hit = rows.find((row) => {
@@ -255,15 +285,22 @@
       const impactBullets = {
         "Doctoral Candidate": [
           "Built EEG and eye-tracking analysis workflows for reproducible hypothesis testing.",
-          "Developed statistical models to quantify links between oculomotor behavior and cognition."
+          "Developed statistical models to quantify links between oculomotor behavior and cognition.",
+          "Contributed to peer-reviewed dissemination and open-science reporting standards."
         ],
-        "Managing Director": [
+        "Managing Director (20%)": [
           "Coordinated budgeting, logistics, and stakeholder communication across institutional initiatives.",
-          "Planned and delivered events and conference operations with multiple internal and external partners."
+          "Planned and delivered events and conference operations with multiple internal and external partners.",
+          "Maintained process continuity and documentation across administrative workflows."
         ],
         "Research Assistant": [
           "Executed end-to-end data handling from acquisition to analysis and reporting.",
-          "Supported cross-project analytical tasks in R and collaborative research environments."
+          "Supported cross-project analytical tasks in R and collaborative research environments.",
+          "Collaborated on method development for robust and transparent analyses."
+        ],
+        "Website Administrator": [
+          "Managed institutional web content and publication workflows in Magnolia CMS.",
+          "Coordinated updates with administrative and academic stakeholders."
         ]
       };
 
@@ -273,7 +310,10 @@
         const title = row.querySelector(".tl-title")?.textContent.trim() || "";
         const subtitle = row.querySelector(".tl-subtitle")?.textContent.trim() || "";
         const org = subtitle.split(",").slice(-1)[0]?.trim() || subtitle;
-        const bullets = impactBullets[title] || ["Delivered analytical and operational support in cross-functional settings."];
+        const bullets = impactBullets[title] || [
+          "Delivered analytical and operational support in cross-functional settings.",
+          "Contributed structured documentation and communication across stakeholders."
+        ];
 
         const block = document.createElement("article");
         block.className = "experience-item";
@@ -284,7 +324,7 @@
           </div>
           <div class="experience-org">${org}</div>
           <ul class="experience-bullets">
-            ${bullets.slice(0, 2).map((item) => `<li>${item}</li>`).join("")}
+            ${bullets.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}
           </ul>
         `;
         target.appendChild(block);
@@ -294,27 +334,48 @@
     function buildEducation(rows) {
       const target = document.getElementById("cv-education");
       if (!target || !rows.length) return;
-      const top = rows[0];
-      const degree = top.querySelector(".tl-title")?.textContent.trim() || "";
-      const institution = top.querySelector(".tl-subtitle")?.textContent.trim() || "";
-      const date = top.querySelector(".tl-date")?.textContent.trim() || "";
-      target.innerHTML = `
-        <p class="micro"><strong>${degree}</strong></p>
-        <p class="micro">${institution}</p>
-        <p class="micro">${date}</p>
-      `;
+      const topTwo = rows.slice(0, 2);
+      target.innerHTML = topTwo
+        .map((entry) => {
+          const degree = entry.querySelector(".tl-title")?.textContent.trim() || "";
+          const institution = entry.querySelector(".tl-subtitle")?.textContent.trim() || "";
+          const date = entry.querySelector(".tl-date")?.textContent.trim() || "";
+          return `<p class="micro"><strong>${degree}</strong><br>${institution}<br>${date}</p>`;
+        })
+        .join("");
     }
 
     function buildOutput(publicationSections) {
       const target = document.getElementById("cv-output");
       if (!target || !publicationSections.length) return;
-      const firstEntry = publicationSections[0].querySelector(".pub-entry");
-      if (!firstEntry) return;
-      const title = firstEntry.querySelector(".pub-title")?.textContent.trim() || "Research publication";
-      target.innerHTML = `
-        <p class="micro"><strong>${title}</strong></p>
-        <p class="micro">Peer-reviewed output demonstrating advanced experimental analysis and communication.</p>
-      `;
+      const firstSection = publicationSections[0];
+      const entries = firstSection ? Array.from(firstSection.querySelectorAll(".pub-entry")).slice(0, 2) : [];
+      if (!entries.length) return;
+      target.innerHTML = entries
+        .map((entry) => {
+          const title = entry.querySelector(".pub-title")?.textContent.trim() || "Peer-reviewed publication";
+          const journal = entry.querySelector(".pub-journal")?.textContent.trim() || "";
+          return `<p class="micro"><strong>${title}</strong><br>${journal}</p>`;
+        })
+        .join("");
+    }
+
+    function buildListFromEntries(targetId, entries, maxItems, fallbackText) {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      if (!entries.length) {
+        target.innerHTML = `<li>${fallbackText}</li>`;
+        return;
+      }
+      target.innerHTML = "";
+      entries.slice(0, maxItems).forEach((entry) => {
+        const label = entry.querySelector(".award-title, .pres-title")?.textContent?.trim()
+          || entry.querySelector(".award-detail, .pres-detail")?.textContent?.trim()
+          || entry.textContent.replace(/\s+/g, " ").trim();
+        const li = document.createElement("li");
+        li.textContent = label;
+        target.appendChild(li);
+      });
     }
 
     async function renderShortCV() {
@@ -325,6 +386,8 @@
         buildExperience(sections.experienceRows || []);
         buildEducation(sections.educationRows || []);
         buildOutput(sections.publicationSections || []);
+        buildListFromEntries("cv-awards", sections.awardsEntries || [], 4, "SNSF-funded doctoral project.");
+        buildListFromEntries("cv-workshops", sections.workshopsEntries || [], 4, "Advanced methods workshops in statistics and neuroscience.");
       } catch (error) {
         console.error("Short CV rendering failed:", error);
         document.getElementById("cv-contacts").textContent = "Unable to load content.";
