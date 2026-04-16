@@ -32,7 +32,7 @@
 <body>
   <div class="print-bar">
     <span class="print-bar-label"><strong>Full CV</strong> · Automatically generated from website pages.</span>
-    <button class="print-btn" onclick="saveCVAsPDF('CV_Arne_Hansen_long')">Save as PDF</button>
+    <button class="print-btn" onclick="downloadFullPDF()">Download PDF</button>
   </div>
 
   <div class="container">
@@ -77,15 +77,24 @@
   </div>
 
   <footer class="site-footer">Last updated March 2026</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="cv-builder.js"></script>
   <script>
-    function saveCVAsPDF(filenameBase) {
-      const originalTitle = document.title;
-      document.title = filenameBase;
-      window.print();
-      window.setTimeout(() => {
-        document.title = originalTitle;
-      }, 1200);
+    async function downloadFullPDF() {
+      const element = document.querySelector(".container");
+      if (!element || !window.html2pdf) {
+        window.print();
+        return;
+      }
+      const options = {
+        margin: [10, 10, 10, 10],
+        filename: "CV_Arne_Hansen_long.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["css", "legacy"] }
+      };
+      await window.html2pdf().set(options).from(element).save();
     }
 
     async function renderFullCV() {

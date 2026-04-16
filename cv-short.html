@@ -8,142 +8,346 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    :root {
+      --cv-navy: #1f2b5b;
+      --cv-mid: #2b427f;
+      --cv-soft: #eef1f8;
+      --cv-text: #101522;
+      --cv-muted: #4f5872;
+    }
+    body { background: #f2f4f8; }
     .print-bar { position: sticky; top: 0; z-index: 300; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .print-bar-label { font-size: 0.78rem; color: var(--muted); }
     .print-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
-    .cv-header { padding: 1.6rem 0 1.2rem; border-bottom: 2px solid var(--border); margin-bottom: 0.8rem; }
-    .cv-header h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-    .cv-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .cv-contacts { font-size: 0.77rem; line-height: 1.7; margin-bottom: 0.5rem; }
-    .cv-summary { font-size: 0.8rem; color: var(--text); line-height: 1.6; max-width: 72ch; }
-    .tight .tl-content { padding-bottom: 16px; }
-    .compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.4rem; margin-top: 0.35rem; }
-    .compact-item { border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; }
-    .compact-label { display: block; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.1rem; }
-    .compact-value { font-size: 0.8rem; }
-    .selected-output { border-bottom: 1px solid var(--border); padding: 0 0 0.45rem 0; margin-bottom: 0.45rem; }
-    .selected-output .pub-title { font-size: 0.84rem; margin-bottom: 0.15rem; }
-    .selected-output .pub-authors, .selected-output .pub-journal, .selected-output .pub-summary { font-size: 0.74rem; margin-bottom: 0.12rem; line-height: 1.4; }
+    .cv-sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto 24px;
+      background: #fff;
+      color: var(--cv-text);
+      display: grid;
+      grid-template-columns: 68mm 1fr;
+      box-shadow: 0 12px 24px rgba(16, 21, 34, 0.12);
+    }
+    .cv-left {
+      background: linear-gradient(180deg, var(--cv-navy) 0%, #26326a 55%, #1b2550 100%);
+      color: #fff;
+      padding: 12mm 8mm 10mm;
+    }
+    .cv-right {
+      padding: 10mm 10mm 8mm;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 4mm;
+    }
+    .name {
+      font-size: 7.8mm;
+      line-height: 1.05;
+      letter-spacing: 0.06em;
+      margin: 0 0 3mm;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .role {
+      font-size: 3.1mm;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #d8e1ff;
+      margin-bottom: 3mm;
+      font-weight: 600;
+    }
+    .contact {
+      font-size: 2.7mm;
+      line-height: 1.55;
+      margin-bottom: 4.5mm;
+      color: #eef2ff;
+    }
+    .left-section { margin-bottom: 4.4mm; }
+    .left-title {
+      margin: 0 0 1.5mm;
+      font-size: 2.5mm;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #d6defa;
+    }
+    .left-list {
+      margin: 0;
+      padding-left: 4mm;
+      font-size: 2.5mm;
+      line-height: 1.45;
+      color: #f5f7ff;
+    }
+    .left-list li { margin-bottom: 1.2mm; }
+    .left-plain {
+      margin: 0;
+      font-size: 2.5mm;
+      line-height: 1.45;
+      color: #f5f7ff;
+    }
+    .section {
+      border-bottom: 0.35mm solid var(--cv-soft);
+      padding-bottom: 2.8mm;
+    }
+    .section:last-child { border-bottom: none; padding-bottom: 0; }
+    .section-title {
+      margin: 0 0 1.5mm;
+      color: var(--cv-mid);
+      font-size: 3mm;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+    .summary {
+      margin: 0;
+      font-size: 2.7mm;
+      line-height: 1.45;
+      color: var(--cv-muted);
+    }
+    .experience-item { margin-bottom: 2.4mm; }
+    .experience-item:last-child { margin-bottom: 0; }
+    .experience-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 2mm;
+      align-items: baseline;
+      margin-bottom: 0.7mm;
+    }
+    .experience-role { font-size: 2.8mm; font-weight: 700; color: var(--cv-text); }
+    .experience-date { font-size: 2.3mm; color: var(--cv-muted); white-space: nowrap; }
+    .experience-org { font-size: 2.5mm; color: var(--cv-muted); margin-bottom: 0.8mm; }
+    .experience-bullets {
+      margin: 0;
+      padding-left: 4mm;
+      font-size: 2.4mm;
+      line-height: 1.4;
+      color: var(--cv-text);
+    }
+    .experience-bullets li { margin-bottom: 0.7mm; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+    }
+    .micro {
+      margin: 0;
+      font-size: 2.4mm;
+      line-height: 1.45;
+      color: var(--cv-text);
+    }
+    .micro strong { color: var(--cv-mid); }
     @media print {
-      .print-bar, .nav, .site-footer { display: none !important; }
-      @page { margin: 12mm 14mm; size: A4; }
-      body { font-size: 9.2pt; line-height: 1.35; }
-      .container { max-width: 100% !important; padding: 0 !important; }
-      .sh-icon, .tl-line-col, .tl-tag, .os-badges { display: none !important; }
-      .section-heading { margin-top: 8pt; margin-bottom: 3pt; font-size: 8.2pt; }
-      .tl-row { grid-template-columns: 70pt 1fr; page-break-inside: avoid; }
-      .tl-date { font-size: 7pt; }
-      .tl-title { font-size: 8.8pt; margin-bottom: 0; }
-      .tl-subtitle { font-size: 7.5pt; margin-bottom: 1pt; }
-      .tl-detail { font-size: 7pt; margin-bottom: 2pt; }
-      .tl-bullets { font-size: 7pt; line-height: 1.35; margin-top: 1pt; }
-      .tl-content { padding-left: 6pt; padding-bottom: 6pt; }
-      .cv-summary { font-size: 7.3pt; line-height: 1.35; }
-      .compact-grid { gap: 5pt 14pt; margin-top: 2pt; }
-      .compact-item { padding-bottom: 2pt; }
-      .compact-label { font-size: 6pt; }
-      .compact-value { font-size: 7pt; }
-      .pub-entry, .selected-output { padding: 0 0 6pt 0; margin-bottom: 6pt; }
-      .pub-title { font-size: 8.6pt; }
-      .pub-authors, .pub-journal, .pub-summary, .selected-output .pub-authors, .selected-output .pub-journal, .selected-output .pub-summary { font-size: 7pt; }
+      .print-bar, .site-footer, .nav { display: none !important; }
+      @page { size: A4; margin: 0; }
+      body { background: #fff; }
+      .cv-sheet {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
 <body>
   <div class="print-bar">
-    <span class="print-bar-label"><strong>Short CV</strong> · One-page concise version.</span>
-    <button class="print-btn" onclick="saveCVAsPDF('CV_Arne_Hansen_short')">Save as PDF</button>
+    <span class="print-bar-label"><strong>Short CV</strong> · One-page industry version.</span>
+    <button class="print-btn" onclick="downloadShortPDF()">Download PDF</button>
   </div>
 
-  <div class="container">
-    <div class="cv-header">
-      <h1 id="cv-name">Arne D. Hansen</h1>
-      <div class="cv-subtitle" id="cv-subtitle"></div>
-      <div class="cv-contacts" id="cv-contacts"></div>
-      <div class="cv-summary" id="cv-summary">
-        Cognitive neuroscience researcher with a focus on EEG and eye-tracking methods for attention and working-memory research. Current doctoral work develops reproducible analysis pipelines and statistical models in oculomotor-neural coupling.
-      </div>
-    </div>
+  <main class="cv-sheet" id="short-cv-sheet">
+    <aside class="cv-left">
+      <h1 class="name" id="cv-name">Arne D. Hansen</h1>
+      <div class="role">Neuroscience to Data & Insights</div>
+      <div class="contact" id="cv-contacts"></div>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></span>Education</div>
-    <div class="timeline tight" id="cv-education"></div>
+      <section class="left-section">
+        <h2 class="left-title">Core Strengths</h2>
+        <ul class="left-list">
+          <li>Quantitative research design</li>
+          <li>Signal and behavioral data analysis</li>
+          <li>Workflow automation and documentation</li>
+          <li>Stakeholder and project coordination</li>
+        </ul>
+      </section>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg></span>Selected Experience</div>
-    <div class="timeline tight" id="cv-experience"></div>
+      <section class="left-section">
+        <h2 class="left-title">Tools</h2>
+        <p class="left-plain">R, Python, MATLAB, JavaScript, Git, SAP, Qualtrics, Power Automate</p>
+      </section>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg></span>Selected Output</div>
-    <div id="cv-output"></div>
+      <section class="left-section">
+        <h2 class="left-title">Languages</h2>
+        <p class="left-plain">German (native), English (professional), French (working)</p>
+      </section>
+    </aside>
 
-    <div class="section-heading"><span class="sh-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17.93V20h-2v-.07A8.001 8.001 0 0 1 4.07 13H4v-2h.07A8.001 8.001 0 0 1 11 4.07V4h2v.07A8.001 8.001 0 0 1 19.93 11H20v2h-.07A8.001 8.001 0 0 1 13 19.93z"/></svg></span>Core Competencies</div>
-    <div class="compact-grid" id="cv-competencies">
-      <div class="compact-item"><span class="compact-label">Methods</span><span class="compact-value">EEG, eye tracking, psychophysiology</span></div>
-      <div class="compact-item"><span class="compact-label">Analysis</span><span class="compact-value">Signal processing, statistical modeling, reproducible workflows</span></div>
-      <div class="compact-item"><span class="compact-label">Programming</span><span class="compact-value">R, Python, MATLAB, JavaScript</span></div>
-      <div class="compact-item"><span class="compact-label">Research Practice</span><span class="compact-value">Open science, preregistration, transparent reporting</span></div>
-    </div>
+    <section class="cv-right">
+      <section class="section">
+        <h2 class="section-title">Profile</h2>
+        <p class="summary">
+          Doctoral researcher in cognitive neuroscience with hands-on experience turning complex behavioral and physiological datasets into actionable insights. Background combines rigorous analytics, reproducible workflows, and operational coordination across research and administrative functions.
+        </p>
+      </section>
 
-  </div>
+      <section class="section">
+        <h2 class="section-title">Relevant Experience</h2>
+        <div id="cv-experience"></div>
+      </section>
+
+      <section class="section two-col">
+        <div>
+          <h2 class="section-title">Education</h2>
+          <div id="cv-education" class="micro"></div>
+        </div>
+        <div>
+          <h2 class="section-title">Selected Output</h2>
+          <div id="cv-output" class="micro"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Industry-Relevant Focus</h2>
+        <p class="micro"><strong>Data:</strong> end-to-end pipeline design, preprocessing, quality control, and reporting.</p>
+        <p class="micro"><strong>Delivery:</strong> translation of complex findings into clear recommendations for mixed audiences.</p>
+        <p class="micro"><strong>Operations:</strong> process support, event coordination, and cross-functional execution in academic institutions.</p>
+      </section>
+    </section>
+  </main>
 
   <footer class="site-footer">Last updated March 2026</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="cv-builder.js"></script>
   <script>
-    function saveCVAsPDF(filenameBase) {
-      const originalTitle = document.title;
-      document.title = filenameBase;
-      window.print();
-      window.setTimeout(() => {
-        document.title = originalTitle;
-      }, 1200);
+    function htmlToText(value) {
+      const div = document.createElement("div");
+      div.innerHTML = value || "";
+      return div.textContent ? div.textContent.replace(/\s+/g, " ").trim() : "";
     }
 
-    function makeTimelineConcise(container, maxBullets) {
-      if (!container) return;
-      const rows = container.querySelectorAll(".tl-row");
-      rows.forEach((row) => {
-        const detail = row.querySelector(".tl-detail");
-        if (detail) detail.remove();
-        const bullets = row.querySelectorAll(".tl-bullets li");
-        bullets.forEach((li, index) => {
-          if (index >= maxBullets) li.remove();
+    function setContacts(profile) {
+      const contactText = htmlToText(profile.contacts)
+        .replace(/\s*\|\s*/g, "\n")
+        .replace(/\s{2,}/g, " ")
+        .trim();
+      document.getElementById("cv-contacts").textContent = contactText;
+    }
+
+    function buildExperience(rows) {
+      const target = document.getElementById("cv-experience");
+      if (!target || !rows.length) return;
+
+      const preferred = ["Doctoral Candidate", "Managing Director", "Research Assistant"];
+      const selected = [];
+      preferred.forEach((roleName) => {
+        const hit = rows.find((row) => {
+          const title = row.querySelector(".tl-title");
+          return title && title.textContent.trim() === roleName;
         });
-        row.querySelectorAll(".tl-bullets").forEach((list) => {
-          if (!list.children.length) list.remove();
-        });
+        if (hit) selected.push(hit);
+      });
+      if (!selected.length) {
+        selected.push(...rows.slice(0, 3));
+      }
+
+      const impactBullets = {
+        "Doctoral Candidate": [
+          "Built EEG and eye-tracking analysis workflows for reproducible hypothesis testing.",
+          "Developed statistical models to quantify links between oculomotor behavior and cognition."
+        ],
+        "Managing Director": [
+          "Coordinated budgeting, logistics, and stakeholder communication across institutional initiatives.",
+          "Planned and delivered events and conference operations with multiple internal and external partners."
+        ],
+        "Research Assistant": [
+          "Executed end-to-end data handling from acquisition to analysis and reporting.",
+          "Supported cross-project analytical tasks in R and collaborative research environments."
+        ]
+      };
+
+      target.innerHTML = "";
+      selected.slice(0, 3).forEach((row) => {
+        const date = row.querySelector(".tl-date")?.textContent.trim() || "";
+        const title = row.querySelector(".tl-title")?.textContent.trim() || "";
+        const subtitle = row.querySelector(".tl-subtitle")?.textContent.trim() || "";
+        const org = subtitle.split(",").slice(-1)[0]?.trim() || subtitle;
+        const bullets = impactBullets[title] || ["Delivered analytical and operational support in cross-functional settings."];
+
+        const block = document.createElement("article");
+        block.className = "experience-item";
+        block.innerHTML = `
+          <div class="experience-head">
+            <div class="experience-role">${title}</div>
+            <div class="experience-date">${date}</div>
+          </div>
+          <div class="experience-org">${org}</div>
+          <ul class="experience-bullets">
+            ${bullets.slice(0, 2).map((item) => `<li>${item}</li>`).join("")}
+          </ul>
+        `;
+        target.appendChild(block);
       });
     }
 
-    function renderSelectedOutput(target, publicationSections) {
+    function buildEducation(rows) {
+      const target = document.getElementById("cv-education");
+      if (!target || !rows.length) return;
+      const top = rows[0];
+      const degree = top.querySelector(".tl-title")?.textContent.trim() || "";
+      const institution = top.querySelector(".tl-subtitle")?.textContent.trim() || "";
+      const date = top.querySelector(".tl-date")?.textContent.trim() || "";
+      target.innerHTML = `
+        <p class="micro"><strong>${degree}</strong></p>
+        <p class="micro">${institution}</p>
+        <p class="micro">${date}</p>
+      `;
+    }
+
+    function buildOutput(publicationSections) {
+      const target = document.getElementById("cv-output");
       if (!target || !publicationSections.length) return;
-      const firstSection = publicationSections[0];
-      const firstEntry = firstSection.querySelector(".pub-entry");
+      const firstEntry = publicationSections[0].querySelector(".pub-entry");
       if (!firstEntry) return;
-      const clonedEntry = firstEntry.cloneNode(true);
-      clonedEntry.classList.add("selected-output");
-      const summary = clonedEntry.querySelector(".pub-summary");
-      if (summary) summary.textContent = "Selected as representative output from current research focus.";
-      target.innerHTML = "";
-      target.appendChild(clonedEntry);
+      const title = firstEntry.querySelector(".pub-title")?.textContent.trim() || "Research publication";
+      target.innerHTML = `
+        <p class="micro"><strong>${title}</strong></p>
+        <p class="micro">Peer-reviewed output demonstrating advanced experimental analysis and communication.</p>
+      `;
     }
 
     async function renderShortCV() {
       try {
         const [profile, sections] = await Promise.all([CVBuilder.loadProfile(), CVBuilder.loadAllSections()]);
-        document.getElementById("cv-name").textContent = profile.name;
-        document.getElementById("cv-subtitle").innerHTML = profile.subtitle;
-        document.getElementById("cv-contacts").innerHTML = profile.contacts;
-        CVBuilder.renderInto(document.getElementById("cv-education"), sections.educationRows, 1);
-        CVBuilder.renderInto(document.getElementById("cv-experience"), sections.experienceRows, 3);
-        makeTimelineConcise(document.getElementById("cv-education"), 1);
-        makeTimelineConcise(document.getElementById("cv-experience"), 2);
-        renderSelectedOutput(document.getElementById("cv-output"), sections.publicationSections);
+        document.getElementById("cv-name").textContent = profile.name || "Arne D. Hansen";
+        setContacts(profile);
+        buildExperience(sections.experienceRows || []);
+        buildEducation(sections.educationRows || []);
+        buildOutput(sections.publicationSections || []);
       } catch (error) {
         console.error("Short CV rendering failed:", error);
-        const contacts = document.getElementById("cv-contacts");
-        if (contacts) {
-          contacts.innerHTML = "Unable to load CV sections. Open this page via a local web server or on the deployed site.";
-        }
+        document.getElementById("cv-contacts").textContent = "Unable to load content.";
       }
     }
+
+    async function downloadShortPDF() {
+      const element = document.getElementById("short-cv-sheet");
+      if (!element || !window.html2pdf) {
+        window.print();
+        return;
+      }
+      const options = {
+        margin: 0,
+        filename: "CV_Arne_Hansen_short.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: "avoid-all" }
+      };
+      await window.html2pdf().set(options).from(element).save();
+    }
+
     renderShortCV();
   </script>
 </body>
