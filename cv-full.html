@@ -17,15 +17,32 @@
     .cv-contacts { font-size: 0.8rem; margin-bottom: 0.75rem; line-height: 1.8; }
     .cv-icon-links { display: flex; flex-wrap: wrap; gap: 14px; }
     .cv-icon-links .icon-link { opacity: 0.7; }
+    .container.pdf-capture {
+      max-width: 100% !important;
+      padding: 0 !important;
+      background: #fff;
+    }
+    .container.pdf-capture .sh-icon,
+    .container.pdf-capture .tl-line-col,
+    .container.pdf-capture .tl-tag,
+    .container.pdf-capture .os-badges { display: none !important; }
+    .container.pdf-capture .tl-row { grid-template-columns: 72pt 1fr; }
+    .container.pdf-capture .tl-content { padding-left: 6pt; padding-bottom: 12pt; }
+    .container.pdf-capture a { color: inherit; text-decoration: none; }
     @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { background: #fff !important; }
       .print-bar, .nav, .site-footer { display: none !important; }
       @page { margin: 14mm 18mm; size: A4; }
       .container { max-width: 100% !important; padding: 0 !important; }
       .sh-icon, .tl-line-col, .tl-tag, .os-badges { display: none !important; }
       .tl-row { grid-template-columns: 72pt 1fr; page-break-inside: avoid; }
       .tl-content { padding-left: 6pt; padding-bottom: 12pt; }
-      .section-heading { page-break-after: avoid; }
+      .cv-header { page-break-after: avoid; }
+      .section-heading { page-break-after: avoid; break-after: avoid; page-break-inside: avoid; margin-top: 10pt; }
+      .pub-section { page-break-inside: avoid; }
       .pub-entry, .award-entry, .pres-entry, .member-entry, .outreach-entry { page-break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
     }
   </style>
 </head>
@@ -77,66 +94,28 @@
   </div>
 
   <footer class="site-footer">Last updated March 2026</footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="cv-builder.js"></script>
+  <script src="cv-pdf.js"></script>
   <script>
-    // Resolves once renderFullCV() has finished populating the DOM. The
-    // download must never start before this, otherwise the captured canvas
-    // would be empty or partial.
     let cvReady = null;
-
-    function waitForImages(root) {
-      const images = Array.from(root.querySelectorAll("img"));
-      return Promise.all(
-        images.map((img) => {
-          if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-          return new Promise((resolve) => {
-            img.addEventListener("load", resolve, { once: true });
-            img.addEventListener("error", resolve, { once: true });
-          });
-        })
-      );
-    }
 
     async function downloadFullPDF() {
       const button = document.querySelector(".print-btn");
-      const element = document.querySelector(".container");
-      const originalLabel = button ? button.textContent : "";
-      if (button) {
-        button.disabled = true;
-        button.textContent = "Preparing…";
-      }
       try {
-        // Make sure all content is rendered and assets are loaded before the
-        // snapshot. These awaits are the fix for the intermittent blank PDF:
-        // html2canvas was sometimes capturing before fonts/images were ready.
-        if (cvReady) await cvReady;
-        if (document.fonts && document.fonts.ready) await document.fonts.ready;
-        await waitForImages(element);
-        // Give the layout one more frame to settle.
-        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-
-        if (!element || !window.html2pdf) {
-          window.print();
-          return;
-        }
-        const options = {
-          margin: [10, 10, 10, 10],
+        await CVPdf.downloadAsPdf({
+          element: document.querySelector(".container"),
           filename: "CV_Arne_Hansen_long.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0, windowWidth: element.scrollWidth },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: ["css", "legacy"] }
-        };
-        await window.html2pdf().set(options).from(element).save();
+          cvReady,
+          button,
+          captureClass: "pdf-capture",
+          options: {
+            margin: [14, 18, 14, 18],
+            pagebreak: { mode: ["css", "legacy"] },
+          },
+        });
       } catch (error) {
         console.error("PDF generation failed:", error);
-        window.print();
-      } finally {
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalLabel;
-        }
+        alert("PDF download failed. Please refresh the page and try again.");
       }
     }
 
@@ -170,7 +149,7 @@
         }
       }
     }
-    cvReady = renderFullCV();
+    cvReady = renderFullCV().then(() => CVPdf.prefetch().catch(() => {}));
   </script>
 </body>
 </html>

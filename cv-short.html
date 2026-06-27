@@ -144,10 +144,21 @@
     }
     .micro-list li { margin-bottom: 0.4mm; }
     .micro strong { color: var(--cv-mid); }
+    #short-cv-sheet.pdf-capture {
+      margin: 0;
+      width: 210mm;
+      min-height: 297mm;
+      box-shadow: none;
+    }
+    #short-cv-sheet.pdf-capture .cv-left {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
     @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
       .print-bar, .site-footer, .nav { display: none !important; }
       @page { size: A4; margin: 0; }
-      body { background: #fff; }
+      html, body { background: #fff !important; }
       .cv-sheet {
         margin: 0;
         width: 210mm;
@@ -155,6 +166,11 @@
         box-shadow: none;
         page-break-inside: avoid;
       }
+      .cv-left {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      a { color: inherit; text-decoration: none; }
     }
   </style>
 </head>
@@ -248,8 +264,8 @@
 
   <footer class="site-footer">Last updated March 2026</footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="cv-builder.js"></script>
+  <script src="cv-pdf.js"></script>
   <script>
     function htmlToText(value) {
       const div = document.createElement("div");
@@ -394,64 +410,29 @@
       }
     }
 
-    // Resolves once renderShortCV() has finished populating the DOM, so the
-    // download never starts before content/assets are ready.
     let cvReady = null;
-
-    function waitForImages(root) {
-      const images = Array.from(root.querySelectorAll("img"));
-      return Promise.all(
-        images.map((img) => {
-          if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-          return new Promise((resolve) => {
-            img.addEventListener("load", resolve, { once: true });
-            img.addEventListener("error", resolve, { once: true });
-          });
-        })
-      );
-    }
 
     async function downloadShortPDF() {
       const button = document.querySelector(".print-btn");
-      const element = document.getElementById("short-cv-sheet");
-      const originalLabel = button ? button.textContent : "";
-      if (button) {
-        button.disabled = true;
-        button.textContent = "Preparing…";
-      }
       try {
-        // Wait for rendering, fonts and images before the snapshot. This is the
-        // fix for intermittent blank PDFs caused by capturing too early.
-        if (cvReady) await cvReady;
-        if (document.fonts && document.fonts.ready) await document.fonts.ready;
-        await waitForImages(element);
-        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-
-        if (!element || !window.html2pdf) {
-          window.print();
-          return;
-        }
-        const options = {
-          margin: 0,
+        await CVPdf.downloadAsPdf({
+          element: document.getElementById("short-cv-sheet"),
           filename: "CV_Arne_Hansen_short.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0, windowWidth: element.scrollWidth },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: "avoid-all" }
-        };
-        await window.html2pdf().set(options).from(element).save();
+          cvReady,
+          button,
+          captureClass: "pdf-capture",
+          options: {
+            margin: 0,
+            pagebreak: { mode: "avoid-all" },
+          },
+        });
       } catch (error) {
         console.error("PDF generation failed:", error);
-        window.print();
-      } finally {
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalLabel;
-        }
+        alert("PDF download failed. Please refresh the page and try again.");
       }
     }
 
-    cvReady = renderShortCV();
+    cvReady = renderShortCV().then(() => CVPdf.prefetch().catch(() => {}));
   </script>
 </body>
 </html>
