@@ -80,21 +80,64 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="cv-builder.js"></script>
   <script>
+    // Resolves once renderFullCV() has finished populating the DOM. The
+    // download must never start before this, otherwise the captured canvas
+    // would be empty or partial.
+    let cvReady = null;
+
+    function waitForImages(root) {
+      const images = Array.from(root.querySelectorAll("img"));
+      return Promise.all(
+        images.map((img) => {
+          if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.addEventListener("load", resolve, { once: true });
+            img.addEventListener("error", resolve, { once: true });
+          });
+        })
+      );
+    }
+
     async function downloadFullPDF() {
+      const button = document.querySelector(".print-btn");
       const element = document.querySelector(".container");
-      if (!element || !window.html2pdf) {
-        window.print();
-        return;
+      const originalLabel = button ? button.textContent : "";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Preparing…";
       }
-      const options = {
-        margin: [10, 10, 10, 10],
-        filename: "CV_Arne_Hansen_long.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        pagebreak: { mode: ["css", "legacy"] }
-      };
-      await window.html2pdf().set(options).from(element).save();
+      try {
+        // Make sure all content is rendered and assets are loaded before the
+        // snapshot. These awaits are the fix for the intermittent blank PDF:
+        // html2canvas was sometimes capturing before fonts/images were ready.
+        if (cvReady) await cvReady;
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        await waitForImages(element);
+        // Give the layout one more frame to settle.
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+        if (!element || !window.html2pdf) {
+          window.print();
+          return;
+        }
+        const options = {
+          margin: [10, 10, 10, 10],
+          filename: "CV_Arne_Hansen_long.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0, windowWidth: element.scrollWidth },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: ["css", "legacy"] }
+        };
+        await window.html2pdf().set(options).from(element).save();
+      } catch (error) {
+        console.error("PDF generation failed:", error);
+        window.print();
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+      }
     }
 
     async function renderFullCV() {
@@ -127,7 +170,7 @@
         }
       }
     }
-    renderFullCV();
+    cvReady = renderFullCV();
   </script>
 </body>
 </html>

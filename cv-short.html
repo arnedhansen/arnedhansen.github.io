@@ -394,24 +394,64 @@
       }
     }
 
-    async function downloadShortPDF() {
-      const element = document.getElementById("short-cv-sheet");
-      if (!element || !window.html2pdf) {
-        window.print();
-        return;
-      }
-      const options = {
-        margin: 0,
-        filename: "CV_Arne_Hansen_short.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        pagebreak: { mode: "avoid-all" }
-      };
-      await window.html2pdf().set(options).from(element).save();
+    // Resolves once renderShortCV() has finished populating the DOM, so the
+    // download never starts before content/assets are ready.
+    let cvReady = null;
+
+    function waitForImages(root) {
+      const images = Array.from(root.querySelectorAll("img"));
+      return Promise.all(
+        images.map((img) => {
+          if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.addEventListener("load", resolve, { once: true });
+            img.addEventListener("error", resolve, { once: true });
+          });
+        })
+      );
     }
 
-    renderShortCV();
+    async function downloadShortPDF() {
+      const button = document.querySelector(".print-btn");
+      const element = document.getElementById("short-cv-sheet");
+      const originalLabel = button ? button.textContent : "";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Preparing…";
+      }
+      try {
+        // Wait for rendering, fonts and images before the snapshot. This is the
+        // fix for intermittent blank PDFs caused by capturing too early.
+        if (cvReady) await cvReady;
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        await waitForImages(element);
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+        if (!element || !window.html2pdf) {
+          window.print();
+          return;
+        }
+        const options = {
+          margin: 0,
+          filename: "CV_Arne_Hansen_short.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0, windowWidth: element.scrollWidth },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: "avoid-all" }
+        };
+        await window.html2pdf().set(options).from(element).save();
+      } catch (error) {
+        console.error("PDF generation failed:", error);
+        window.print();
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+      }
+    }
+
+    cvReady = renderShortCV();
   </script>
 </body>
 </html>
