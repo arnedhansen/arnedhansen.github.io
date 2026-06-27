@@ -99,9 +99,6 @@ const CVPdf = (() => {
           scale: 2,
           useCORS: true,
           backgroundColor: "#ffffff",
-          scrollX: 0,
-          scrollY: 0,
-          windowWidth: element.scrollWidth,
           logging: false,
         },
         jsPDF: {
