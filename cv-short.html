@@ -26,14 +26,16 @@
       margin: 18px auto 24px;
       background: #fff;
       color: var(--cv-text);
-      display: grid;
-      grid-template-columns: 64mm 1fr;
+      display: flex;
+      align-items: stretch;
       box-shadow: 0 12px 24px rgba(16, 21, 34, 0.12);
       overflow: hidden;
     }
 
     /* Left column */
     .cv-left {
+      width: 64mm;
+      flex: 0 0 64mm;
       background: var(--cv-dark);
       color: #eef1f7;
       padding: 8mm 7mm 9mm;
@@ -111,6 +113,8 @@
 
     /* Right column */
     .cv-right {
+      flex: 1 1 0;
+      min-width: 0;
       padding: 12mm 11mm 10mm;
       display: flex;
       flex-direction: column;
@@ -165,9 +169,12 @@
     .pub-line .meta { color: var(--cv-muted); }
 
     .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 6mm;
+    }
+    .two-col > * {
+      flex: 1 1 0;
+      min-width: 0;
     }
     .mini-list { margin: 0; padding-left: 3.8mm; font-size: 2.4mm; line-height: 1.4; color: var(--cv-text); }
     .mini-list li { margin-bottom: 0.7mm; }
