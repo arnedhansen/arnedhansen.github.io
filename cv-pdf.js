@@ -50,32 +50,6 @@ const CVPdf = (() => {
     return element.scrollHeight > 40 && text.length > 20;
   }
 
-  function createCaptureClone(element, captureClass) {
-    const wrapper = document.createElement("div");
-    wrapper.setAttribute("aria-hidden", "true");
-    wrapper.style.cssText = [
-      "position:fixed",
-      "left:-10000px",
-      "top:0",
-      "width:210mm",
-      "background:#fff",
-      "z-index:-1",
-      "pointer-events:none",
-      "overflow:visible",
-    ].join(";");
-    const clone = element.cloneNode(true);
-    clone.classList.add(captureClass);
-    wrapper.appendChild(clone);
-    document.body.appendChild(wrapper);
-    return { clone, wrapper };
-  }
-
-  function removeCaptureClone(wrapper) {
-    if (wrapper && wrapper.parentNode) {
-      wrapper.parentNode.removeChild(wrapper);
-    }
-  }
-
   async function setButtonState(button, label, disabled) {
     if (!button) return;
     button.disabled = disabled;
@@ -105,10 +79,11 @@ const CVPdf = (() => {
       throw new Error("CV content is not ready yet. Refresh the page and try again.");
     }
 
-    const { clone, wrapper } = createCaptureClone(element, captureClass);
+    const hadCaptureClass = captureClass ? element.classList.contains(captureClass) : false;
+    if (captureClass) element.classList.add(captureClass);
     try {
-      await prepareDocument(clone, null);
-      if (!hasVisibleContent(clone)) {
+      await prepareDocument(element, null);
+      if (!hasVisibleContent(element)) {
         throw new Error("CV content could not be prepared for export.");
       }
 
@@ -126,7 +101,7 @@ const CVPdf = (() => {
           backgroundColor: "#ffffff",
           scrollX: 0,
           scrollY: 0,
-          windowWidth: clone.scrollWidth,
+          windowWidth: element.scrollWidth,
           logging: false,
         },
         jsPDF: {
@@ -137,9 +112,9 @@ const CVPdf = (() => {
         pagebreak: options.pagebreak,
       };
 
-      await html2pdf().set(captureOptions).from(clone).save();
+      await html2pdf().set(captureOptions).from(element).save();
     } finally {
-      removeCaptureClone(wrapper);
+      if (captureClass && !hadCaptureClass) element.classList.remove(captureClass);
       await setButtonState(button, originalLabel, false);
     }
   }
